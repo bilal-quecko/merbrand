@@ -35,7 +35,6 @@ namespace MeraBrand.Expo.UI
             bookingManager = StallBookingManager.Instance ?? FindFirstObjectByType<StallBookingManager>();
             bool isAdmin = SessionManager.Instance != null && SessionManager.Instance.IsAdmin;
 
-            // Dashboard starts hidden. Admin opens it explicitly from the HUD button.
             if (dashboardPanel != null)
                 dashboardPanel.SetActive(false);
 
@@ -51,6 +50,7 @@ namespace MeraBrand.Expo.UI
 
         private void OnDestroy()
         {
+            UIInteractionState.Release(this);
             if (bookingManager != null)
                 bookingManager.BookingChanged -= OnBookingChanged;
         }
@@ -60,16 +60,10 @@ namespace MeraBrand.Expo.UI
             if (SessionManager.Instance == null || !SessionManager.Instance.IsAdmin || dashboardPanel == null)
                 return;
 
-            bool show = !dashboardPanel.activeSelf;
-            dashboardPanel.SetActive(show);
-
-            if (show)
-            {
-                RefreshCounters();
-                PopulateHallDropdownIfEmpty();
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
+            if (dashboardPanel.activeSelf)
+                CloseDashboard();
+            else
+                OpenDashboard();
         }
 
         public void OpenDashboard()
@@ -80,14 +74,17 @@ namespace MeraBrand.Expo.UI
             dashboardPanel.SetActive(true);
             RefreshCounters();
             PopulateHallDropdownIfEmpty();
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            UIInteractionState.Acquire(this);
+            cameraModeManager?.RefreshCursorState();
         }
 
         public void CloseDashboard()
         {
             if (dashboardPanel != null)
                 dashboardPanel.SetActive(false);
+
+            UIInteractionState.Release(this);
+            cameraModeManager?.RefreshCursorState();
         }
 
         public void Search()
