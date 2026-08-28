@@ -29,6 +29,8 @@ namespace MeraBrand.Expo.CameraSystem
         private float pitch;
         private bool cursorLocked;
 
+        public bool CursorLocked => cursorLocked;
+
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
@@ -44,24 +46,15 @@ namespace MeraBrand.Expo.CameraSystem
 
         private void Update()
         {
-            HandleCursor();
+            // Pause menu owns cursor/input while the simulation is paused.
+            if (Time.timeScale <= 0f)
+                return;
+
             if (!cursorLocked)
                 return;
 
             HandleLook();
             HandleMovement();
-        }
-
-        private void HandleCursor()
-        {
-            Keyboard keyboard = Keyboard.current;
-            Mouse mouse = Mouse.current;
-
-            if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame)
-                SetCursorLocked(false);
-
-            if (mouse != null && mouse.leftButton.wasPressedThisFrame && !cursorLocked)
-                SetCursorLocked(true);
         }
 
         private void HandleLook()
@@ -95,7 +88,7 @@ namespace MeraBrand.Expo.CameraSystem
             if (keyboard.qKey.isPressed) y += 1f;
             if (keyboard.eKey.isPressed) y -= 1f;
 
-            Vector3 horizontal = (transform.right * x + transform.forward * z);
+            Vector3 horizontal = transform.right * x + transform.forward * z;
             horizontal.y = 0f;
             if (horizontal.sqrMagnitude > 1f)
                 horizontal.Normalize();
@@ -116,7 +109,7 @@ namespace MeraBrand.Expo.CameraSystem
             controller.Move(motion);
         }
 
-        private void SetCursorLocked(bool locked)
+        public void SetCursorLocked(bool locked)
         {
             cursorLocked = locked;
             Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
