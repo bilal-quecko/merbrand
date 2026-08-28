@@ -26,6 +26,10 @@ namespace MeraBrand.Expo.CameraSystem
         {
             CurrentMode = CameraMode.Flythrough;
             SetCameraStates(true, false);
+
+            FlyCameraController fly = GetFlyController();
+            if (fly != null)
+                fly.SetCursorLocked(true);
         }
 
         public void ShowTopDown()
@@ -34,6 +38,26 @@ namespace MeraBrand.Expo.CameraSystem
             SetCameraStates(false, true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+        }
+
+        public void FocusStall(Vector3 cameraPosition, Vector3 lookTarget)
+        {
+            CurrentMode = CameraMode.StallFocus;
+            SetCameraStates(true, false);
+
+            FlyCameraController fly = GetFlyController();
+            if (fly != null)
+            {
+                fly.SnapToLookAt(cameraPosition, lookTarget);
+                fly.SetCursorLocked(true);
+            }
+        }
+
+        private FlyCameraController GetFlyController()
+        {
+            return flythroughCamera != null
+                ? flythroughCamera.GetComponent<FlyCameraController>()
+                : null;
         }
 
         private void SetCameraStates(bool flyActive, bool topDownActive)
