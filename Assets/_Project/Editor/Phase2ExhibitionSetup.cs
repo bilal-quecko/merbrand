@@ -15,18 +15,29 @@ namespace MeraBrand.Expo.Editor
         private const string StallPrefabPath = Root + "/Prefabs/Stalls";
         private const string MaterialPath = Root + "/Art/Materials";
 
-        // Venue/layout drawings are in feet, therefore 1 Unity unit = 1 foot.
-        // Stall specifications are provided in metres and are converted precisely to feet here.
+        // AUTHORITATIVE SCALE RULES
+        // 1 Unity unit = 1 foot for venue/layout geometry.
+        // Stall specifications are provided in metres and converted to feet.
         private const float FeetPerMeter = 3.280839895f;
-        private const float WallHeightMeters = 2.5f;
+
+        // AUTHORITATIVE HALL DIMENSIONS (A x B)
+        // A = width (Unity X axis), B = height/depth on plan (Unity Z axis).
+        // Hall 1 = lower-left hall.
+        // Hall 2 = large right-side hall, including the E2 area.
+        // Hall 3 = upper-left smaller hall.
+        private static readonly Vector2 Hall1Feet = new(168f, 115f);
+        private static readonly Vector2 Hall2Feet = new(82f, 198f);
+        private static readonly Vector2 Hall3Feet = new(98f, 78f);
+
+        private const float StallWallHeightMeters = 2.5f;
         private const float HeaderHeightMeters = 2.2f;
-        private const float WallThicknessMeters = 0.08f;
+        private const float StallWallThicknessMeters = 0.08f;
 
         private static float MetersToUnits(float meters) => meters * FeetPerMeter;
 
-        private static readonly float WallHeight = MetersToUnits(WallHeightMeters);       // 8.20210 ft
-        private static readonly float HeaderHeight = MetersToUnits(HeaderHeightMeters);   // 7.21785 ft
-        private static readonly float WallThickness = MetersToUnits(WallThicknessMeters); // 0.26247 ft
+        private static readonly float StallWallHeight = MetersToUnits(StallWallHeightMeters);
+        private static readonly float HeaderHeight = MetersToUnits(HeaderHeightMeters);
+        private static readonly float StallWallThickness = MetersToUnits(StallWallThicknessMeters);
 
         [MenuItem("Mera Brand/Phase 2/Generate Stall Prefabs")]
         public static void GenerateStallPrefabs()
@@ -38,11 +49,7 @@ namespace MeraBrand.Expo.Editor
                 MaterialPath + "/MAT_Stall_Available.mat",
                 new Color(0.72f, 0.74f, 0.76f));
 
-            // IMPORTANT:
-            // Names are metric dimensions. Unity footprint is converted to feet because the
-            // complete venue layout is authored at 1 Unity unit = 1 foot.
-            // X = stall frontage, Z = stall side/depth.
-            // 3x6 means 6 m frontage and 3 m side/depth, per exhibition specification.
+            // X = frontage, Z = side/depth.
             CreateStallPrefab(
                 "PF_Stall_3x3",
                 new Vector2(MetersToUnits(3f), MetersToUnits(3f)),
@@ -50,6 +57,7 @@ namespace MeraBrand.Expo.Editor
                 StallSize.ThreeByThree,
                 availableMaterial);
 
+            // 3x6 specification: 6 m frontage x 3 m side/depth.
             CreateStallPrefab(
                 "PF_Stall_3x6",
                 new Vector2(MetersToUnits(6f), MetersToUnits(3f)),
@@ -69,7 +77,7 @@ namespace MeraBrand.Expo.Editor
 
             EditorUtility.DisplayDialog(
                 "Mera Brand - Phase 2",
-                "Standard stall prefabs regenerated with metric specifications converted to the feet-based Unity layout.\n\n" +
+                "Standard stall prefabs regenerated.\n\n" +
                 "3x3 m = 9.84252 x 9.84252 ft\n" +
                 "3x6 m = 19.68504 ft FRONT x 9.84252 ft SIDE\n" +
                 "6x6 m = 19.68504 x 19.68504 ft\n" +
@@ -96,41 +104,74 @@ namespace MeraBrand.Expo.Editor
             GetOrCreateRoot("Systems");
             GetOrCreateRoot("UI");
 
+            // Remove obsolete calibration/reference objects from the earlier interpretation.
             RemoveChildIfExists(architecture, "Reference_MainFootprint_88x171");
             RemoveChildIfExists(architecture, "Reference_Origin");
+            RemoveChildIfExists(architecture, "Hall_Dimension_References");
             RemoveChildIfExists(stalls, "Stall_Size_Reference");
 
-            // The supplied drawing explicitly gives an 88 ft x 171 ft left-side reference area.
-            // This is intentionally only a calibration reference, not a claim that every wall
-            // in the complete venue has been dimensioned from the image.
-            GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            floor.name = "Reference_MainFootprint_88x171";
-            floor.transform.SetParent(architecture, false);
-            floor.transform.localPosition = new Vector3(44f, -0.05f, 85.5f);
-            floor.transform.localScale = new Vector3(88f, 0.1f, 171f);
+            Material hallMaterial = GetOrCreateMaterial(
+                MaterialPath + "/MAT_Hall_Reference.mat",
+                new Color(0.56f, 0.53f, 0.47f));
 
-            GameObject origin = new("Reference_Origin");
-            origin.transform.SetParent(architecture, false);
-            origin.transform.localPosition = Vector3.zero;
+            GameObject hallReferences = new("Hall_Dimension_References");
+            hallReferences.transform.SetParent(architecture, false);
+
+            // These three footprint objects use the exact hall dimensions supplied by the client.
+            // They are intentionally separated in the editor as dimension references only.
+            // Final relative placement will follow the supplied plan once corridor/connection offsets are locked.
+            CreateHallReference("Hall_1_168x115_ft", Hall1Feet, new Vector3(0f, 0f, 0f), hallReferences.transform, hallMaterial);
+            CreateHallReference("Hall_2_82x198_ft", Hall2Feet, new Vector3(190f, 0f, 0f), hallReferences.transform, hallMaterial);
+            CreateHallReference("Hall_3_98x78_ft", Hall3Feet, new Vector3(0f, 0f, 140f), hallReferences.transform, hallMaterial);
 
             GameObject sizeReference = new("Stall_Size_Reference");
             sizeReference.transform.SetParent(stalls, false);
 
-            // Reference stalls are spaced using their actual converted dimensions.
-            InstantiateReferenceStall("PF_Stall_3x3", new Vector3(6f, 0f, 6f), "REF_3x3", sizeReference.transform);
-            InstantiateReferenceStall("PF_Stall_3x6", new Vector3(24f, 0f, 6f), "REF_3x6", sizeReference.transform);
-            InstantiateReferenceStall("PF_Stall_6x6", new Vector3(48f, 0f, 10f), "REF_6x6", sizeReference.transform);
+            InstantiateReferenceStall("PF_Stall_3x3", new Vector3(6f, 0f, -20f), "REF_3x3", sizeReference.transform);
+            InstantiateReferenceStall("PF_Stall_3x6", new Vector3(24f, 0f, -20f), "REF_3x6", sizeReference.transform);
+            InstantiateReferenceStall("PF_Stall_6x6", new Vector3(52f, 0f, -20f), "REF_6x6", sizeReference.transform);
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
 
-            Selection.activeGameObject = floor;
+            Selection.activeGameObject = hallReferences;
             SceneView.lastActiveSceneView?.FrameSelected();
 
             EditorUtility.DisplayDialog(
                 "Mera Brand - Phase 2",
-                "Exhibition scene prepared with the 88 x 171 ft calibration footprint and correctly converted metric stall references.\n\nNext step: place the complete floor-plan geometry against the supplied layout.",
+                "Hall dimension references updated to the authoritative sizes:\n\n" +
+                "Hall 1 (lower-left): 168 x 115 ft\n" +
+                "Hall 2 (right, includes E2): 82 x 198 ft\n" +
+                "Hall 3 (upper-left): 98 x 78 ft\n\n" +
+                "A = width/X, B = plan height/Z.\n\n" +
+                "The old 88 x 171 master footprint is no longer used.",
                 "OK");
+        }
+
+        private static void CreateHallReference(
+            string name,
+            Vector2 sizeFeet,
+            Vector3 origin,
+            Transform parent,
+            Material material)
+        {
+            GameObject hall = new(name);
+            hall.transform.SetParent(parent, false);
+            hall.transform.localPosition = origin;
+
+            GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            floor.name = "Floor";
+            floor.transform.SetParent(hall.transform, false);
+            floor.transform.localPosition = new Vector3(sizeFeet.x * 0.5f, -0.05f, sizeFeet.y * 0.5f);
+            floor.transform.localScale = new Vector3(sizeFeet.x, 0.1f, sizeFeet.y);
+
+            Renderer renderer = floor.GetComponent<Renderer>();
+            if (renderer != null)
+                renderer.sharedMaterial = material;
+
+            GameObject originMarker = new("Origin_A0_B0");
+            originMarker.transform.SetParent(hall.transform, false);
+            originMarker.transform.localPosition = Vector3.zero;
         }
 
         private static void CreateStallPrefab(
@@ -150,23 +191,20 @@ namespace MeraBrand.Expo.Editor
                 new Vector3(footprintInUnityUnits.x, 0.1f, footprintInUnityUnits.y), material);
 
             CreatePart("BackWall", root.transform,
-                new Vector3(0f, WallHeight * 0.5f, footprintInUnityUnits.y * 0.5f),
-                new Vector3(footprintInUnityUnits.x, WallHeight, WallThickness), material);
+                new Vector3(0f, StallWallHeight * 0.5f, footprintInUnityUnits.y * 0.5f),
+                new Vector3(footprintInUnityUnits.x, StallWallHeight, StallWallThickness), material);
 
             CreatePart("LeftWall", root.transform,
-                new Vector3(-footprintInUnityUnits.x * 0.5f, WallHeight * 0.5f, 0f),
-                new Vector3(WallThickness, WallHeight, footprintInUnityUnits.y), material);
+                new Vector3(-footprintInUnityUnits.x * 0.5f, StallWallHeight * 0.5f, 0f),
+                new Vector3(StallWallThickness, StallWallHeight, footprintInUnityUnits.y), material);
 
             CreatePart("RightWall", root.transform,
-                new Vector3(footprintInUnityUnits.x * 0.5f, WallHeight * 0.5f, 0f),
-                new Vector3(WallThickness, WallHeight, footprintInUnityUnits.y), material);
+                new Vector3(footprintInUnityUnits.x * 0.5f, StallWallHeight * 0.5f, 0f),
+                new Vector3(StallWallThickness, StallWallHeight, footprintInUnityUnits.y), material);
 
             GameObject headerAnchor = new("HeaderAnchor");
             headerAnchor.transform.SetParent(root.transform, false);
-            headerAnchor.transform.localPosition = new Vector3(
-                0f,
-                HeaderHeight,
-                footprintInUnityUnits.y * 0.5f - 0.02f);
+            headerAnchor.transform.localPosition = new Vector3(0f, HeaderHeight, footprintInUnityUnits.y * 0.5f - 0.02f);
 
             GameObject visitPoint = new("VisitPoint");
             visitPoint.transform.SetParent(root.transform, false);
@@ -174,7 +212,6 @@ namespace MeraBrand.Expo.Editor
                 0f,
                 MetersToUnits(1.7f),
                 -Mathf.Max(MetersToUnits(2f), footprintInUnityUnits.y * 0.75f));
-            visitPoint.transform.localRotation = Quaternion.identity;
 
             GameObject lookTarget = new("LookTarget");
             lookTarget.transform.SetParent(root.transform, false);
@@ -188,7 +225,7 @@ namespace MeraBrand.Expo.Editor
                 size,
                 footprintMeters,
                 footprintInUnityUnits,
-                WallHeightMeters);
+                StallWallHeightMeters);
             identity.EditorSetCameraAnchors(visitPoint.transform, lookTarget.transform);
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
