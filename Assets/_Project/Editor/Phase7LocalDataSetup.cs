@@ -39,43 +39,91 @@ namespace MeraBrand.Expo.Editor
             RemoveChildIfExists(systemsRoot, "Phase7_LocalDataSystem");
             RemoveChildIfExists(uiRoot, "Phase7_LocalDataUI");
 
+            Transform bookingPanel = uiRoot.Find("Phase6_BookingUI/Phase6Canvas/BookingPanel");
+            if (bookingPanel == null)
+            {
+                EditorUtility.DisplayDialog("Mera Brand - Phase 7", "Phase 6 BookingPanel was not found. Rerun Phase 6 setup first.", "OK");
+                return;
+            }
+
+            // Remove old Phase 7 controls if setup is rerun.
+            RemoveChildIfExists(bookingPanel, "Phase7_LogoControls");
+
             GameObject systemObject = new("Phase7_LocalDataSystem");
             systemObject.transform.SetParent(systemsRoot, false);
             LocalDataManagementController controller = systemObject.AddComponent<LocalDataManagementController>();
 
+            // -----------------------------
+            // LOGO CONTROLS INSIDE BOOKING POPUP
+            // -----------------------------
+            RectTransform bookingRect = bookingPanel.GetComponent<RectTransform>();
+            if (bookingRect != null)
+                bookingRect.sizeDelta = new Vector2(560f, 570f);
+
+            // Move Phase 6 lower controls down to make room for logo upload.
+            SetChildY(bookingPanel, "BookingError_TMP", -118f);
+            SetChildY(bookingPanel, "ConfirmBookingButton", -190f);
+            SetChildY(bookingPanel, "CancelBookingButton", -245f);
+
+            GameObject logoControls = new("Phase7_LogoControls", typeof(RectTransform));
+            logoControls.transform.SetParent(bookingPanel, false);
+            RectTransform logoControlsRect = logoControls.GetComponent<RectTransform>();
+            logoControlsRect.anchorMin = logoControlsRect.anchorMax = new Vector2(0.5f, 0.5f);
+            logoControlsRect.anchoredPosition = Vector2.zero;
+            logoControlsRect.sizeDelta = new Vector2(520f, 180f);
+
+            CreateText("LogoLabel_TMP", logoControls.transform, "Exhibitor Logo", 17f, new Vector2(0f, -34f), new Vector2(440f, 28f));
+            TMP_InputField logoPath = CreateInputField("LogoPathInput", logoControls.transform, "Logo path (PC build) — leave blank in Editor", new Vector2(0f, -70f));
+            Button importLogo = CreateButton("ImportLogoButton", logoControls.transform, "UPLOAD LOGO", new Vector2(-105f, -116f), new Vector2(200f, 40f));
+            Button removeLogo = CreateButton("RemoveLogoButton", logoControls.transform, "REMOVE LOGO", new Vector2(105f, -116f), new Vector2(200f, 40f));
+            TextMeshProUGUI logoStatus = CreateText("LogoStatus_TMP", logoControls.transform, string.Empty, 13f, new Vector2(0f, -154f), new Vector2(460f, 32f));
+
+            UnityEventTools.AddPersistentListener(importLogo.onClick, controller.ImportLogoForSelectedStall);
+            UnityEventTools.AddPersistentListener(removeLogo.onClick, controller.RemoveLogoFromSelectedStall);
+
+            // -----------------------------
+            // BACKUP / RESTORE PANEL (HIDDEN BY DEFAULT)
+            // -----------------------------
             GameObject uiObject = new("Phase7_LocalDataUI");
             uiObject.transform.SetParent(uiRoot, false);
             Canvas canvas = CreateCanvas(uiObject.transform);
 
-            GameObject panel = CreatePanel("LocalDataPanel", canvas.transform);
-            CreateText("Title_TMP", panel.transform, "LOCAL DATA", 24f, new Vector2(0f, 220f), new Vector2(360f, 40f));
-            CreateText("LogoLabel_TMP", panel.transform, "Selected Stall Logo", 17f, new Vector2(0f, 168f), new Vector2(360f, 30f));
+            GameObject dataPanel = CreatePanel("LocalDataPanel", canvas.transform);
+            CreateText("Title_TMP", dataPanel.transform, "LOCAL DATA", 24f, new Vector2(0f, 185f), new Vector2(360f, 40f));
+            CreateText("BackupLabel_TMP", dataPanel.transform, "Backup / Restore", 17f, new Vector2(0f, 135f), new Vector2(360f, 30f));
 
-            TMP_InputField logoPath = CreateInputField("LogoPathInput", panel.transform, "Paste logo path here (PC build)", new Vector2(0f, 125f));
-            Button importLogo = CreateButton("ImportLogoButton", panel.transform, "IMPORT LOGO", new Vector2(0f, 75f));
-            Button removeLogo = CreateButton("RemoveLogoButton", panel.transform, "REMOVE LOGO", new Vector2(0f, 29f));
+            Button export = CreateButton("ExportBackupButton", dataPanel.transform, "EXPORT BACKUP", new Vector2(0f, 82f));
+            Button import = CreateButton("ImportBackupButton", dataPanel.transform, "IMPORT BACKUP", new Vector2(0f, 32f));
+            Button openFolder = CreateButton("OpenFolderButton", dataPanel.transform, "OPEN DATA FOLDER", new Vector2(0f, -18f));
+            Button reset = CreateButton("ResetAllButton", dataPanel.transform, "RESET ALL BOOKINGS", new Vector2(0f, -68f));
+            Button closeData = CreateButton("CloseDataButton", dataPanel.transform, "CLOSE", new Vector2(0f, -118f));
+            TextMeshProUGUI dataStatus = CreateText("Status_TMP", dataPanel.transform, string.Empty, 13f, new Vector2(0f, -174f), new Vector2(360f, 70f));
+            dataStatus.enableWordWrapping = true;
 
-            CreateText("BackupLabel_TMP", panel.transform, "Backup / Restore", 17f, new Vector2(0f, -25f), new Vector2(360f, 30f));
-            Button export = CreateButton("ExportBackupButton", panel.transform, "EXPORT BACKUP", new Vector2(0f, -68f));
-            Button import = CreateButton("ImportBackupButton", panel.transform, "IMPORT BACKUP", new Vector2(0f, -114f));
-            Button openFolder = CreateButton("OpenFolderButton", panel.transform, "OPEN DATA FOLDER", new Vector2(0f, -160f));
-            Button reset = CreateButton("ResetAllButton", panel.transform, "RESET ALL BOOKINGS", new Vector2(0f, -206f));
-
-            TextMeshProUGUI status = CreateText("Status_TMP", panel.transform, string.Empty, 14f, new Vector2(0f, -274f), new Vector2(360f, 90f));
-            status.enableWordWrapping = true;
-
-            UnityEventTools.AddPersistentListener(importLogo.onClick, controller.ImportLogoForSelectedStall);
-            UnityEventTools.AddPersistentListener(removeLogo.onClick, controller.RemoveLogoFromSelectedStall);
             UnityEventTools.AddPersistentListener(export.onClick, controller.ExportBackup);
             UnityEventTools.AddPersistentListener(import.onClick, controller.ImportBackup);
             UnityEventTools.AddPersistentListener(openFolder.onClick, controller.OpenLocalDataFolder);
             UnityEventTools.AddPersistentListener(reset.onClick, controller.ResetAllBookings);
+            UnityEventTools.AddPersistentListener(closeData.onClick, controller.CloseAdminPanel);
+
+            // Data-management button lives in the Admin HUD, so Visitors never see it.
+            Transform adminHud = uiRoot.Find("Phase4_HUD/HUDCanvas/AdminHUD");
+            if (adminHud != null)
+            {
+                RemoveChildIfExists(adminHud, "LocalDataButton");
+                Button dataButton = CreateButton("LocalDataButton", adminHud, "DATA", new Vector2(490f, 0f), new Vector2(90f, 45f));
+                UnityEventTools.AddPersistentListener(dataButton.onClick, controller.ToggleAdminPanel);
+            }
 
             SerializedObject so = new(controller);
+            so.FindProperty("adminPanel").objectReferenceValue = dataPanel;
             so.FindProperty("selectionController").objectReferenceValue = selection;
             so.FindProperty("logoPathInput").objectReferenceValue = logoPath;
-            so.FindProperty("statusText").objectReferenceValue = status;
+            // Logo feedback belongs to the booking popup; backup functions log details to console.
+            so.FindProperty("statusText").objectReferenceValue = logoStatus;
             so.ApplyModifiedPropertiesWithoutUndo();
+
+            dataPanel.SetActive(false);
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
@@ -84,13 +132,20 @@ namespace MeraBrand.Expo.Editor
 
             EditorUtility.DisplayDialog(
                 "Mera Brand - Phase 7",
-                "Local-only data management is ready.\n\n" +
-                "• Logos are embedded into the local booking JSON as image data\n" +
-                "• Export creates timestamped JSON backups\n" +
-                "• Import reads import_bookings.json from the local data folder\n" +
-                "• Reset requires two presses\n" +
-                "• No Supabase, server, API key, or internet connection is required",
+                "Phase 7 UI updated.\n\n" +
+                "• The logo panel no longer floats on screen\n" +
+                "• BOOK STALL / EDIT BOOKING now contains Exhibitor Name + UPLOAD LOGO\n" +
+                "• A small DATA button in the Admin HUD opens backup/restore tools\n" +
+                "• Local data remains fully offline",
                 "OK");
+        }
+
+        private static void SetChildY(Transform parent, string childName, float y)
+        {
+            Transform child = parent.Find(childName);
+            if (child == null) return;
+            RectTransform rect = child.GetComponent<RectTransform>();
+            if (rect != null) rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, y);
         }
 
         private static Canvas CreateCanvas(Transform parent)
@@ -112,11 +167,11 @@ namespace MeraBrand.Expo.Editor
             GameObject go = new(name, typeof(RectTransform), typeof(Image));
             go.transform.SetParent(parent, false);
             RectTransform rect = go.GetComponent<RectTransform>();
-            rect.anchorMin = rect.anchorMax = new Vector2(0f, 0.5f);
-            rect.pivot = new Vector2(0f, 0.5f);
-            rect.anchoredPosition = new Vector2(25f, 0f);
-            rect.sizeDelta = new Vector2(420f, 650f);
-            go.GetComponent<Image>().color = new Color(0.04f, 0.06f, 0.085f, 0.97f);
+            rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.anchoredPosition = Vector2.zero;
+            rect.sizeDelta = new Vector2(430f, 470f);
+            go.GetComponent<Image>().color = new Color(0.04f, 0.06f, 0.085f, 0.98f);
             return go;
         }
 
@@ -136,14 +191,14 @@ namespace MeraBrand.Expo.Editor
             return tmp;
         }
 
-        private static Button CreateButton(string name, Transform parent, string label, Vector2 pos)
+        private static Button CreateButton(string name, Transform parent, string label, Vector2 pos, Vector2? size = null)
         {
             GameObject go = new(name, typeof(RectTransform), typeof(Image), typeof(Button));
             go.transform.SetParent(parent, false);
             RectTransform rect = go.GetComponent<RectTransform>();
             rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
             rect.anchoredPosition = pos;
-            rect.sizeDelta = new Vector2(310f, 38f);
+            rect.sizeDelta = size ?? new Vector2(310f, 40f);
             go.GetComponent<Image>().color = new Color(0.15f, 0.24f, 0.31f, 1f);
             TextMeshProUGUI text = CreateText("Text_TMP", go.transform, label, 16f, Vector2.zero, Vector2.zero);
             text.rectTransform.anchorMin = Vector2.zero;
@@ -160,7 +215,7 @@ namespace MeraBrand.Expo.Editor
             RectTransform rect = root.GetComponent<RectTransform>();
             rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
             rect.anchoredPosition = pos;
-            rect.sizeDelta = new Vector2(350f, 42f);
+            rect.sizeDelta = new Vector2(440f, 42f);
             root.GetComponent<Image>().color = new Color(0.12f, 0.15f, 0.18f, 1f);
 
             GameObject area = new("Text Area", typeof(RectTransform), typeof(RectMask2D));
@@ -169,13 +224,13 @@ namespace MeraBrand.Expo.Editor
             areaRect.anchorMin = Vector2.zero; areaRect.anchorMax = Vector2.one;
             areaRect.offsetMin = new Vector2(10f, 4f); areaRect.offsetMax = new Vector2(-10f, -4f);
 
-            TextMeshProUGUI placeholder = CreateText("Placeholder", area.transform, placeholderValue, 14f, Vector2.zero, Vector2.zero);
+            TextMeshProUGUI placeholder = CreateText("Placeholder", area.transform, placeholderValue, 13f, Vector2.zero, Vector2.zero);
             placeholder.color = new Color(1f, 1f, 1f, 0.4f);
             placeholder.alignment = TextAlignmentOptions.MidlineLeft;
             placeholder.rectTransform.anchorMin = Vector2.zero; placeholder.rectTransform.anchorMax = Vector2.one;
             placeholder.rectTransform.offsetMin = Vector2.zero; placeholder.rectTransform.offsetMax = Vector2.zero;
 
-            TextMeshProUGUI text = CreateText("Text", area.transform, string.Empty, 14f, Vector2.zero, Vector2.zero);
+            TextMeshProUGUI text = CreateText("Text", area.transform, string.Empty, 13f, Vector2.zero, Vector2.zero);
             text.alignment = TextAlignmentOptions.MidlineLeft;
             text.rectTransform.anchorMin = Vector2.zero; text.rectTransform.anchorMax = Vector2.one;
             text.rectTransform.offsetMin = Vector2.zero; text.rectTransform.offsetMax = Vector2.zero;
