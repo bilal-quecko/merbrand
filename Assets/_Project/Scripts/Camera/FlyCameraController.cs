@@ -1,3 +1,4 @@
+using MeraBrand.Expo.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,12 +40,12 @@ namespace MeraBrand.Expo.CameraSystem
 
         private void Start()
         {
-            SetCursorLocked(lockCursorOnStart);
+            SetCursorLocked(lockCursorOnStart && !UIInteractionState.IsBlocked);
         }
 
         private void Update()
         {
-            if (Time.timeScale <= 0f)
+            if (Time.timeScale <= 0f || UIInteractionState.IsBlocked)
                 return;
 
             if (!cursorLocked)
@@ -108,6 +109,9 @@ namespace MeraBrand.Expo.CameraSystem
 
         public void SetCursorLocked(bool locked)
         {
+            if (locked && UIInteractionState.IsBlocked)
+                locked = false;
+
             cursorLocked = locked;
             Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
             Cursor.visible = !locked;
