@@ -1,6 +1,7 @@
 using MeraBrand.Expo.Authentication;
 using MeraBrand.Expo.Booking;
 using MeraBrand.Expo.CameraSystem;
+using MeraBrand.Expo.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -51,12 +52,13 @@ namespace MeraBrand.Expo.Stalls
 
         private void OnDestroy()
         {
+            UIInteractionState.Release(this);
             if (bookingManager != null) bookingManager.BookingChanged -= OnBookingChanged;
         }
 
         private void Update()
         {
-            if (Time.timeScale <= 0f) return;
+            if (Time.timeScale <= 0f || UIInteractionState.IsBlocked) return;
             SessionManager session = SessionManager.Instance;
             if (session == null || !session.IsAdmin) return;
             if (cameraModeManager == null || cameraModeManager.CurrentMode != CameraMode.TopDown) return;
@@ -86,9 +88,13 @@ namespace MeraBrand.Expo.Stalls
 
         public void CloseSelection()
         {
-            ClearHighlight(); selectedStall = null;
+            ClearHighlight();
+            selectedStall = null;
             if (selectionPanel != null) selectionPanel.SetActive(false);
-            CloseBookingPopup(); CancelMakeAvailable();
+            CloseBookingPopup();
+            CancelMakeAvailable();
+            UIInteractionState.Release(this);
+            cameraModeManager?.RefreshCursorState();
         }
 
         public void SelectFromDashboard(StallIdentity stall)
@@ -100,10 +106,21 @@ namespace MeraBrand.Expo.Stalls
         public void VisitSelectedStall()
         {
             if (selectedStall == null || cameraModeManager == null) return;
+
             Vector3 cameraPosition = selectedStall.VisitPoint != null ? selectedStall.VisitPoint.position :
                 selectedStall.transform.position - selectedStall.transform.forward * Mathf.Max(8f, selectedStall.FootprintUnityUnits.y * 0.9f) + Vector3.up * 5.5f;
             Vector3 lookTarget = selectedStall.LookTarget != null ? selectedStall.LookTarget.position : selectedStall.transform.position + Vector3.up * 4.5f;
-            ClearHighlight(); if (selectionPanel != null) selectionPanel.SetActive(false);
+
+            // Visiting a stall is a camera mode, not a UI mode. Close all management panels first.
+            FindFirstObjectByType<AdminDashboardController>()?.CloseDashboard();
+            FindFirstObjectByType<LocalDataManagementController>()?.CloseAdminPanel();
+
+            ClearHighlight();
+            if (selectionPanel != null) selectionPanel.SetActive(false);
+            if (bookingPanel != null) bookingPanel.SetActive(false);
+            if (availableConfirmPanel != null) availableConfirmPanel.SetActive(false);
+            UIInteractionState.Release(this);
+
             cameraModeManager.FocusStall(cameraPosition, lookTarget);
         }
 
@@ -141,14 +158,16 @@ namespace MeraBrand.Expo.Stalls
 
         public void RequestMakeAvailable()
         {
-            if (selectedStall != null && availableConfirmPanel != null) availableConfirmPanel.SetActive(true);
+            if (selectedStall != null && availableConfirmPanel != null)
+                availableConfirmPanel.SetActive(true);
         }
 
         public void ConfirmMakeAvailable()
         {
             bookingManager ??= StallBookingManager.Instance;
             if (selectedStall != null && bookingManager != null) bookingManager.MakeAvailable(selectedStall.StallId);
-            CancelMakeAvailable(); RefreshSelectionUI();
+            CancelMakeAvailable();
+            RefreshSelectionUI();
         }
 
         public void CancelMakeAvailable()
@@ -166,6 +185,8 @@ namespace MeraBrand.Expo.Stalls
             if (exhibitorInput != null) exhibitorInput.text = editing && record != null ? record.exhibitorName : string.Empty;
             if (bookingErrorText != null) bookingErrorText.text = string.Empty;
             bookingPanel.SetActive(true);
+            UIInteractionState.Acquire(this);
+            cameraModeManager?.RefreshCursorState();
         }
 
         private void TrySelectAt(Vector2 screenPosition)
@@ -180,11 +201,14 @@ namespace MeraBrand.Expo.Stalls
 
         private void SelectStall(StallIdentity stall)
         {
-            ClearHighlight(); selectedStall = stall;
+            ClearHighlight();
+            selectedStall = stall;
             Transform highlight = stall.transform.Find("Phase5_SelectionHighlight");
             if (highlight != null) { activeHighlight = highlight.gameObject; activeHighlight.SetActive(true); }
             RefreshSelectionUI();
             if (selectionPanel != null) selectionPanel.SetActive(true);
+            UIInteractionState.Acquire(this);
+            cameraModeManager?.RefreshCursorState();
         }
 
         private void RefreshSelectionUI()
