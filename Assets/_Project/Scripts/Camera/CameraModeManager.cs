@@ -1,3 +1,4 @@
+using MeraBrand.Expo.UI;
 using UnityEngine;
 
 namespace MeraBrand.Expo.CameraSystem
@@ -16,28 +17,36 @@ namespace MeraBrand.Expo.CameraSystem
 
         public CameraMode CurrentMode { get; private set; }
 
+        private bool lastUiBlocked;
+
         public void Configure(GameObject flyCamera, GameObject adminCamera)
         {
             flythroughCamera = flyCamera;
             topDownCamera = adminCamera;
         }
 
+        private void Update()
+        {
+            bool blocked = UIInteractionState.IsBlocked;
+            if (blocked == lastUiBlocked)
+                return;
+
+            lastUiBlocked = blocked;
+            ApplyCursorForCurrentState();
+        }
+
         public void ShowFlythrough()
         {
             CurrentMode = CameraMode.Flythrough;
             SetCameraStates(true, false);
-
-            FlyCameraController fly = GetFlyController();
-            if (fly != null)
-                fly.SetCursorLocked(true);
+            ApplyCursorForCurrentState();
         }
 
         public void ShowTopDown()
         {
             CurrentMode = CameraMode.TopDown;
             SetCameraStates(false, true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            ApplyCursorForCurrentState();
         }
 
         public void FocusStall(Vector3 cameraPosition, Vector3 lookTarget)
@@ -47,10 +56,34 @@ namespace MeraBrand.Expo.CameraSystem
 
             FlyCameraController fly = GetFlyController();
             if (fly != null)
-            {
                 fly.SnapToLookAt(cameraPosition, lookTarget);
-                fly.SetCursorLocked(true);
+
+            ApplyCursorForCurrentState();
+        }
+
+        public void RefreshCursorState()
+        {
+            ApplyCursorForCurrentState();
+        }
+
+        private void ApplyCursorForCurrentState()
+        {
+            if (UIInteractionState.IsBlocked || CurrentMode == CameraMode.TopDown)
+            {
+                FlyCameraController fly = GetFlyController();
+                if (fly != null)
+                    fly.SetCursorLocked(false);
+                else
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+                return;
             }
+
+            FlyCameraController activeFly = GetFlyController();
+            if (activeFly != null && flythroughCamera != null && flythroughCamera.activeInHierarchy)
+                activeFly.SetCursorLocked(true);
         }
 
         private FlyCameraController GetFlyController()
