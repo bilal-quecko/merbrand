@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using MeraBrand.Expo.Authentication;
 using MeraBrand.Expo.Stalls;
 using TMPro;
 using UnityEngine;
@@ -20,10 +19,20 @@ namespace MeraBrand.Expo.Booking
         private void Start()
         {
             bookingManager = StallBookingManager.Instance;
-            adminPanel ??= GameObject.Find("LocalDataPanel");
-            bool isAdmin = SessionManager.Instance != null && SessionManager.Instance.IsAdmin;
-            if (adminPanel != null) adminPanel.SetActive(isAdmin);
-            if (isAdmin) SetStatus($"Local data folder:\n{Application.persistentDataPath}");
+            if (adminPanel != null)
+                adminPanel.SetActive(false);
+        }
+
+        public void ToggleAdminPanel()
+        {
+            if (adminPanel != null)
+                adminPanel.SetActive(!adminPanel.activeSelf);
+        }
+
+        public void CloseAdminPanel()
+        {
+            if (adminPanel != null)
+                adminPanel.SetActive(false);
         }
 
         public void ImportLogoForSelectedStall()
@@ -31,8 +40,6 @@ namespace MeraBrand.Expo.Booking
             bookingManager ??= StallBookingManager.Instance;
             StallIdentity stall = selectionController != null ? selectionController.SelectedStall : null;
             if (stall == null) { SetStatus("Select a stall first."); return; }
-            StallBookingRecord record = bookingManager?.Get(stall.StallId);
-            if (record == null || !record.isBooked) { SetStatus("Book the stall before assigning a logo."); return; }
 
             string path = logoPathInput != null ? logoPathInput.text.Trim().Trim('"') : string.Empty;
 #if UNITY_EDITOR
@@ -54,8 +61,18 @@ namespace MeraBrand.Expo.Booking
                 string ext = Path.GetExtension(path).ToLowerInvariant();
                 string mime = ext == ".png" ? "image/png" : "image/jpeg";
                 string dataUri = $"data:{mime};base64,{Convert.ToBase64String(bytes)}";
-                bookingManager.SetLogo(stall.StallId, dataUri);
-                SetStatus($"Logo saved locally for {stall.DisplayName}.");
+
+                StallBookingRecord record = bookingManager?.Get(stall.StallId);
+                if (record != null && record.isBooked)
+                {
+                    bookingManager.SetLogo(stall.StallId, dataUri);
+                    SetStatus($"Logo updated for {stall.DisplayName}.");
+                }
+                else
+                {
+                    SetPendingLogo(stall.StallId, dataUri);
+                    SetStatus($"Logo selected for {stall.DisplayName}. Confirm the booking to save it.");
+                }
             }
             catch (Exception ex)
             {
@@ -69,8 +86,34 @@ namespace MeraBrand.Expo.Booking
             StallIdentity stall = selectionController != null ? selectionController.SelectedStall : null;
             if (stall == null) { SetStatus("Select a stall first."); return; }
             bookingManager?.SetLogo(stall.StallId, string.Empty);
+            ClearPendingLogo(stall.StallId);
             SetStatus($"Logo removed from {stall.DisplayName}.");
         }
+
+        public static string ConsumePendingLogo(string stallId)
+        {
+            if (string.IsNullOrWhiteSpace(stallId)) return string.Empty;
+            string key = PendingLogoKey(stallId);
+            string value = PlayerPrefs.GetString(key, string.Empty);
+            PlayerPrefs.DeleteKey(key);
+            PlayerPrefs.Save();
+            return value;
+        }
+
+        public static void ClearPendingLogo(string stallId)
+        {
+            if (string.IsNullOrWhiteSpace(stallId)) return;
+            PlayerPrefs.DeleteKey(PendingLogoKey(stallId));
+            PlayerPrefs.Save();
+        }
+
+        private static void SetPendingLogo(string stallId, string dataUri)
+        {
+            PlayerPrefs.SetString(PendingLogoKey(stallId), dataUri ?? string.Empty);
+            PlayerPrefs.Save();
+        }
+
+        private static string PendingLogoKey(string stallId) => $"MERA_BRAND_PENDING_LOGO_{stallId}";
 
         public void ExportBackup()
         {
@@ -124,12 +167,6 @@ namespace MeraBrand.Expo.Booking
             bookingManager.ResetAllBookings();
             selectionController?.CloseSelection();
             SetStatus("All local booking data has been cleared.");
-        }
-
-        public void CancelReset()
-        {
-            resetArmed = false;
-            SetStatus("Reset cancelled.");
         }
 
         private void SetStatus(string message)
