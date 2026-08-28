@@ -1,6 +1,8 @@
 using System;
 using System.IO;
+using MeraBrand.Expo.CameraSystem;
 using MeraBrand.Expo.Stalls;
+using MeraBrand.Expo.UI;
 using TMPro;
 using UnityEngine;
 
@@ -14,25 +16,52 @@ namespace MeraBrand.Expo.Booking
         [SerializeField] private TextMeshProUGUI statusText;
 
         private StallBookingManager bookingManager;
+        private CameraModeManager cameraModeManager;
         private bool resetArmed;
 
         private void Start()
         {
             bookingManager = StallBookingManager.Instance;
+            cameraModeManager = FindFirstObjectByType<CameraModeManager>();
             if (adminPanel != null)
                 adminPanel.SetActive(false);
         }
 
+        private void OnDestroy()
+        {
+            UIInteractionState.Release(this);
+        }
+
         public void ToggleAdminPanel()
         {
-            if (adminPanel != null)
-                adminPanel.SetActive(!adminPanel.activeSelf);
+            if (adminPanel == null)
+                return;
+
+            if (adminPanel.activeSelf)
+                CloseAdminPanel();
+            else
+                OpenAdminPanel();
+        }
+
+        public void OpenAdminPanel()
+        {
+            if (adminPanel == null)
+                return;
+
+            adminPanel.SetActive(true);
+            UIInteractionState.Acquire(this);
+            cameraModeManager ??= FindFirstObjectByType<CameraModeManager>();
+            cameraModeManager?.RefreshCursorState();
         }
 
         public void CloseAdminPanel()
         {
             if (adminPanel != null)
                 adminPanel.SetActive(false);
+
+            UIInteractionState.Release(this);
+            cameraModeManager ??= FindFirstObjectByType<CameraModeManager>();
+            cameraModeManager?.RefreshCursorState();
         }
 
         public void ImportLogoForSelectedStall()
