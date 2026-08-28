@@ -53,8 +53,15 @@ namespace MeraBrand.Expo.Editor
             AdminDashboardController controller = dashboardRoot.AddComponent<AdminDashboardController>();
             Canvas canvas = CreateCanvas(dashboardRoot.transform);
 
+            Button toggleButton = CreateButton("OpenDashboardButton", canvas.transform, "STALL DASHBOARD", new Vector2(-760f, 470f), new Vector2(190f, 42f));
+            RectTransform toggleRect = toggleButton.GetComponent<RectTransform>();
+            toggleRect.anchorMin = toggleRect.anchorMax = new Vector2(0.5f, 0.5f);
+            UnityEventTools.AddPersistentListener(toggleButton.onClick, controller.ToggleDashboard);
+
             GameObject panel = CreatePanel("DashboardPanel", canvas.transform);
             CreateText("Title_TMP", panel.transform, "STALL MANAGEMENT", 22f, new Vector2(0f, 205f), new Vector2(650f, 36f));
+            Button closeDashboard = CreateButton("CloseDashboardButton", panel.transform, "X", new Vector2(320f, 205f), new Vector2(42f, 34f));
+            UnityEventTools.AddPersistentListener(closeDashboard.onClick, controller.CloseDashboard);
 
             TextMeshProUGUI total = CreateText("Total_TMP", panel.transform, "Total: 0", 17f, new Vector2(-210f, 165f), new Vector2(180f, 30f));
             TextMeshProUGUI available = CreateText("Available_TMP", panel.transform, "Available: 0", 17f, new Vector2(0f, 165f), new Vector2(180f, 30f));
@@ -92,6 +99,8 @@ namespace MeraBrand.Expo.Editor
             so.FindProperty("cameraModeManager").objectReferenceValue = cameraMode;
             so.ApplyModifiedPropertiesWithoutUndo();
 
+            panel.SetActive(false);
+
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             AssetDatabase.SaveAssets();
@@ -99,13 +108,11 @@ namespace MeraBrand.Expo.Editor
 
             EditorUtility.DisplayDialog(
                 "Mera Brand - Phase 8",
-                "Admin Stall Dashboard is ready.\n\n" +
-                "• Live Total / Available / Booked counters\n" +
-                "• Search by stall ID, display name, hall, or exhibitor\n" +
-                "• Hall and booking-status filters\n" +
-                "• Previous / Next result navigation\n" +
-                "• Search result automatically switches to Top View, centers the camera, highlights the stall, and opens its booking panel\n" +
-                "• Central StallRegistry validates IDs at runtime",
+                "Admin Stall Dashboard updated.\n\n" +
+                "• Dashboard starts hidden\n" +
+                "• STALL DASHBOARD button opens/closes it\n" +
+                "• X button closes the dashboard\n" +
+                "• Search, filters, counters and navigation remain unchanged",
                 "OK");
         }
 
