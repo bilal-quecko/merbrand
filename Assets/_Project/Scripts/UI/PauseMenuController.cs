@@ -2,6 +2,7 @@ using MeraBrand.Expo.CameraSystem;
 using MeraBrand.Expo.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace MeraBrand.Expo.UI
 {
@@ -75,14 +76,31 @@ namespace MeraBrand.Expo.UI
 
         public void ExitToMainMenu()
         {
-            Time.timeScale = 1f;
+            // Always restore global runtime state BEFORE any scene transition.
             isPaused = false;
+            Time.timeScale = 1f;
+
+            if (pausePanel != null)
+                pausePanel.SetActive(false);
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
+            // Use the persistent loader when available. Fall back to a direct load so this
+            // action still works when the exhibition scene is tested directly in the Editor.
             if (SceneLoader.Instance != null)
+            {
                 SceneLoader.Instance.LoadMainMenu();
+                return;
+            }
+
+            SceneManager.LoadScene(SceneNames.MainMenu);
+        }
+
+        private void OnDisable()
+        {
+            // A disabled pause controller must never leave the application frozen.
+            Time.timeScale = 1f;
         }
 
         private void OnDestroy()
