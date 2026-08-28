@@ -29,15 +29,25 @@ namespace MeraBrand.Expo.Editor
 
             Scene scene = EditorSceneManager.OpenScene(ExhibitionPath, OpenSceneMode.Single);
 
-            CameraModeManager cameraModeManager = Object.FindFirstObjectByType<CameraModeManager>();
-            GameObject adminCameraObject = GameObject.Find("AdminTopDownCamera");
-            Camera adminCamera = adminCameraObject != null ? adminCameraObject.GetComponent<Camera>() : null;
+            // Phase 4 deliberately saves AdminTopDownCamera disabled because the runtime role
+            // controller enables it only for admins. GameObject.Find / FindFirstObjectByType do
+            // not reliably return inactive scene objects, so Phase 5 must resolve these systems
+            // through the known hierarchy and Resources.FindObjectsOfTypeAll.
+            CameraModeManager cameraModeManager = FindSceneObjectIncludingInactive<CameraModeManager>(scene);
+
+            Transform camerasRoot = FindSceneTransformIncludingInactive(scene, "Cameras");
+            Transform adminCameraTransform = camerasRoot != null ? camerasRoot.Find("AdminTopDownCamera") : null;
+            Camera adminCamera = adminCameraTransform != null ? adminCameraTransform.GetComponent<Camera>() : null;
 
             if (cameraModeManager == null || adminCamera == null)
             {
                 EditorUtility.DisplayDialog(
                     "Mera Brand - Phase 5",
-                    "Phase 4 camera systems were not found. Run 'Setup Main Menu + Role Flow' first.",
+                    "Phase 4 camera systems were not found in 02_Exhibition.\n\n" +
+                    "Expected:\n" +
+                    "Cameras/AdminTopDownCamera\n" +
+                    "Systems/Phase4_RoleSystems with CameraModeManager\n\n" +
+                    "If those objects are missing, run 'Mera Brand → Phase 4 → Setup Main Menu + Role Flow' once, then run Phase 5 again.",
                     "OK");
                 return;
             }
@@ -92,6 +102,29 @@ namespace MeraBrand.Expo.Editor
                 "• VISIT STALL moves the fly camera to that stall\n\n" +
                 "Any stall without an ID was assigned a stable STALL-### ID. Rerun this setup after adding new stall prefabs.",
                 "OK");
+        }
+
+        private static T FindSceneObjectIncludingInactive<T>(Scene scene) where T : Component
+        {
+            T[] all = Resources.FindObjectsOfTypeAll<T>();
+            foreach (T item in all)
+            {
+                if (item != null && item.gameObject.scene == scene)
+                    return item;
+            }
+
+            return null;
+        }
+
+        private static Transform FindSceneTransformIncludingInactive(Scene scene, string rootName)
+        {
+            foreach (GameObject root in scene.GetRootGameObjects())
+            {
+                if (root != null && root.name == rootName)
+                    return root.transform;
+            }
+
+            return null;
         }
 
         private static void AssignMissingUniqueIds(StallIdentity[] stalls)
