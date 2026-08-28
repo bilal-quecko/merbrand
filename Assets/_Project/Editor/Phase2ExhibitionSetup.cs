@@ -15,10 +15,18 @@ namespace MeraBrand.Expo.Editor
         private const string StallPrefabPath = Root + "/Prefabs/Stalls";
         private const string MaterialPath = Root + "/Art/Materials";
 
-        // Project convention: 1 Unity unit = 1 foot.
-        private const float WallHeight = 10f;
-        private const float WallThickness = 0.25f;
-        private const float HeaderHeight = 8f;
+        // Venue/layout drawings are in feet, therefore 1 Unity unit = 1 foot.
+        // Stall specifications are provided in metres and are converted precisely to feet here.
+        private const float FeetPerMeter = 3.280839895f;
+        private const float WallHeightMeters = 2.5f;
+        private const float HeaderHeightMeters = 2.2f;
+        private const float WallThicknessMeters = 0.08f;
+
+        private static float MetersToUnits(float meters) => meters * FeetPerMeter;
+
+        private static readonly float WallHeight = MetersToUnits(WallHeightMeters);       // 8.20210 ft
+        private static readonly float HeaderHeight = MetersToUnits(HeaderHeightMeters);   // 7.21785 ft
+        private static readonly float WallThickness = MetersToUnits(WallThicknessMeters); // 0.26247 ft
 
         [MenuItem("Mera Brand/Phase 2/Generate Stall Prefabs")]
         public static void GenerateStallPrefabs()
@@ -30,16 +38,42 @@ namespace MeraBrand.Expo.Editor
                 MaterialPath + "/MAT_Stall_Available.mat",
                 new Color(0.72f, 0.74f, 0.76f));
 
-            CreateStallPrefab("PF_Stall_3x3", new Vector2(3f, 3f), StallSize.ThreeByThree, availableMaterial);
-            CreateStallPrefab("PF_Stall_3x6", new Vector2(3f, 6f), StallSize.ThreeBySix, availableMaterial);
-            CreateStallPrefab("PF_Stall_6x6", new Vector2(6f, 6f), StallSize.SixBySix, availableMaterial);
+            // IMPORTANT:
+            // Names are metric dimensions. Unity footprint is converted to feet because the
+            // complete venue layout is authored at 1 Unity unit = 1 foot.
+            // X = stall frontage, Z = stall side/depth.
+            // 3x6 means 6 m frontage and 3 m side/depth, per exhibition specification.
+            CreateStallPrefab(
+                "PF_Stall_3x3",
+                new Vector2(MetersToUnits(3f), MetersToUnits(3f)),
+                new Vector2(3f, 3f),
+                StallSize.ThreeByThree,
+                availableMaterial);
+
+            CreateStallPrefab(
+                "PF_Stall_3x6",
+                new Vector2(MetersToUnits(6f), MetersToUnits(3f)),
+                new Vector2(6f, 3f),
+                StallSize.ThreeBySix,
+                availableMaterial);
+
+            CreateStallPrefab(
+                "PF_Stall_6x6",
+                new Vector2(MetersToUnits(6f), MetersToUnits(6f)),
+                new Vector2(6f, 6f),
+                StallSize.SixBySix,
+                availableMaterial);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
             EditorUtility.DisplayDialog(
                 "Mera Brand - Phase 2",
-                "Standard stall prefabs created: 3x3, 3x6 and 6x6.",
+                "Standard stall prefabs regenerated with metric specifications converted to the feet-based Unity layout.\n\n" +
+                "3x3 m = 9.84252 x 9.84252 ft\n" +
+                "3x6 m = 19.68504 ft FRONT x 9.84252 ft SIDE\n" +
+                "6x6 m = 19.68504 x 19.68504 ft\n" +
+                "Stall wall height = 2.5 m = 8.20210 ft",
                 "OK");
         }
 
@@ -81,9 +115,11 @@ namespace MeraBrand.Expo.Editor
 
             GameObject sizeReference = new("Stall_Size_Reference");
             sizeReference.transform.SetParent(stalls, false);
-            InstantiateReferenceStall("PF_Stall_3x3", new Vector3(4f, 0f, 4f), "REF_3x3", sizeReference.transform);
-            InstantiateReferenceStall("PF_Stall_3x6", new Vector3(10f, 0f, 4f), "REF_3x6", sizeReference.transform);
-            InstantiateReferenceStall("PF_Stall_6x6", new Vector3(18f, 0f, 4f), "REF_6x6", sizeReference.transform);
+
+            // Reference stalls are spaced using their actual converted dimensions.
+            InstantiateReferenceStall("PF_Stall_3x3", new Vector3(6f, 0f, 6f), "REF_3x3", sizeReference.transform);
+            InstantiateReferenceStall("PF_Stall_3x6", new Vector3(24f, 0f, 6f), "REF_3x6", sizeReference.transform);
+            InstantiateReferenceStall("PF_Stall_6x6", new Vector3(48f, 0f, 10f), "REF_6x6", sizeReference.transform);
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
@@ -93,11 +129,16 @@ namespace MeraBrand.Expo.Editor
 
             EditorUtility.DisplayDialog(
                 "Mera Brand - Phase 2",
-                "Exhibition scene prepared with the 88 x 171 ft calibration footprint and stall-size references.\n\nNext step: place the complete floor-plan geometry against the supplied layout.",
+                "Exhibition scene prepared with the 88 x 171 ft calibration footprint and correctly converted metric stall references.\n\nNext step: place the complete floor-plan geometry against the supplied layout.",
                 "OK");
         }
 
-        private static void CreateStallPrefab(string prefabName, Vector2 footprint, StallSize size, Material material)
+        private static void CreateStallPrefab(
+            string prefabName,
+            Vector2 footprintInUnityUnits,
+            Vector2 footprintMeters,
+            StallSize size,
+            Material material)
         {
             string path = $"{StallPrefabPath}/{prefabName}.prefab";
 
@@ -106,35 +147,48 @@ namespace MeraBrand.Expo.Editor
 
             CreatePart("Floor", root.transform,
                 new Vector3(0f, 0.05f, 0f),
-                new Vector3(footprint.x, 0.1f, footprint.y), material);
+                new Vector3(footprintInUnityUnits.x, 0.1f, footprintInUnityUnits.y), material);
 
             CreatePart("BackWall", root.transform,
-                new Vector3(0f, WallHeight * 0.5f, footprint.y * 0.5f),
-                new Vector3(footprint.x, WallHeight, WallThickness), material);
+                new Vector3(0f, WallHeight * 0.5f, footprintInUnityUnits.y * 0.5f),
+                new Vector3(footprintInUnityUnits.x, WallHeight, WallThickness), material);
 
             CreatePart("LeftWall", root.transform,
-                new Vector3(-footprint.x * 0.5f, WallHeight * 0.5f, 0f),
-                new Vector3(WallThickness, WallHeight, footprint.y), material);
+                new Vector3(-footprintInUnityUnits.x * 0.5f, WallHeight * 0.5f, 0f),
+                new Vector3(WallThickness, WallHeight, footprintInUnityUnits.y), material);
 
             CreatePart("RightWall", root.transform,
-                new Vector3(footprint.x * 0.5f, WallHeight * 0.5f, 0f),
-                new Vector3(WallThickness, WallHeight, footprint.y), material);
+                new Vector3(footprintInUnityUnits.x * 0.5f, WallHeight * 0.5f, 0f),
+                new Vector3(WallThickness, WallHeight, footprintInUnityUnits.y), material);
 
             GameObject headerAnchor = new("HeaderAnchor");
             headerAnchor.transform.SetParent(root.transform, false);
-            headerAnchor.transform.localPosition = new Vector3(0f, HeaderHeight, footprint.y * 0.5f - 0.02f);
+            headerAnchor.transform.localPosition = new Vector3(
+                0f,
+                HeaderHeight,
+                footprintInUnityUnits.y * 0.5f - 0.02f);
 
             GameObject visitPoint = new("VisitPoint");
             visitPoint.transform.SetParent(root.transform, false);
-            visitPoint.transform.localPosition = new Vector3(0f, 5.5f, -Mathf.Max(5f, footprint.y * 0.9f));
+            visitPoint.transform.localPosition = new Vector3(
+                0f,
+                MetersToUnits(1.7f),
+                -Mathf.Max(MetersToUnits(2f), footprintInUnityUnits.y * 0.75f));
             visitPoint.transform.localRotation = Quaternion.identity;
 
             GameObject lookTarget = new("LookTarget");
             lookTarget.transform.SetParent(root.transform, false);
-            lookTarget.transform.localPosition = new Vector3(0f, 4.5f, 0f);
+            lookTarget.transform.localPosition = new Vector3(0f, MetersToUnits(1.5f), 0f);
 
             StallIdentity identity = root.GetComponent<StallIdentity>();
-            identity.EditorConfigure("UNASSIGNED", prefabName, "UNASSIGNED", size, footprint);
+            identity.EditorConfigure(
+                "UNASSIGNED",
+                prefabName,
+                "UNASSIGNED",
+                size,
+                footprintMeters,
+                footprintInUnityUnits,
+                WallHeightMeters);
             identity.EditorSetCameraAnchors(visitPoint.transform, lookTarget.transform);
 
             PrefabUtility.SaveAsPrefabAsset(root, path);
