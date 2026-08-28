@@ -10,12 +10,16 @@ using UnityEngine.SceneManagement;
 namespace MeraBrand.Expo.Editor
 {
     /// <summary>
-    /// Generates the first-pass Hall 1 internal layout from the supplied expo plan.
-    /// Venue coordinates are feet (1 Unity unit = 1 foot).
-    /// Stall prefab names remain metric and are already converted to feet by Phase 2 setup.
+    /// Builds Hall 1 from the supplied reference plan.
+    /// Venue coordinates are feet: 1 Unity unit = 1 foot.
+    /// Stall specifications are metric and the prefabs are already converted to feet.
     ///
-    /// Important: Hall dimensions are authoritative. Internal placement is a plan-matched working
-    /// layout that can be fine-tuned once additional measured offsets are supplied.
+    /// Locked Hall 1 rules:
+    /// - Hall 1 = 168 x 115 ft.
+    /// - Normal numbered booths = 3 x 3 m.
+    /// - Silver S booths (S-1, S-2, ... S-24) = 6 m frontage x 3 m depth.
+    /// - Gold booths = 6 x 6 m.
+    /// - Placement follows the Hall 1 reference image proportions, not a generic grid.
     /// </summary>
     public static class Phase2Hall1InternalLayoutSetup
     {
@@ -23,8 +27,13 @@ namespace MeraBrand.Expo.Editor
         private const string ScenePath = Root + "/Scenes/02_Exhibition.unity";
         private const string StallPrefabPath = Root + "/Prefabs/Stalls";
 
-        // Hall 1 authoritative size: 168 x 115 ft.
         private static readonly Vector2 Hall1Feet = new(168f, 115f);
+
+        // Converted dimensions used for plan spacing.
+        private const float Booth3mFeet = 9.84252f;
+        private const float Booth6mFeet = 19.68504f;
+        private const float SilverColumnPitch = 21.0f;
+        private const float SilverRowPitch = 10.5f;
 
         [MenuItem("Mera Brand/Phase 2/Build Hall 1 Internal Layout")]
         public static void BuildHall1InternalLayout()
@@ -50,75 +59,70 @@ namespace MeraBrand.Expo.Editor
             Transform hallRoot = new GameObject("Hall_1_Stalls").transform;
             hallRoot.SetParent(stallsRoot, false);
 
-            Transform standard = CreateGroup("Standard_Stalls", hallRoot);
-            Transform islandA = CreateGroup("Island_A_S1_to_S10", hallRoot);
-            Transform islandB = CreateGroup("Island_B_S4_to_S10", hallRoot);
-            Transform islandC = CreateGroup("Island_C_S11_to_S22", hallRoot);
-            Transform islandD = CreateGroup("Island_D_S14_to_S24", hallRoot);
-            Transform special = CreateGroup("Special_And_Sponsor", hallRoot);
+            Transform normal = CreateGroup("Normal_3x3m", hallRoot);
+            Transform silver = CreateGroup("Silver_6x3m", hallRoot);
+            Transform special = CreateGroup("SL_And_Special", hallRoot);
+            Transform gold = CreateGroup("Gold_6x6m", hallRoot);
+            Transform sponsors = CreateGroup("Main_Expo_Co_Sponsors", hallRoot);
 
-            // ---------------------------
-            // WEST PERIMETER: 1 - 5
-            // ---------------------------
-            // Fronts face inward/east. The supplied plan shows these vertically stacked on Hall 1's west wall.
-            for (int i = 0; i < 5; i++)
+            // -----------------------------------------------------------------
+            // WEST PERIMETER — NORMAL 3x3 m STALLS 1-5
+            // -----------------------------------------------------------------
+            // The reference has five compact booths vertically stacked against the west wall.
+            // Their centers are kept near the wall with clear gaps matching the drawing.
+            float[] westZ = { 11f, 25.5f, 40f, 54.5f, 69f };
+            for (int i = 0; i < westZ.Length; i++)
             {
                 string label = (i + 1).ToString();
                 PlaceStall("PF_Stall_3x3", $"H1-{label}", label, "Hall 1",
-                    new Vector3(5.2f, 0f, 17f + i * 12f), 90f, standard);
+                    new Vector3(5.4f, 0f, westZ[i]), 90f, normal);
             }
 
-            // ---------------------------
-            // CENTRAL LOWER ISLAND
-            // Plan display labels: upper S-10, S-9, S-8 / lower S-1, S-2, S-3
-            // ---------------------------
-            PlaceHorizontalRow(new[] { "S-1", "S-2", "S-3" }, 47f, 35f, 0f, islandA, "H1-A-L");
-            PlaceHorizontalRow(new[] { "S-10", "S-9", "S-8" }, 47f, 47f, 180f, islandA, "H1-A-U");
+            // -----------------------------------------------------------------
+            // SILVER ISLANDS — EACH S-BOOTH IS 6x3 m
+            // -----------------------------------------------------------------
+            // Reference image arrangement:
+            // upper-left:  S20 S21 S22 / S11 S12 S13
+            // upper-right: S23 S24     / S14 S15
+            // lower-left:  S10 S9 S8   / S1  S2  S3
+            // lower-right: S9  S10     / S4  S5
+            //
+            // X is frontage (6 m = 19.685 ft), Z is booth depth (3 m = 9.843 ft).
+            PlaceSilverRow(new[] { "S-1", "S-2", "S-3" }, 35f, 45.5f, 0f, silver, "H1-SIL-LA-L");
+            PlaceSilverRow(new[] { "S-10", "S-9", "S-8" }, 35f, 56f, 180f, silver, "H1-SIL-LA-U");
 
-            // ---------------------------
-            // CENTRAL LOWER-RIGHT ISLAND
-            // The drawing repeats display labels S-9 and S-10 here. Internal IDs remain unique.
-            // ---------------------------
-            PlaceHorizontalRow(new[] { "S-4", "S-5" }, 112f, 35f, 0f, islandB, "H1-B-L");
-            PlaceHorizontalRow(new[] { "S-9", "S-10" }, 112f, 47f, 180f, islandB, "H1-B-U");
+            PlaceSilverRow(new[] { "S-4", "S-5" }, 108f, 45.5f, 0f, silver, "H1-SIL-LB-L");
+            PlaceSilverRow(new[] { "S-9", "S-10" }, 108f, 56f, 180f, silver, "H1-SIL-LB-U");
 
-            // ---------------------------
-            // CENTRAL UPPER ISLAND
-            // upper S-20, S-21, S-22 / lower S-11, S-12, S-13
-            // ---------------------------
-            PlaceHorizontalRow(new[] { "S-11", "S-12", "S-13" }, 47f, 76f, 0f, islandC, "H1-C-L");
-            PlaceHorizontalRow(new[] { "S-20", "S-21", "S-22" }, 47f, 88f, 180f, islandC, "H1-C-U");
+            PlaceSilverRow(new[] { "S-11", "S-12", "S-13" }, 35f, 83.5f, 0f, silver, "H1-SIL-UA-L");
+            PlaceSilverRow(new[] { "S-20", "S-21", "S-22" }, 35f, 94f, 180f, silver, "H1-SIL-UA-U");
 
-            // ---------------------------
-            // CENTRAL UPPER-RIGHT ISLAND
-            // upper S-23, S-24 / lower S-14, S-15
-            // ---------------------------
-            PlaceHorizontalRow(new[] { "S-14", "S-15" }, 112f, 76f, 0f, islandD, "H1-D-L");
-            PlaceHorizontalRow(new[] { "S-23", "S-24" }, 112f, 88f, 180f, islandD, "H1-D-U");
+            PlaceSilverRow(new[] { "S-14", "S-15" }, 108f, 83.5f, 0f, silver, "H1-SIL-UB-L");
+            PlaceSilverRow(new[] { "S-23", "S-24" }, 108f, 94f, 180f, silver, "H1-SIL-UB-U");
 
-            // ---------------------------
-            // SL / SPECIAL LOCATIONS
-            // Using 3x6 metric booth with 6 m frontage. Rotations match the plan orientation.
-            // ---------------------------
-            PlaceStall("PF_Stall_3x6", "H1-SL1", "SL 1", "Hall 1", new Vector3(7f, 0f, 91f), 90f, special);
-            PlaceStall("PF_Stall_3x6", "H1-SL2", "SL 2", "Hall 1", new Vector3(151f, 0f, 88f), 90f, special);
-            PlaceStall("PF_Stall_3x6", "H1-SL3", "SL 3", "Hall 1", new Vector3(151f, 0f, 47f), 90f, special);
-            PlaceStall("PF_Stall_3x6", "H1-SL4", "SL 4", "Hall 1", new Vector3(160f, 0f, 12f), 0f, special);
+            // -----------------------------------------------------------------
+            // SL STALLS — kept as 6x3 m special modules from the plan.
+            // -----------------------------------------------------------------
+            PlaceStall("PF_Stall_3x6", "H1-SL1", "SL 1", "Hall 1", new Vector3(6.2f, 0f, 91f), 90f, special);
+            PlaceStall("PF_Stall_3x6", "H1-SL2", "SL 2", "Hall 1", new Vector3(144f, 0f, 89f), 90f, special);
+            PlaceStall("PF_Stall_3x6", "H1-SL3", "SL 3", "Hall 1", new Vector3(144f, 0f, 51f), 90f, special);
+            PlaceStall("PF_Stall_3x6", "H1-SL4", "SL 4", "Hall 1", new Vector3(157f, 0f, 11f), 0f, special);
 
-            // ---------------------------
-            // SOUTH / ENTRANCE SPONSOR ROW
-            // These are placeholders using standard modular stall sizes so models can be replaced later.
-            // ---------------------------
-            PlaceStall("PF_Stall_3x6", "H1-GOLD1", "GOLD 1", "Hall 1", new Vector3(42f, 0f, 12f), 0f, special);
-            PlaceStall("PF_Stall_3x6", "H1-GOLD2", "GOLD 2", "Hall 1", new Vector3(64f, 0f, 12f), 0f, special);
-            PlaceStall("PF_Stall_3x6", "H1-GOLD-SPONSOR", "Gold Sponsor", "Hall 1", new Vector3(87f, 0f, 12f), 0f, special);
-            PlaceStall("PF_Stall_3x6", "H1-MAIN-SPONSOR", "Main Sponsor", "Hall 1", new Vector3(116f, 0f, 12f), 0f, special);
-            PlaceStall("PF_Stall_3x6", "H1-EXPO-SPONSOR", "Expo Sponsor", "Hall 1", new Vector3(141f, 0f, 12f), 0f, special);
+            // -----------------------------------------------------------------
+            // GOLD ROW — GOLD STALLS ARE 6x6 m
+            // -----------------------------------------------------------------
+            PlaceStall("PF_Stall_6x6", "H1-GOLD1", "GOLD 1", "Hall 1", new Vector3(36f, 0f, 16f), 0f, gold);
+            PlaceStall("PF_Stall_6x6", "H1-GOLD2", "GOLD 2", "Hall 1", new Vector3(57f, 0f, 16f), 0f, gold);
+            PlaceStall("PF_Stall_6x6", "H1-GOLD-SPONSOR", "Gold Sponsor", "Hall 1", new Vector3(78f, 0f, 16f), 0f, gold);
 
-            // Co-sponsor sits near the Hall 1 -> Hall 2 connection in the supplied plan.
-            PlaceStall("PF_Stall_3x3", "H1-CO-SPONSOR", "Co Sponsor", "Hall 1", new Vector3(163f, 0f, 27f), 90f, special);
+            // Main and Expo Sponsor blocks are shown with roughly 6 m frontage in the reference.
+            // They remain 6x3 modular placeholders until their final custom models are supplied.
+            PlaceStall("PF_Stall_3x6", "H1-MAIN-SPONSOR", "Main Sponsor", "Hall 1", new Vector3(108f, 0f, 16f), 0f, sponsors);
+            PlaceStall("PF_Stall_3x6", "H1-EXPO-SPONSOR", "Expo Sponsor", "Hall 1", new Vector3(130f, 0f, 16f), 0f, sponsors);
+            PlaceStall("PF_Stall_3x3", "H1-CO-SPONSOR", "Co Sponsor", "Hall 1", new Vector3(162.5f, 0f, 12f), 90f, sponsors);
 
-            CreateHallLabel(hallRoot, "HALL 1", new Vector3(Hall1Feet.x * 0.5f, 0.2f, Hall1Feet.y * 0.56f));
+            // Hall label sits in the open center aisle between upper and lower island groups.
+            CreateHallLabel(hallRoot, "HALL 1", new Vector3(84f, 0.2f, 69f));
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
@@ -128,25 +132,27 @@ namespace MeraBrand.Expo.Editor
 
             EditorUtility.DisplayDialog(
                 "Mera Brand - Hall 1",
-                "Hall 1 first-pass internal layout generated.\n\n" +
-                "Includes:\n" +
-                "• west perimeter stalls 1-5\n" +
-                "• four central S-stall islands\n" +
-                "• SL1-SL4\n" +
-                "• Gold/Main/Expo/Co sponsor placeholders\n\n" +
-                "Hall dimensions remain exact at 168 x 115 ft. Internal stall offsets are matched to the supplied plan and can be fine-tuned before Hall 2/Hall 3 are populated.",
+                "Hall 1 corrected to the reference layout.\n\n" +
+                "Locked sizes:\n" +
+                "• Normal numbered stalls = 3x3 m\n" +
+                "• Silver S stalls = 6x3 m (6 m frontage)\n" +
+                "• Gold stalls = 6x6 m\n\n" +
+                "The four silver islands, west perimeter stalls, SL positions and sponsor row were compacted/repositioned to match the supplied plan much more closely.",
                 "OK");
         }
 
-        private static void PlaceHorizontalRow(string[] displayLabels, float startX, float z, float yRotation, Transform parent, string internalPrefix)
+        private static void PlaceSilverRow(string[] labels, float startX, float z, float yRotation, Transform parent, string internalPrefix)
         {
-            const float spacing = 11f; // 3 m booth is 9.8425 ft; small practical divider gap retained.
-
-            for (int i = 0; i < displayLabels.Length; i++)
+            for (int i = 0; i < labels.Length; i++)
             {
-                string display = displayLabels[i];
-                PlaceStall("PF_Stall_3x3", $"{internalPrefix}-{i + 1}", display, "Hall 1",
-                    new Vector3(startX + i * spacing, 0f, z), yRotation, parent);
+                PlaceStall(
+                    "PF_Stall_3x6",
+                    $"{internalPrefix}-{i + 1}",
+                    labels[i],
+                    "Hall 1",
+                    new Vector3(startX + i * SilverColumnPitch, 0f, z),
+                    yRotation,
+                    parent);
             }
         }
 
@@ -179,33 +185,34 @@ namespace MeraBrand.Expo.Editor
                 Vector2 metres;
                 Vector2 units;
                 StallSize size;
-                if (prefabName.Contains("3x6"))
-                {
-                    metres = new Vector2(6f, 3f);
-                    units = new Vector2(19.68504f, 9.84252f);
-                    size = StallSize.ThreeBySix;
-                }
-                else if (prefabName.Contains("6x6"))
+
+                if (prefabName.Contains("6x6"))
                 {
                     metres = new Vector2(6f, 6f);
-                    units = new Vector2(19.68504f, 19.68504f);
+                    units = new Vector2(Booth6mFeet, Booth6mFeet);
                     size = StallSize.SixBySix;
+                }
+                else if (prefabName.Contains("3x6"))
+                {
+                    metres = new Vector2(6f, 3f);
+                    units = new Vector2(Booth6mFeet, Booth3mFeet);
+                    size = StallSize.ThreeBySix;
                 }
                 else
                 {
                     metres = new Vector2(3f, 3f);
-                    units = new Vector2(9.84252f, 9.84252f);
+                    units = new Vector2(Booth3mFeet, Booth3mFeet);
                     size = StallSize.ThreeByThree;
                 }
 
                 identity.EditorConfigure(internalId, displayLabel, hall, size, metres, units, 2.5f);
             }
 
-            CreateStallLabel(instance.transform, displayLabel);
+            CreateStallLabel(instance.transform, displayLabel, prefabName.Contains("6x6") ? 15f : prefabName.Contains("3x6") ? 13f : 8f);
             return instance;
         }
 
-        private static void CreateStallLabel(Transform stall, string label)
+        private static void CreateStallLabel(Transform stall, string label, float width)
         {
             Transform existing = stall.Find("PlanLabel_TMP");
             if (existing != null)
@@ -220,8 +227,10 @@ namespace MeraBrand.Expo.Editor
             tmp.text = label;
             tmp.alignment = TextAlignmentOptions.Center;
             tmp.fontSize = 2.2f;
-            tmp.enableAutoSizing = false;
-            tmp.rectTransform.sizeDelta = new Vector2(9f, 3f);
+            tmp.enableAutoSizing = true;
+            tmp.fontSizeMin = 1.2f;
+            tmp.fontSizeMax = 2.4f;
+            tmp.rectTransform.sizeDelta = new Vector2(width, 4f);
         }
 
         private static void CreateHallLabel(Transform parent, string label, Vector3 position)
