@@ -20,6 +20,7 @@ namespace MeraBrand.Expo.Booking
         private void Start()
         {
             bookingManager = StallBookingManager.Instance;
+            adminPanel ??= GameObject.Find("LocalDataPanel");
             bool isAdmin = SessionManager.Instance != null && SessionManager.Instance.IsAdmin;
             if (adminPanel != null) adminPanel.SetActive(isAdmin);
             if (isAdmin) SetStatus($"Local data folder:\n{Application.persistentDataPath}");
