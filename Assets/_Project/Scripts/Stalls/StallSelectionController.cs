@@ -91,6 +91,12 @@ namespace MeraBrand.Expo.Stalls
             CloseBookingPopup(); CancelMakeAvailable();
         }
 
+        public void SelectFromDashboard(StallIdentity stall)
+        {
+            if (stall == null) return;
+            SelectStall(stall);
+        }
+
         public void VisitSelectedStall()
         {
             if (selectedStall == null || cameraModeManager == null) return;
