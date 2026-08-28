@@ -1,6 +1,7 @@
 using MeraBrand.Expo.Authentication;
 using MeraBrand.Expo.CameraSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace MeraBrand.Expo.Core
 {
@@ -33,6 +34,22 @@ namespace MeraBrand.Expo.Core
             }
         }
 
+        private void Update()
+        {
+            if (Time.timeScale <= 0f)
+                return;
+
+            SessionManager session = SessionManager.Instance;
+            Keyboard keyboard = Keyboard.current;
+            if (session == null || !session.IsAdmin || keyboard == null || !keyboard.tabKey.wasPressedThisFrame)
+                return;
+
+            if (cameraModeManager != null && cameraModeManager.CurrentMode == CameraMode.TopDown)
+                cameraModeManager.ShowFlythrough();
+            else
+                cameraModeManager?.ShowTopDown();
+        }
+
         public void ShowTopView()
         {
             if (SessionManager.Instance != null && SessionManager.Instance.IsAdmin)
@@ -59,6 +76,10 @@ namespace MeraBrand.Expo.Core
 
         private static void ReturnToMenu()
         {
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             if (SceneLoader.Instance != null)
                 SceneLoader.Instance.LoadMainMenu();
             else
