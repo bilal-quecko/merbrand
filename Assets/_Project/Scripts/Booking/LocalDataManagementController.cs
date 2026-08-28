@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using MeraBrand.Expo.Authentication;
 using MeraBrand.Expo.Stalls;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace MeraBrand.Expo.Booking
 {
     public sealed class LocalDataManagementController : MonoBehaviour
     {
+        [SerializeField] private GameObject adminPanel;
         [SerializeField] private StallSelectionController selectionController;
         [SerializeField] private TMP_InputField logoPathInput;
         [SerializeField] private TextMeshProUGUI statusText;
@@ -18,7 +20,9 @@ namespace MeraBrand.Expo.Booking
         private void Start()
         {
             bookingManager = StallBookingManager.Instance;
-            SetStatus($"Local data folder:\n{Application.persistentDataPath}");
+            bool isAdmin = SessionManager.Instance != null && SessionManager.Instance.IsAdmin;
+            if (adminPanel != null) adminPanel.SetActive(isAdmin);
+            if (isAdmin) SetStatus($"Local data folder:\n{Application.persistentDataPath}");
         }
 
         public void ImportLogoForSelectedStall()
@@ -91,7 +95,8 @@ namespace MeraBrand.Expo.Booking
             try
             {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", $"\"{Application.persistentDataPath.Replace('/', '\\')}\"") { UseShellExecute = true });
+                string folder = Application.persistentDataPath.Replace('/', '\\');
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", $"\"{folder}\"") { UseShellExecute = true });
 #elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
                 System.Diagnostics.Process.Start("open", Application.persistentDataPath);
 #else
