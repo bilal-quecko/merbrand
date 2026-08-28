@@ -114,12 +114,21 @@ namespace MeraBrand.Expo.Stalls
                 if (bookingErrorText != null) bookingErrorText.text = "Exhibitor / brand name is required.";
                 return;
             }
-            bookingManager.Book(selectedStall.StallId, exhibitor);
-            CloseBookingPopup(); RefreshSelectionUI();
+
+            StallBookingRecord existing = bookingManager.Get(selectedStall.StallId);
+            string logo = existing != null && existing.isBooked
+                ? existing.logoReference
+                : LocalDataManagementController.ConsumePendingLogo(selectedStall.StallId);
+
+            bookingManager.Book(selectedStall.StallId, exhibitor, logo);
+            CloseBookingPopup();
+            RefreshSelectionUI();
         }
 
         public void CloseBookingPopup()
         {
+            if (selectedStall != null)
+                LocalDataManagementController.ClearPendingLogo(selectedStall.StallId);
             if (bookingPanel != null) bookingPanel.SetActive(false);
             if (bookingErrorText != null) bookingErrorText.text = string.Empty;
         }
@@ -145,6 +154,7 @@ namespace MeraBrand.Expo.Stalls
         {
             bookingManager ??= StallBookingManager.Instance;
             if (selectedStall == null || bookingPanel == null) return;
+            LocalDataManagementController.ClearPendingLogo(selectedStall.StallId);
             StallBookingRecord record = bookingManager?.Get(selectedStall.StallId);
             if (bookingStallText != null) bookingStallText.text = $"{selectedStall.DisplayName}\n{selectedStall.StallId}";
             if (exhibitorInput != null) exhibitorInput.text = editing && record != null ? record.exhibitorName : string.Empty;
