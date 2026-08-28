@@ -34,9 +34,7 @@ namespace MeraBrand.Expo.CameraSystem
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
-            Vector3 euler = transform.eulerAngles;
-            yaw = euler.y;
-            pitch = euler.x > 180f ? euler.x - 360f : euler.x;
+            SyncAnglesFromTransform();
         }
 
         private void Start()
@@ -46,7 +44,6 @@ namespace MeraBrand.Expo.CameraSystem
 
         private void Update()
         {
-            // Pause menu owns cursor/input while the simulation is paused.
             if (Time.timeScale <= 0f)
                 return;
 
@@ -114,6 +111,37 @@ namespace MeraBrand.Expo.CameraSystem
             cursorLocked = locked;
             Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
             Cursor.visible = !locked;
+        }
+
+        public void SnapToPose(Vector3 position, Quaternion rotation)
+        {
+            bool wasEnabled = controller != null && controller.enabled;
+            if (controller != null && wasEnabled)
+                controller.enabled = false;
+
+            transform.SetPositionAndRotation(position, rotation);
+            SyncAnglesFromTransform();
+
+            if (controller != null && wasEnabled)
+                controller.enabled = true;
+        }
+
+        public void SnapToLookAt(Vector3 position, Vector3 target)
+        {
+            Vector3 direction = target - position;
+            Quaternion rotation = direction.sqrMagnitude > 0.0001f
+                ? Quaternion.LookRotation(direction.normalized, Vector3.up)
+                : transform.rotation;
+
+            SnapToPose(position, rotation);
+        }
+
+        private void SyncAnglesFromTransform()
+        {
+            Vector3 euler = transform.eulerAngles;
+            yaw = euler.y;
+            pitch = euler.x > 180f ? euler.x - 360f : euler.x;
+            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
         }
     }
 }
