@@ -12,6 +12,7 @@ namespace MeraBrand.Expo.UI
 
         private bool isPaused;
         private FlyCameraController flyCamera;
+        private CameraModeManager cameraModeManager;
 
         private void Awake()
         {
@@ -23,6 +24,7 @@ namespace MeraBrand.Expo.UI
         private void Start()
         {
             flyCamera = FindFirstObjectByType<FlyCameraController>();
+            cameraModeManager = FindFirstObjectByType<CameraModeManager>();
         }
 
         private void Update()
@@ -69,16 +71,28 @@ namespace MeraBrand.Expo.UI
             if (pausePanel != null)
                 pausePanel.SetActive(false);
 
+            cameraModeManager ??= FindFirstObjectByType<CameraModeManager>();
+            if (cameraModeManager != null)
+            {
+                cameraModeManager.RefreshCursorState();
+                return;
+            }
+
             flyCamera ??= FindFirstObjectByType<FlyCameraController>();
-            if (flyCamera != null && flyCamera.gameObject.activeInHierarchy)
+            if (flyCamera != null && flyCamera.gameObject.activeInHierarchy && !UIInteractionState.IsBlocked)
                 flyCamera.SetCursorLocked(true);
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
 
         public void ExitToMainMenu()
         {
-            // Always restore global runtime state BEFORE any scene transition.
             isPaused = false;
             Time.timeScale = 1f;
+            UIInteractionState.ClearAll();
 
             if (pausePanel != null)
                 pausePanel.SetActive(false);
@@ -86,8 +100,6 @@ namespace MeraBrand.Expo.UI
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            // Use the persistent loader when available. Fall back to a direct load so this
-            // action still works when the exhibition scene is tested directly in the Editor.
             if (SceneLoader.Instance != null)
             {
                 SceneLoader.Instance.LoadMainMenu();
@@ -99,7 +111,6 @@ namespace MeraBrand.Expo.UI
 
         private void OnDisable()
         {
-            // A disabled pause controller must never leave the application frozen.
             Time.timeScale = 1f;
         }
 
