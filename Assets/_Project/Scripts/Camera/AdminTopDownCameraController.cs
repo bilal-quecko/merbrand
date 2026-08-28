@@ -1,3 +1,4 @@
+using MeraBrand.Expo.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,11 +11,8 @@ namespace MeraBrand.Expo.CameraSystem
         [SerializeField] private float zoomSpeed = 8f;
         [SerializeField] private float minOrthographicSize = 25f;
         [SerializeField] private float maxOrthographicSize = 180f;
-        [SerializeField] private float focusOrthographicSize = 28f;
 
         private Camera controlledCamera;
-
-        public Camera ControlledCamera => controlledCamera != null ? controlledCamera : GetComponent<Camera>();
 
         private void Awake()
         {
@@ -24,7 +22,7 @@ namespace MeraBrand.Expo.CameraSystem
 
         private void Update()
         {
-            if (Time.timeScale <= 0f)
+            if (UIInteractionState.IsBlocked)
                 return;
 
             if (Keyboard.current != null)
@@ -51,16 +49,9 @@ namespace MeraBrand.Expo.CameraSystem
             }
         }
 
-        public void FocusOn(Vector3 worldPosition, float orthographicSize = -1f)
+        public void FocusOn(Vector3 worldPosition)
         {
-            controlledCamera ??= GetComponent<Camera>();
-            Vector3 position = transform.position;
-            position.x = worldPosition.x;
-            position.z = worldPosition.z;
-            transform.position = position;
-
-            float targetSize = orthographicSize > 0f ? orthographicSize : focusOrthographicSize;
-            controlledCamera.orthographicSize = Mathf.Clamp(targetSize, minOrthographicSize, maxOrthographicSize);
+            transform.position = new Vector3(worldPosition.x, transform.position.y, worldPosition.z);
         }
     }
 }
