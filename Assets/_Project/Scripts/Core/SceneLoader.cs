@@ -25,8 +25,14 @@ namespace MeraBrand.Expo.Core
 
         public void Load(string sceneName)
         {
-            if (!isLoading)
-                StartCoroutine(LoadRoutine(sceneName));
+            if (isLoading)
+                return;
+
+            // Scene transitions must never inherit a paused simulation state.
+            // Centralizing this here protects every current and future scene change.
+            Time.timeScale = 1f;
+
+            StartCoroutine(LoadRoutine(sceneName));
         }
 
         public void LoadMainMenu() => Load(SceneNames.MainMenu);
@@ -35,8 +41,8 @@ namespace MeraBrand.Expo.Core
         private IEnumerator LoadRoutine(string sceneName)
         {
             isLoading = true;
-            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
             if (operation == null)
             {
                 Debug.LogError($"Unable to start loading scene '{sceneName}'. Check Build Settings.");
@@ -44,6 +50,8 @@ namespace MeraBrand.Expo.Core
                 yield break;
             }
 
+            // Async scene loading progresses independently of scaled game time.
+            // Yielding frames is safe even if another system changes timeScale later.
             while (!operation.isDone)
                 yield return null;
 
