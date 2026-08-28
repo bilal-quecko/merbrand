@@ -34,18 +34,60 @@ namespace MeraBrand.Expo.UI
             registry = StallRegistry.Instance ?? FindFirstObjectByType<StallRegistry>();
             bookingManager = StallBookingManager.Instance ?? FindFirstObjectByType<StallBookingManager>();
             bool isAdmin = SessionManager.Instance != null && SessionManager.Instance.IsAdmin;
-            if (dashboardPanel != null) dashboardPanel.SetActive(isAdmin);
-            if (!isAdmin) return;
+
+            // Dashboard starts hidden. Admin opens it explicitly from the HUD button.
+            if (dashboardPanel != null)
+                dashboardPanel.SetActive(false);
+
+            if (!isAdmin)
+                return;
 
             PopulateHallDropdown();
-            if (bookingManager != null) bookingManager.BookingChanged += OnBookingChanged;
+            if (bookingManager != null)
+                bookingManager.BookingChanged += OnBookingChanged;
             RefreshCounters();
             SetResult("Search by stall ID, name, hall, or exhibitor.");
         }
 
         private void OnDestroy()
         {
-            if (bookingManager != null) bookingManager.BookingChanged -= OnBookingChanged;
+            if (bookingManager != null)
+                bookingManager.BookingChanged -= OnBookingChanged;
+        }
+
+        public void ToggleDashboard()
+        {
+            if (SessionManager.Instance == null || !SessionManager.Instance.IsAdmin || dashboardPanel == null)
+                return;
+
+            bool show = !dashboardPanel.activeSelf;
+            dashboardPanel.SetActive(show);
+
+            if (show)
+            {
+                RefreshCounters();
+                PopulateHallDropdownIfEmpty();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
+        public void OpenDashboard()
+        {
+            if (SessionManager.Instance == null || !SessionManager.Instance.IsAdmin || dashboardPanel == null)
+                return;
+
+            dashboardPanel.SetActive(true);
+            RefreshCounters();
+            PopulateHallDropdownIfEmpty();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        public void CloseDashboard()
+        {
+            if (dashboardPanel != null)
+                dashboardPanel.SetActive(false);
         }
 
         public void Search()
@@ -60,7 +102,7 @@ namespace MeraBrand.Expo.UI
 
             string query = searchInput != null ? searchInput.text.Trim() : string.Empty;
             string hallFilter = hallDropdown != null && hallDropdown.value > 0 ? hallDropdown.options[hallDropdown.value].text : string.Empty;
-            int statusFilter = statusDropdown != null ? statusDropdown.value : 0; // 0 all, 1 available, 2 booked
+            int statusFilter = statusDropdown != null ? statusDropdown.value : 0;
 
             currentMatches = registry.Stalls.Where(stall => Matches(stall, query, hallFilter, statusFilter)).ToList();
             currentMatchIndex = 0;
@@ -106,13 +148,20 @@ namespace MeraBrand.Expo.UI
             int booked = 0;
             foreach (StallIdentity stall in registry.Stalls)
             {
-                if (stall != null && bookingManager != null && bookingManager.IsBooked(stall.StallId)) booked++;
+                if (stall != null && bookingManager != null && bookingManager.IsBooked(stall.StallId))
+                    booked++;
             }
             int available = Mathf.Max(0, total - booked);
 
             if (totalText != null) totalText.text = $"Total: {total}";
             if (bookedText != null) bookedText.text = $"Booked: {booked}";
             if (availableText != null) availableText.text = $"Available: {available}";
+        }
+
+        private void PopulateHallDropdownIfEmpty()
+        {
+            if (hallDropdown != null && hallDropdown.options.Count <= 1)
+                PopulateHallDropdown();
         }
 
         private void PopulateHallDropdown()
