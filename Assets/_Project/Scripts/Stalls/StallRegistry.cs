@@ -34,11 +34,6 @@ namespace MeraBrand.Expo.Stalls
                 if (stall == null) continue;
                 stalls.Add(stall);
 
-                StallTopDownLabel topDownLabel = stall.GetComponent<StallTopDownLabel>();
-                if (topDownLabel == null)
-                    topDownLabel = stall.gameObject.AddComponent<StallTopDownLabel>();
-                topDownLabel.Refresh();
-
                 string id = stall.StallId;
                 if (string.IsNullOrWhiteSpace(id) || id == "UNASSIGNED")
                 {
