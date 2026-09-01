@@ -14,6 +14,7 @@ namespace MeraBrand.Expo.CameraSystem
     {
         [SerializeField] private GameObject flythroughCamera;
         [SerializeField] private GameObject topDownCamera;
+        [SerializeField] private string modelLayerName = "Models";
 
         public CameraMode CurrentMode { get; private set; }
 
@@ -23,6 +24,12 @@ namespace MeraBrand.Expo.CameraSystem
         {
             flythroughCamera = flyCamera;
             topDownCamera = adminCamera;
+            ApplyCameraLayerMasks();
+        }
+
+        private void Awake()
+        {
+            ApplyCameraLayerMasks();
         }
 
         private void Update()
@@ -38,6 +45,7 @@ namespace MeraBrand.Expo.CameraSystem
         public void ShowFlythrough()
         {
             CurrentMode = CameraMode.Flythrough;
+            ApplyCameraLayerMasks();
             SetCameraStates(true, false);
             ApplyCursorForCurrentState();
         }
@@ -45,6 +53,7 @@ namespace MeraBrand.Expo.CameraSystem
         public void ShowTopDown()
         {
             CurrentMode = CameraMode.TopDown;
+            ApplyCameraLayerMasks();
             SetCameraStates(false, true);
             ApplyCursorForCurrentState();
         }
@@ -52,6 +61,7 @@ namespace MeraBrand.Expo.CameraSystem
         public void FocusStall(Vector3 cameraPosition, Vector3 lookTarget)
         {
             CurrentMode = CameraMode.StallFocus;
+            ApplyCameraLayerMasks();
             SetCameraStates(true, false);
 
             FlyCameraController fly = GetFlyController();
@@ -64,6 +74,34 @@ namespace MeraBrand.Expo.CameraSystem
         public void RefreshCursorState()
         {
             ApplyCursorForCurrentState();
+        }
+
+        public void RefreshCameraLayerMasks()
+        {
+            ApplyCameraLayerMasks();
+        }
+
+        private void ApplyCameraLayerMasks()
+        {
+            int modelsLayer = LayerMask.NameToLayer(modelLayerName);
+            if (modelsLayer < 0)
+                return;
+
+            int modelsBit = 1 << modelsLayer;
+
+            if (flythroughCamera != null)
+            {
+                Camera visitorCamera = flythroughCamera.GetComponent<Camera>();
+                if (visitorCamera != null)
+                    visitorCamera.cullingMask |= modelsBit;
+            }
+
+            if (topDownCamera != null)
+            {
+                Camera adminCamera = topDownCamera.GetComponent<Camera>();
+                if (adminCamera != null)
+                    adminCamera.cullingMask &= ~modelsBit;
+            }
         }
 
         private void ApplyCursorForCurrentState()
