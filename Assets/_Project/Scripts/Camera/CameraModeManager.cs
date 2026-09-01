@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using MeraBrand.Expo.Stalls;
 using MeraBrand.Expo.UI;
+using TMPro;
 using UnityEngine;
 
 namespace MeraBrand.Expo.CameraSystem
@@ -13,27 +15,32 @@ namespace MeraBrand.Expo.CameraSystem
 
     public sealed class CameraModeManager : MonoBehaviour
     {
+        private const string StallNumberObjectName = "Phase6_ExhibitorNumber_TMP";
+
         [SerializeField] private GameObject flythroughCamera;
         [SerializeField] private GameObject topDownCamera;
-        [SerializeField] private string modelLayerName = "Models";
+        [SerializeField] private string modelTag = "Model";
 
         public CameraMode CurrentMode { get; private set; }
 
+        private readonly List<GameObject> modelRoots = new();
         private bool lastUiBlocked;
+        private bool warnedMissingModelTag;
         private TopDownPresentationController topDownPresentation;
 
         public void Configure(GameObject flyCamera, GameObject adminCamera)
         {
             flythroughCamera = flyCamera;
             topDownCamera = adminCamera;
-            ApplyCameraLayerMasks();
+            CacheTaggedModelRoots();
             EnsureTopDownPresentation();
         }
 
         private void Awake()
         {
-            ApplyCameraLayerMasks();
+            CacheTaggedModelRoots();
             EnsureTopDownPresentation();
+            SetStallNumberVisibility(false);
         }
 
         private void Start()
@@ -54,7 +61,7 @@ namespace MeraBrand.Expo.CameraSystem
         public void ShowFlythrough()
         {
             CurrentMode = CameraMode.Flythrough;
-            ApplyCameraLayerMasks();
+            SetTaggedModelsActive(true);
             SetCameraStates(true, false);
             ApplyPresentationForCurrentMode();
             ApplyCursorForCurrentState();
@@ -63,7 +70,11 @@ namespace MeraBrand.Expo.CameraSystem
         public void ShowTopDown()
         {
             CurrentMode = CameraMode.TopDown;
-            ApplyCameraLayerMasks();
+
+            // Cache while the tagged objects are still active. Once disabled,
+            // FindGameObjectsWithTag cannot discover them again.
+            CacheTaggedModelRoots();
+            SetTaggedModelsActive(false);
             SetCameraStates(false, true);
             ApplyPresentationForCurrentMode();
             ApplyCursorForCurrentState();
@@ -72,7 +83,7 @@ namespace MeraBrand.Expo.CameraSystem
         public void FocusStall(Vector3 cameraPosition, Vector3 lookTarget)
         {
             CurrentMode = CameraMode.StallFocus;
-            ApplyCameraLayerMasks();
+            SetTaggedModelsActive(true);
             SetCameraStates(true, false);
 
             FlyCameraController fly = GetFlyController();
@@ -88,9 +99,12 @@ namespace MeraBrand.Expo.CameraSystem
             ApplyCursorForCurrentState();
         }
 
+        // Kept for compatibility with older setup code. The project now uses the
+        // Model tag rather than a camera culling layer for detailed scene models.
         public void RefreshCameraLayerMasks()
         {
-            ApplyCameraLayerMasks();
+            CacheTaggedModelRoots();
+            SetTaggedModelsActive(CurrentMode != CameraMode.TopDown);
         }
 
         private void ApplyPresentationForCurrentMode()
@@ -98,7 +112,7 @@ namespace MeraBrand.Expo.CameraSystem
             EnsureTopDownPresentation();
             bool isTopDown = CurrentMode == CameraMode.TopDown;
 
-            StallTopDownLabel.SetAllVisible(isTopDown);
+            SetStallNumberVisibility(isTopDown);
 
             if (topDownPresentation != null)
             {
@@ -106,6 +120,68 @@ namespace MeraBrand.Expo.CameraSystem
                     topDownPresentation.EnterTopDown();
                 else
                     topDownPresentation.ExitTopDown();
+            }
+        }
+
+        private void SetStallNumberVisibility(bool visible)
+        {
+            StallIdentity[] stalls = FindObjectsByType<StallIdentity>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (StallIdentity stall in stalls)
+            {
+                if (stall == null)
+                    continue;
+
+                TMP_Text[] labels = stall.GetComponentsInChildren<TMP_Text>(true);
+                foreach (TMP_Text label in labels)
+                {
+                    if (label != null && label.gameObject.name == StallNumberObjectName)
+                        label.gameObject.SetActive(visible);
+                }
+            }
+        }
+
+        private void CacheTaggedModelRoots()
+        {
+            modelRoots.RemoveAll(item => item == null);
+
+            if (string.IsNullOrWhiteSpace(modelTag))
+                return;
+
+            try
+            {
+                GameObject[] found = GameObject.FindGameObjectsWithTag(modelTag);
+                foreach (GameObject item in found)
+                {
+                    if (item != null && !modelRoots.Contains(item))
+                        modelRoots.Add(item);
+                }
+            }
+            catch (UnityException)
+            {
+                if (!warnedMissingModelTag)
+                {
+                    warnedMissingModelTag = true;
+                    Debug.LogWarning($"CameraModeManager: tag '{modelTag}' does not exist. Create it in Unity Tags and Layers and assign it to the external-model parent object.");
+                }
+            }
+        }
+
+        private void SetTaggedModelsActive(bool active)
+        {
+            if (active)
+                CacheTaggedModelRoots();
+
+            for (int i = modelRoots.Count - 1; i >= 0; i--)
+            {
+                GameObject item = modelRoots[i];
+                if (item == null)
+                {
+                    modelRoots.RemoveAt(i);
+                    continue;
+                }
+
+                if (item.activeSelf != active)
+                    item.SetActive(active);
             }
         }
 
@@ -120,29 +196,6 @@ namespace MeraBrand.Expo.CameraSystem
             topDownPresentation = topDownCamera.GetComponent<TopDownPresentationController>();
             if (topDownPresentation == null)
                 topDownPresentation = topDownCamera.AddComponent<TopDownPresentationController>();
-        }
-
-        private void ApplyCameraLayerMasks()
-        {
-            int modelsLayer = LayerMask.NameToLayer(modelLayerName);
-            if (modelsLayer < 0)
-                return;
-
-            int modelsBit = 1 << modelsLayer;
-
-            if (flythroughCamera != null)
-            {
-                Camera visitorCamera = flythroughCamera.GetComponent<Camera>();
-                if (visitorCamera != null)
-                    visitorCamera.cullingMask |= modelsBit;
-            }
-
-            if (topDownCamera != null)
-            {
-                Camera adminCamera = topDownCamera.GetComponent<Camera>();
-                if (adminCamera != null)
-                    adminCamera.cullingMask &= ~modelsBit;
-            }
         }
 
         private void ApplyCursorForCurrentState()
