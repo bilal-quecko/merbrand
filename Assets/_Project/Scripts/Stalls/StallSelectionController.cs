@@ -15,6 +15,7 @@ namespace MeraBrand.Expo.Stalls
         [Header("Camera")]
         [SerializeField] private CameraModeManager cameraModeManager;
         [SerializeField] private Camera topDownCamera;
+        [SerializeField] private string ignoredTopDownLayer = "Models";
 
         [Header("Selection UI")]
         [SerializeField] private GameObject selectionPanel;
@@ -111,7 +112,6 @@ namespace MeraBrand.Expo.Stalls
                 selectedStall.transform.position - selectedStall.transform.forward * Mathf.Max(8f, selectedStall.FootprintUnityUnits.y * 0.9f) + Vector3.up * 5.5f;
             Vector3 lookTarget = selectedStall.LookTarget != null ? selectedStall.LookTarget.position : selectedStall.transform.position + Vector3.up * 4.5f;
 
-            // Visiting a stall is a camera mode, not a UI mode. Close all management panels first.
             FindFirstObjectByType<AdminDashboardController>()?.CloseDashboard();
             FindFirstObjectByType<LocalDataManagementController>()?.CloseAdminPanel();
 
@@ -192,10 +192,26 @@ namespace MeraBrand.Expo.Stalls
         private void TrySelectAt(Vector2 screenPosition)
         {
             if (topDownCamera == null || !topDownCamera.gameObject.activeInHierarchy) return;
+
             Ray ray = topDownCamera.ScreenPointToRay(screenPosition);
-            if (!Physics.Raycast(ray, out RaycastHit hit, 2000f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore)) { CloseSelection(); return; }
+            int raycastMask = Physics.DefaultRaycastLayers;
+            int modelsLayer = LayerMask.NameToLayer(ignoredTopDownLayer);
+            if (modelsLayer >= 0)
+                raycastMask &= ~(1 << modelsLayer);
+
+            if (!Physics.Raycast(ray, out RaycastHit hit, 2000f, raycastMask, QueryTriggerInteraction.Ignore))
+            {
+                CloseSelection();
+                return;
+            }
+
             StallIdentity stall = hit.collider.GetComponentInParent<StallIdentity>();
-            if (stall == null) { CloseSelection(); return; }
+            if (stall == null)
+            {
+                CloseSelection();
+                return;
+            }
+
             SelectStall(stall);
         }
 
