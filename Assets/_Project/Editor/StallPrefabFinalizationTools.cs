@@ -1,5 +1,7 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using MeraBrand.Expo.Stalls;
 using TMPro;
 using UnityEditor;
@@ -13,6 +15,7 @@ namespace MeraBrand.Expo.Editor
         private const string StallPrefabPath = "Assets/_Project/Prefabs/Stalls";
         private const string SelectedMaterialPath = "Assets/_Project/Art/Materials/MAT_Stall_Selected.mat";
         private const string BookedMaterialPath = "Assets/_Project/Art/Materials/MAT_Stall_Booked.mat";
+        private const string StallNumberObjectName = "Phase6_ExhibitorNumber_TMP";
 
         private static readonly string[] PrefabNames =
         {
@@ -88,11 +91,17 @@ namespace MeraBrand.Expo.Editor
                 "OK");
         }
 
+        [MenuItem("Mera Brand/Stalls/Assign + Validate")]
+        public static void AssignAndValidateStalls()
+        {
+            ValidateAndAssignManualStallIds();
+        }
+
         [MenuItem("Mera Brand/Stall Tools/Validate + Assign IDs To Manually Placed Stalls")]
         public static void ValidateAndAssignManualStallIds()
         {
             StallIdentity[] stalls = Object.FindObjectsByType<StallIdentity>(FindObjectsSortMode.None);
-            HashSet<string> usedIds = new();
+            HashSet<string> usedIds = new(StringComparer.OrdinalIgnoreCase);
             int assigned = 0;
             int duplicatesFixed = 0;
             int nextNumber = 1;
@@ -144,6 +153,7 @@ namespace MeraBrand.Expo.Editor
                         stall.FootprintUnityUnits,
                         stall.WallHeightMeters);
                     EditorUtility.SetDirty(stall);
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(stall);
                     usedIds.Add(newId);
                     assigned++;
                     if (duplicate)
@@ -155,16 +165,103 @@ namespace MeraBrand.Expo.Editor
                 }
             }
 
+            StallNumberResult numberResult = AssignDisplayNumbers(stalls);
+
             if (EditorSceneManager.GetActiveScene().IsValid())
                 EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
 
             EditorUtility.DisplayDialog(
-                "Mera Brand - Stall Tools",
+                "Mera Brand - Stalls",
                 $"Scanned {stalls.Length} manually placed stall instances.\n\n" +
                 $"IDs assigned/reassigned: {assigned}\n" +
                 $"Duplicate IDs fixed: {duplicatesFixed}\n\n" +
-                "Existing unique custom IDs were preserved.",
+                $"Normal numbers (S_): {numberResult.normalCount}\n" +
+                $"Silver numbers (SL_): {numberResult.silverCount}\n" +
+                $"Gold numbers (G_): {numberResult.goldCount}\n" +
+                $"Missing {StallNumberObjectName}: {numberResult.missingLabelCount}\n\n" +
+                "Existing unique custom IDs were preserved. Stall numbers were written to the existing prefab TMP objects.",
                 "OK");
+        }
+
+        private static StallNumberResult AssignDisplayNumbers(IEnumerable<StallIdentity> stallCollection)
+        {
+            StallNumberResult result = new();
+            int normal = 1;
+            int silver = 1;
+            int gold = 1;
+
+            IEnumerable<StallIdentity> ordered = stallCollection
+                .Where(stall => stall != null)
+                .OrderBy(stall => stall.StallId, StringComparer.OrdinalIgnoreCase);
+
+            foreach (StallIdentity stall in ordered)
+            {
+                string number;
+                switch (ResolveNumberType(stall))
+                {
+                    case StallNumberType.Silver:
+                        number = $"SL_{silver++}";
+                        result.silverCount++;
+                        break;
+                    case StallNumberType.Gold:
+                        number = $"G_{gold++}";
+                        result.goldCount++;
+                        break;
+                    default:
+                        number = $"S_{normal++}";
+                        result.normalCount++;
+                        break;
+                }
+
+                TMP_Text label = stall
+                    .GetComponentsInChildren<TMP_Text>(true)
+                    .FirstOrDefault(tmp => tmp != null && tmp.gameObject.name == StallNumberObjectName);
+
+                if (label == null)
+                {
+                    result.missingLabelCount++;
+                    Debug.LogWarning($"Stall '{stall.name}' ({stall.StallId}) is missing child TMP '{StallNumberObjectName}'. Number '{number}' was not written.", stall);
+                    continue;
+                }
+
+                Undo.RecordObject(label, "Assign Stall Display Number");
+                label.text = number;
+                label.gameObject.SetActive(false);
+                EditorUtility.SetDirty(label);
+                EditorUtility.SetDirty(label.gameObject);
+                PrefabUtility.RecordPrefabInstancePropertyModifications(label);
+                PrefabUtility.RecordPrefabInstancePropertyModifications(label.gameObject);
+            }
+
+            return result;
+        }
+
+        private static StallNumberType ResolveNumberType(StallIdentity stall)
+        {
+            if (stall == null)
+                return StallNumberType.Normal;
+
+            switch (stall.Size)
+            {
+                case StallSize.ThreeBySix:
+                    return StallNumberType.Silver;
+                case StallSize.SixBySix:
+                    return StallNumberType.Gold;
+                case StallSize.ThreeByThree:
+                    return StallNumberType.Normal;
+            }
+
+            Vector2 size = stall.FootprintMeters;
+            bool x6 = Mathf.Approximately(size.x, 6f);
+            bool y6 = Mathf.Approximately(size.y, 6f);
+            bool x3 = Mathf.Approximately(size.x, 3f);
+            bool y3 = Mathf.Approximately(size.y, 3f);
+
+            if (x6 && y6)
+                return StallNumberType.Gold;
+            if ((x6 && y3) || (x3 && y6))
+                return StallNumberType.Silver;
+            return StallNumberType.Normal;
         }
 
         private static void CreateOrUpdateSelectionHighlight(Transform root, StallIdentity identity, Material material)
@@ -211,7 +308,6 @@ namespace MeraBrand.Expo.Editor
                 ? header.localPosition
                 : new Vector3(0f, identity.WallHeightMeters * 3.280839895f, identity.FootprintUnityUnits.y * 0.5f);
 
-            // Only establish the default position on first creation. Existing prefab adjustments are preserved.
             if (existing == null)
             {
                 go.transform.localPosition = headerPosition + new Vector3(0f, -0.6f, -0.08f);
@@ -280,9 +376,24 @@ namespace MeraBrand.Expo.Editor
         private static bool TryReadGeneratedNumber(string id, out int value)
         {
             value = 0;
-            if (string.IsNullOrWhiteSpace(id) || !id.StartsWith("STALL-"))
+            if (string.IsNullOrWhiteSpace(id) || !id.StartsWith("STALL-", StringComparison.OrdinalIgnoreCase))
                 return false;
             return int.TryParse(id.Substring(6), out value);
+        }
+
+        private enum StallNumberType
+        {
+            Normal,
+            Silver,
+            Gold
+        }
+
+        private sealed class StallNumberResult
+        {
+            public int normalCount;
+            public int silverCount;
+            public int goldCount;
+            public int missingLabelCount;
         }
     }
 }
