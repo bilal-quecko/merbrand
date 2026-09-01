@@ -1,0 +1,350 @@
+fileFormatVersion: 2
+guid: b0b87f9d920722b4aaa8c624b214fbe3
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spritesheet_merabrand_0
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 312
+        width: 857
+        height: 608
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 447fcede70edc2f42b73fb1f4e1869fd
+      internalID: -488608827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_merabrand_42
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 705
+        width: 521
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60eae7e829bfae346852804a625643ae
+      internalID: 1596311172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_merabrand_43
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 541
+        width: 520
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bc09210edce7a34782e60048fe10a5d
+      internalID: -1009915703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_merabrand_44
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 318
+        width: 172
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9699e43d0e059147a4c03850fd15d1a
+      internalID: 1574953748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_merabrand_45
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 316
+        width: 170
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14e69b822d5b3924884ab7a46130fe23
+      internalID: -210593719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_merabrand_52
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 90
+        width: 612
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d972a39c1a441346854f3e500bc54ec
+      internalID: 1396387369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_merabrand_60
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 97
+        width: 607
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2fca790df8105b438a384f17c21a4d3
+      internalID: 784285143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 01b3f9c5a88c2fa438beb5764167b1a6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      spritesheet_merabrand_0: -488608827
+      spritesheet_merabrand_1: 1655153924
+      spritesheet_merabrand_10: -584569757
+      spritesheet_merabrand_11: -1860134512
+      spritesheet_merabrand_12: -1611353580
+      spritesheet_merabrand_13: 288596232
+      spritesheet_merabrand_14: 1361371653
+      spritesheet_merabrand_15: 252549813
+      spritesheet_merabrand_16: -375726270
+      spritesheet_merabrand_17: 739504221
+      spritesheet_merabrand_18: 1239532396
+      spritesheet_merabrand_19: -1823734876
+      spritesheet_merabrand_2: -1105066339
+      spritesheet_merabrand_20: 1246105707
+      spritesheet_merabrand_21: 1275902160
+      spritesheet_merabrand_22: 1449714283
+      spritesheet_merabrand_23: 527717209
+      spritesheet_merabrand_24: -1580101160
+      spritesheet_merabrand_25: -814868904
+      spritesheet_merabrand_26: -561458566
+      spritesheet_merabrand_27: -882315990
+      spritesheet_merabrand_28: 1020590862
+      spritesheet_merabrand_29: -1574337510
+      spritesheet_merabrand_3: 133250442
+      spritesheet_merabrand_30: 181879134
+      spritesheet_merabrand_31: -868083285
+      spritesheet_merabrand_32: 1819601858
+      spritesheet_merabrand_33: -1520912335
+      spritesheet_merabrand_34: -541899084
+      spritesheet_merabrand_35: 1850661919
+      spritesheet_merabrand_36: 1381172776
+      spritesheet_merabrand_37: -957749073
+      spritesheet_merabrand_38: -950442291
+      spritesheet_merabrand_39: 865729932
+      spritesheet_merabrand_4: -1290072832
+      spritesheet_merabrand_40: -779979009
+      spritesheet_merabrand_41: 338874683
+      spritesheet_merabrand_42: 1596311172
+      spritesheet_merabrand_43: -1009915703
+      spritesheet_merabrand_44: 1574953748
+      spritesheet_merabrand_45: -210593719
+      spritesheet_merabrand_46: -1845539569
+      spritesheet_merabrand_47: -130376403
+      spritesheet_merabrand_48: -1413990370
+      spritesheet_merabrand_49: 902451827
+      spritesheet_merabrand_5: 440294335
+      spritesheet_merabrand_50: 265695962
+      spritesheet_merabrand_51: 424028052
+      spritesheet_merabrand_52: 1396387369
+      spritesheet_merabrand_53: 1982277923
+      spritesheet_merabrand_54: 1329584499
+      spritesheet_merabrand_55: -1258197137
+      spritesheet_merabrand_56: 1600144464
+      spritesheet_merabrand_57: -758924782
+      spritesheet_merabrand_58: -659241516
+      spritesheet_merabrand_59: -256089907
+      spritesheet_merabrand_6: -116711194
+      spritesheet_merabrand_60: 784285143
+      spritesheet_merabrand_61: -72557602
+      spritesheet_merabrand_62: 900273110
+      spritesheet_merabrand_63: -1266588662
+      spritesheet_merabrand_7: -1110219136
+      spritesheet_merabrand_8: 1058948094
+      spritesheet_merabrand_9: 1174135937
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
