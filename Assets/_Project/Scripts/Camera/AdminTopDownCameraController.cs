@@ -11,6 +11,7 @@ namespace MeraBrand.Expo.CameraSystem
         [SerializeField] private float zoomSpeed = 8f;
         [SerializeField] private float minOrthographicSize = 25f;
         [SerializeField] private float maxOrthographicSize = 180f;
+        [SerializeField] private string hiddenModelLayer = "Models";
 
         private Camera controlledCamera;
 
@@ -18,6 +19,16 @@ namespace MeraBrand.Expo.CameraSystem
         {
             controlledCamera = GetComponent<Camera>();
             controlledCamera.orthographic = true;
+            ApplyTopDownCullingMask();
+        }
+
+        private void OnValidate()
+        {
+            if (controlledCamera == null)
+                controlledCamera = GetComponent<Camera>();
+
+            if (controlledCamera != null)
+                ApplyTopDownCullingMask();
         }
 
         private void Update()
@@ -52,6 +63,24 @@ namespace MeraBrand.Expo.CameraSystem
         public void FocusOn(Vector3 worldPosition)
         {
             transform.position = new Vector3(worldPosition.x, transform.position.y, worldPosition.z);
+        }
+
+        public void RefreshLayerVisibility()
+        {
+            controlledCamera ??= GetComponent<Camera>();
+            ApplyTopDownCullingMask();
+        }
+
+        private void ApplyTopDownCullingMask()
+        {
+            if (controlledCamera == null)
+                return;
+
+            int modelsLayer = LayerMask.NameToLayer(hiddenModelLayer);
+            if (modelsLayer < 0)
+                return;
+
+            controlledCamera.cullingMask &= ~(1 << modelsLayer);
         }
     }
 }
