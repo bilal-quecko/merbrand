@@ -1,3 +1,4 @@
+using MeraBrand.Expo.Stalls;
 using MeraBrand.Expo.UI;
 using UnityEngine;
 
@@ -19,17 +20,25 @@ namespace MeraBrand.Expo.CameraSystem
         public CameraMode CurrentMode { get; private set; }
 
         private bool lastUiBlocked;
+        private TopDownPresentationController topDownPresentation;
 
         public void Configure(GameObject flyCamera, GameObject adminCamera)
         {
             flythroughCamera = flyCamera;
             topDownCamera = adminCamera;
             ApplyCameraLayerMasks();
+            EnsureTopDownPresentation();
         }
 
         private void Awake()
         {
             ApplyCameraLayerMasks();
+            EnsureTopDownPresentation();
+        }
+
+        private void Start()
+        {
+            ApplyPresentationForCurrentMode();
         }
 
         private void Update()
@@ -47,6 +56,7 @@ namespace MeraBrand.Expo.CameraSystem
             CurrentMode = CameraMode.Flythrough;
             ApplyCameraLayerMasks();
             SetCameraStates(true, false);
+            ApplyPresentationForCurrentMode();
             ApplyCursorForCurrentState();
         }
 
@@ -55,6 +65,7 @@ namespace MeraBrand.Expo.CameraSystem
             CurrentMode = CameraMode.TopDown;
             ApplyCameraLayerMasks();
             SetCameraStates(false, true);
+            ApplyPresentationForCurrentMode();
             ApplyCursorForCurrentState();
         }
 
@@ -68,6 +79,7 @@ namespace MeraBrand.Expo.CameraSystem
             if (fly != null)
                 fly.SnapToLookAt(cameraPosition, lookTarget);
 
+            ApplyPresentationForCurrentMode();
             ApplyCursorForCurrentState();
         }
 
@@ -79,6 +91,35 @@ namespace MeraBrand.Expo.CameraSystem
         public void RefreshCameraLayerMasks()
         {
             ApplyCameraLayerMasks();
+        }
+
+        private void ApplyPresentationForCurrentMode()
+        {
+            EnsureTopDownPresentation();
+            bool isTopDown = CurrentMode == CameraMode.TopDown;
+
+            StallTopDownLabel.SetAllVisible(isTopDown);
+
+            if (topDownPresentation != null)
+            {
+                if (isTopDown)
+                    topDownPresentation.EnterTopDown();
+                else
+                    topDownPresentation.ExitTopDown();
+            }
+        }
+
+        private void EnsureTopDownPresentation()
+        {
+            if (topDownCamera == null)
+            {
+                topDownPresentation = null;
+                return;
+            }
+
+            topDownPresentation = topDownCamera.GetComponent<TopDownPresentationController>();
+            if (topDownPresentation == null)
+                topDownPresentation = topDownCamera.AddComponent<TopDownPresentationController>();
         }
 
         private void ApplyCameraLayerMasks()
