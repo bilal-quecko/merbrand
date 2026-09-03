@@ -100,7 +100,7 @@ namespace MeraBrand.Expo.Editor
         [MenuItem("Mera Brand/Stall Tools/Validate + Assign IDs To Manually Placed Stalls")]
         public static void ValidateAndAssignManualStallIds()
         {
-            StallIdentity[] stalls = Object.FindObjectsByType<StallIdentity>(FindObjectsSortMode.None);
+            StallIdentity[] stalls = UnityEngine.Object.FindObjectsByType<StallIdentity>(FindObjectsSortMode.None);
             HashSet<string> usedIds = new(StringComparer.OrdinalIgnoreCase);
             int assigned = 0;
             int duplicatesFixed = 0;
@@ -363,7 +363,7 @@ namespace MeraBrand.Expo.Editor
         {
             Collider collider = go.GetComponent<Collider>();
             if (collider != null)
-                Object.DestroyImmediate(collider);
+                UnityEngine.Object.DestroyImmediate(collider);
         }
 
         private static void SetMaterial(GameObject go, Material material)
