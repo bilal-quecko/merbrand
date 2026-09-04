@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c4db87110ff6faa45b4fb260c0dae39f
+timeCreated: 1482767729
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/glass_light.mat
+  uploadId: 242485

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c2025917427fe4443a1b147b4d5cf77a
+timeCreated: 1485547529
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Terrain&Roads for Examples/Road_parts/Materials/bardur.mat
+  uploadId: 242485

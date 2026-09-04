@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 4f56f2e39f005f542af67f91e969cc3d
+timeCreated: 1519605639
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Car_Prefabs/Day Cars/SchoolBus.prefab
+  uploadId: 242485

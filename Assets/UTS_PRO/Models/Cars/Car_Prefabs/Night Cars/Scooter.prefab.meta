@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7f58c01eda9c2894f9f7a67d873b42b5
+timeCreated: 1518885830
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Car_Prefabs/Night Cars/Scooter.prefab
+  uploadId: 242485

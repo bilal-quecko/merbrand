@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c24346ac6acf40c49a1bac75b64b99d2
+timeCreated: 1482777547
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/black_glass.mat
+  uploadId: 242485

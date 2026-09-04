@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ec4611934746e5c418c527b628fa4a2a
+timeCreated: 1482933950
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/C_Jeep_Body_D.mat
+  uploadId: 242485

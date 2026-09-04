@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a96c52c37cd5ff343bf2954628b3ab1c
+timeCreated: 1482951403
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/MiniBus.mat
+  uploadId: 242485

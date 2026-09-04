@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: cb3aa2b15c47c814b82d36ab8d2ea033
+timeCreated: 1518894563
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/People/Prefabs/People Prefabs/Girl_66.prefab
+  uploadId: 242485

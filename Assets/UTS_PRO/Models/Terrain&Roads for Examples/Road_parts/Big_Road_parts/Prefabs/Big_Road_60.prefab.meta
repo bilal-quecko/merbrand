@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1e33e08a8131fd34facee86cac9ebb85
+timeCreated: 1512348338
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Terrain&Roads for Examples/Road_parts/Big_Road_parts/Prefabs/Big_Road_60.prefab
+  uploadId: 242485

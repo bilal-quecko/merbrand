@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b50928e11d697b94381e0b9e5467b787
+timeCreated: 1502835884
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Traffic light/Prefabs/Traffic Light_3 (1).prefab
+  uploadId: 242485

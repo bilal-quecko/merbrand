@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c563cee5507f517408a6df8bdf7bf448
+timeCreated: 1485510404
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/Gyroscooter_Body_D.mat
+  uploadId: 242485

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: be1dafb081b7bee4eb019cc36f6c0498
+timeCreated: 1518887357
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Car_Prefabs/Day Cars/Police_1.prefab
+  uploadId: 242485

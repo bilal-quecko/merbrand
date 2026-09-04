@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 75da8a6e688b18a42aa4b3c18ce22603
+timeCreated: 1482949645
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/MiniBus_Ambulance.mat
+  uploadId: 242485

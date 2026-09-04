@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 5828cca5229996b4eb488c7d9efe45ec
+timeCreated: 1518640674
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Terrain&Roads for Examples/Road_parts/Big_Road_parts/Materials/plita1_alfa.mat
+  uploadId: 242485

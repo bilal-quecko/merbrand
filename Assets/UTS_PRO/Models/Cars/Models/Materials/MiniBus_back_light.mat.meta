@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f878da8602425de4e8e37f97b4232269
+timeCreated: 1482949645
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/MiniBus_back_light.mat
+  uploadId: 242485

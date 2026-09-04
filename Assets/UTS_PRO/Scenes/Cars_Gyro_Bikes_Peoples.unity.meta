@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9045a8dba25345345871afd5b430ad61
+timeCreated: 1516320313
+licenseType: Store
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Scenes/Cars_Gyro_Bikes_Peoples.unity
+  uploadId: 242485

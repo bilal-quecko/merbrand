@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: bd1490530ee0d7d4bac044a9da5d5cb9
+timeCreated: 1518918118
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Car_Prefabs/Bicycles & Gyro/Gyroscooter_2_Girl_66.prefab
+  uploadId: 242485

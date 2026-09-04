@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bd1a65d25b3e44f4aa0d9b80df93db7a
+timeCreated: 1458968415
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Terrain&Roads for Examples/Materials/default_plane.mat
+  uploadId: 242485

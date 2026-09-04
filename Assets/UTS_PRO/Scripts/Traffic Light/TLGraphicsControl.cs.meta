@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 7397f58e19bd08b41ba63cb113519ca0
+timeCreated: 1515064463
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Scripts/Traffic Light/TLGraphicsControl.cs
+  uploadId: 242485

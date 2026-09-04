@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 77c2ddad95f4610459e96a1ce473a8b0
+timeCreated: 1482962415
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/Taxi_Body_D.mat
+  uploadId: 242485

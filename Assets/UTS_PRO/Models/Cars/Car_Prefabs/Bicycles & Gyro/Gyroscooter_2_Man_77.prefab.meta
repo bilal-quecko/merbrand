@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: ad16c2ae7c4639549bd8fc628a8e3a51
+timeCreated: 1518984834
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Car_Prefabs/Bicycles & Gyro/Gyroscooter_2_Man_77.prefab
+  uploadId: 242485

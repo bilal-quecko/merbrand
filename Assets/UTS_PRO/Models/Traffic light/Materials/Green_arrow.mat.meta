@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6ad366a1942dfb44186d3ca336b7cb55
+timeCreated: 1502665211
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Traffic light/Materials/Green_arrow.mat
+  uploadId: 242485

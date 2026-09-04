@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 3329cc979d851064b9795fb2faabbca5
+timeCreated: 1518886733
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Car_Prefabs/Day Cars/Car_6.prefab
+  uploadId: 242485

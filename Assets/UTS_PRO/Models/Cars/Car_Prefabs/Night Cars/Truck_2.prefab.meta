@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: ef1ea4c6f144f8e4b89e492c1700a5ec
+timeCreated: 1518888098
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Car_Prefabs/Night Cars/Truck_2.prefab
+  uploadId: 242485

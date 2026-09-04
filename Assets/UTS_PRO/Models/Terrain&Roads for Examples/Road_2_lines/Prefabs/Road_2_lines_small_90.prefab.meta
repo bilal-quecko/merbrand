@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d78e266f0cc37444aab310ac7e89a874
+timeCreated: 1512348144
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Terrain&Roads for Examples/Road_2_lines/Prefabs/Road_2_lines_small_90.prefab
+  uploadId: 242485

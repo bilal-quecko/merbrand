@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: d6f74e102d1b4df4fb98c18c72b8db07
+timeCreated: 1516447532
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Editor/PeopleWalkPathEditor.cs
+  uploadId: 242485

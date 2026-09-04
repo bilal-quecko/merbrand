@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: d35851e85f00238499381b7fd517ac85
+timeCreated: 1516302373
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Scripts/Traffic Light/LightManager.cs
+  uploadId: 242485

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4b9daa8783bc24c4b8b5bdf1bb63da37
+timeCreated: 1452987186
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Terrain&Roads for Examples/Road_parts/Materials/Road_big_map.mat
+  uploadId: 242485

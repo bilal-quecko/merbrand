@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7da41a6b3318b6a40843413d5e840e4d
+timeCreated: 1482968272
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/Truck_Body_Color.mat
+  uploadId: 242485

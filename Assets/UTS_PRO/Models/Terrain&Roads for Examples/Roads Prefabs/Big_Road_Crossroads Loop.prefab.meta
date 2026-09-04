@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fa733a773cf44514793ad8133f14de37
+timeCreated: 1515158685
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Terrain&Roads for Examples/Roads Prefabs/Big_Road_Crossroads
+    Loop.prefab
+  uploadId: 242485

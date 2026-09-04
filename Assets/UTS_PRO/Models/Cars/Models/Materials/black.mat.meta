@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2635c00e6bd4f554b9a911521f256d2b
+timeCreated: 1482768649
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/black.mat
+  uploadId: 242485

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 663f14d1f0b897743b556e4b44d78a17
+timeCreated: 1514228593
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Scripts/Street And Concert/StandingPeopleStreet.cs
+  uploadId: 242485

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: bec44e2fbc7d4a04db25a2bf638e3223
+timeCreated: 1519394410
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Crossroad_prefabs/Right and left motion_without
+    people.prefab
+  uploadId: 242485

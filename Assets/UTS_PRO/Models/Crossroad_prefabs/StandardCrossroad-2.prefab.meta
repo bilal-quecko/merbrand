@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 339b7f6357cbc054b89f28040030e660
+timeCreated: 1519320972
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Crossroad_prefabs/StandardCrossroad-2.prefab
+  uploadId: 242485

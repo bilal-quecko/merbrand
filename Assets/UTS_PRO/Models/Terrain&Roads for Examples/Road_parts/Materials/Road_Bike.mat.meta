@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 721e908cb2ddd9249a66a171e4bcfbee
+timeCreated: 1485547529
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Terrain&Roads for Examples/Road_parts/Materials/Road_Bike.mat
+  uploadId: 242485

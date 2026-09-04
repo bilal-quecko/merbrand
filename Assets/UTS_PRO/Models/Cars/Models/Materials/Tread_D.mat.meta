@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ffe497a349d22c84991a85b288e4e812
+timeCreated: 1482767729
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/Tread_D.mat
+  uploadId: 242485

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9c3dd6a7476364b4b9d2f8ee7567c4b6
+timeCreated: 1482958546
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/City_Bus_Taillight_D.mat
+  uploadId: 242485

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 405f78517e636b94b99b17ae7f3c67c3
+timeCreated: 1482880007
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Models/Cars/Models/Materials/Police_2_Body_D_Traffic.mat
+  uploadId: 242485

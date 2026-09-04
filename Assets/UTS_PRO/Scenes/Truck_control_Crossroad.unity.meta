@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2dcdf72e467d74d4da6cefa8f537c251
+timeCreated: 1522090861
+licenseType: Store
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89133
+  packageName: Urban Traffic System 2018.2
+  packageVersion: 2018.2
+  assetPath: Assets/UTS_PRO/Scenes/Truck_control_Crossroad.unity
+  uploadId: 242485
