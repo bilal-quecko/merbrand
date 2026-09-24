@@ -37,7 +37,7 @@ namespace MeraBrand.Expo.Editor
 
             EditorUtility.DisplayDialog(
                 "Mera Brand - Phase 4",
-                "Phase 4 setup completed.\n\nDevelopment admin credentials:\nUsername: admin\nPassword: admin123\n\nVisitor enters flythrough mode. Admin enters top-down mode and can switch between Top View and Free Fly.",
+                "Phase 4 setup completed.\n\nDevelopment admin credentials:\nUsername: admin\nPassword: admin123\n\nVisitor enters flythrough mode and can switch between Top View and Free Fly. Admin enters top-down mode with full management access.",
                 "OK");
         }
 
@@ -162,8 +162,12 @@ namespace MeraBrand.Expo.Editor
             UnityEventTools.AddPersistentListener(flyButton.onClick, modeController.ShowFreeFly);
             UnityEventTools.AddPersistentListener(logoutButton.onClick, modeController.Logout);
 
-            GameObject visitorHud = CreatePanel("VisitorHUD", hudCanvas.transform, new Vector2(0.91f, 0.94f), new Vector2(220f, 70f));
-            Button exitButton = CreateButton("ExitToMenuButton", visitorHud.transform, "EXIT TO MENU", Vector2.zero, new Vector2(180f, 42f));
+            GameObject visitorHud = CreatePanel("VisitorHUD", hudCanvas.transform, new Vector2(0.82f, 0.94f), new Vector2(570f, 70f));
+            Button visitorTopButton = CreateButton("VisitorTopViewButton", visitorHud.transform, "TOP VIEW", new Vector2(-185f, 0f), new Vector2(155f, 42f));
+            Button visitorFlyButton = CreateButton("VisitorFreeFlyButton", visitorHud.transform, "FREE FLY", Vector2.zero, new Vector2(155f, 42f));
+            Button exitButton = CreateButton("ExitToMenuButton", visitorHud.transform, "EXIT TO MENU", new Vector2(185f, 0f), new Vector2(155f, 42f));
+            UnityEventTools.AddPersistentListener(visitorTopButton.onClick, modeController.ShowTopView);
+            UnityEventTools.AddPersistentListener(visitorFlyButton.onClick, modeController.ShowFreeFly);
             UnityEventTools.AddPersistentListener(exitButton.onClick, modeController.ExitVisitorToMenu);
 
             SerializedObject modeSo = new(modeController);
