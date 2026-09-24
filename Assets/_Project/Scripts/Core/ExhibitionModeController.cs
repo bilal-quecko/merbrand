@@ -33,6 +33,7 @@ namespace MeraBrand.Expo.Core
                 if (adminHud != null) adminHud.SetActive(false);
                 if (visitorHud != null) visitorHud.SetActive(true);
                 EnsureVisitorNavigationControls();
+                MobileFlyControls.Ensure(cameraModeManager);
                 cameraModeManager?.ShowFlythrough();
             }
         }
