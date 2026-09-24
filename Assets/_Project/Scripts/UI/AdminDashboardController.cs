@@ -39,7 +39,10 @@ namespace MeraBrand.Expo.UI
                 dashboardPanel.SetActive(false);
 
             if (!isAdmin)
+            {
+                gameObject.SetActive(false);
                 return;
+            }
 
             PopulateHallDropdown();
             if (bookingManager != null)
