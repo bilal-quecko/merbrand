@@ -14,6 +14,7 @@ namespace MeraBrand.Expo.CameraSystem
 
         [Header("Look")]
         [SerializeField] private float mouseSensitivity = 0.12f;
+        [SerializeField] private float touchLookSensitivity = 0.12f;
         [SerializeField] private float minPitch = -85f;
         [SerializeField] private float maxPitch = 85f;
 
@@ -40,7 +41,8 @@ namespace MeraBrand.Expo.CameraSystem
 
         private void Start()
         {
-            SetCursorLocked(lockCursorOnStart && !UIInteractionState.IsBlocked);
+            bool touchMode = MobileFlyControls.IsTouchInterfaceAvailable;
+            SetCursorLocked(!touchMode && lockCursorOnStart && !UIInteractionState.IsBlocked);
         }
 
         private void Update()
@@ -48,43 +50,64 @@ namespace MeraBrand.Expo.CameraSystem
             if (Time.timeScale <= 0f || UIInteractionState.IsBlocked)
                 return;
 
-            if (!cursorLocked)
+            bool touchMode = MobileFlyControls.Instance != null && MobileFlyControls.Instance.IsVisible;
+            if (!cursorLocked && !touchMode)
                 return;
 
-            HandleLook();
-            HandleMovement();
+            HandleLook(touchMode);
+            HandleMovement(touchMode);
         }
 
-        private void HandleLook()
+        private void HandleLook(bool touchMode)
         {
-            Mouse mouse = Mouse.current;
-            if (mouse == null)
-                return;
+            Vector2 delta = Vector2.zero;
+            float sensitivity = mouseSensitivity;
 
-            Vector2 delta = mouse.delta.ReadValue();
-            yaw += delta.x * mouseSensitivity;
-            pitch -= delta.y * mouseSensitivity;
+            if (touchMode && MobileFlyControls.Instance != null)
+            {
+                delta = MobileFlyControls.Instance.ConsumeLookDelta();
+                sensitivity = touchLookSensitivity;
+            }
+            else
+            {
+                Mouse mouse = Mouse.current;
+                if (mouse == null)
+                    return;
+                delta = mouse.delta.ReadValue();
+            }
+
+            yaw += delta.x * sensitivity;
+            pitch -= delta.y * sensitivity;
             pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
             transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
         }
 
-        private void HandleMovement()
+        private void HandleMovement(bool touchMode)
         {
             Keyboard keyboard = Keyboard.current;
-            if (keyboard == null)
-                return;
 
             float x = 0f;
             float z = 0f;
             float y = 0f;
 
-            if (keyboard.aKey.isPressed) x -= 1f;
-            if (keyboard.dKey.isPressed) x += 1f;
-            if (keyboard.sKey.isPressed) z -= 1f;
-            if (keyboard.wKey.isPressed) z += 1f;
-            if (keyboard.qKey.isPressed) y += 1f;
-            if (keyboard.eKey.isPressed) y -= 1f;
+            if (keyboard != null)
+            {
+                if (keyboard.aKey.isPressed) x -= 1f;
+                if (keyboard.dKey.isPressed) x += 1f;
+                if (keyboard.sKey.isPressed) z -= 1f;
+                if (keyboard.wKey.isPressed) z += 1f;
+                if (keyboard.qKey.isPressed) y += 1f;
+                if (keyboard.eKey.isPressed) y -= 1f;
+            }
+
+            if (touchMode && MobileFlyControls.Instance != null)
+            {
+                Vector2 move = MobileFlyControls.Instance.MoveInput;
+                x += move.x;
+                z += move.y;
+                y += MobileFlyControls.Instance.VerticalInput;
+            }
 
             Vector3 horizontal = transform.right * x + transform.forward * z;
             horizontal.y = 0f;
@@ -92,7 +115,7 @@ namespace MeraBrand.Expo.CameraSystem
                 horizontal.Normalize();
 
             float speed = moveSpeed;
-            if (keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed)
+            if (keyboard != null && (keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed))
                 speed *= boostMultiplier;
 
             Vector3 motion = horizontal * speed + Vector3.up * (y * verticalSpeed);
@@ -109,7 +132,9 @@ namespace MeraBrand.Expo.CameraSystem
 
         public void SetCursorLocked(bool locked)
         {
-            if (locked && UIInteractionState.IsBlocked)
+            if (MobileFlyControls.IsTouchInterfaceAvailable)
+                locked = false;
+            else if (locked && UIInteractionState.IsBlocked)
                 locked = false;
 
             cursorLocked = locked;
