@@ -61,7 +61,7 @@ namespace MeraBrand.Expo.Stalls
         {
             if (Time.timeScale <= 0f || UIInteractionState.IsBlocked) return;
             SessionManager session = SessionManager.Instance;
-            if (session == null || !session.IsAdmin) return;
+            if (session == null || session.CurrentRole == UserRole.None) return;
             if (cameraModeManager == null || cameraModeManager.CurrentMode != CameraMode.TopDown) return;
 
             Mouse mouse = Mouse.current;
@@ -100,7 +100,7 @@ namespace MeraBrand.Expo.Stalls
 
         public void SelectFromDashboard(StallIdentity stall)
         {
-            if (stall == null) return;
+            if (!IsAdmin() || stall == null) return;
             SelectStall(stall);
         }
 
@@ -124,11 +124,19 @@ namespace MeraBrand.Expo.Stalls
             cameraModeManager.FocusStall(cameraPosition, lookTarget);
         }
 
-        public void OpenBookPopup() => OpenBookingPopup(false);
-        public void OpenEditPopup() => OpenBookingPopup(true);
+        public void OpenBookPopup()
+        {
+            if (IsAdmin()) OpenBookingPopup(false);
+        }
+
+        public void OpenEditPopup()
+        {
+            if (IsAdmin()) OpenBookingPopup(true);
+        }
 
         public void ConfirmBooking()
         {
+            if (!IsAdmin()) return;
             bookingManager ??= StallBookingManager.Instance;
             if (selectedStall == null || bookingManager == null) return;
             string exhibitor = exhibitorInput != null ? exhibitorInput.text.Trim() : string.Empty;
@@ -150,7 +158,7 @@ namespace MeraBrand.Expo.Stalls
 
         public void CloseBookingPopup()
         {
-            if (selectedStall != null)
+            if (IsAdmin() && selectedStall != null)
                 LocalDataManagementController.ClearPendingLogo(selectedStall.StallId);
             if (bookingPanel != null) bookingPanel.SetActive(false);
             if (bookingErrorText != null) bookingErrorText.text = string.Empty;
@@ -158,12 +166,14 @@ namespace MeraBrand.Expo.Stalls
 
         public void RequestMakeAvailable()
         {
+            if (!IsAdmin()) return;
             if (selectedStall != null && availableConfirmPanel != null)
                 availableConfirmPanel.SetActive(true);
         }
 
         public void ConfirmMakeAvailable()
         {
+            if (!IsAdmin()) return;
             bookingManager ??= StallBookingManager.Instance;
             if (selectedStall != null && bookingManager != null) bookingManager.MakeAvailable(selectedStall.StallId);
             CancelMakeAvailable();
@@ -177,6 +187,7 @@ namespace MeraBrand.Expo.Stalls
 
         private void OpenBookingPopup(bool editing)
         {
+            if (!IsAdmin()) return;
             bookingManager ??= StallBookingManager.Instance;
             if (selectedStall == null || bookingPanel == null) return;
             LocalDataManagementController.ClearPendingLogo(selectedStall.StallId);
@@ -240,9 +251,15 @@ namespace MeraBrand.Expo.Stalls
             bool booked = record?.isBooked == true;
             if (statusText != null) statusText.text = booked ? "Status: BOOKED" : "Status: AVAILABLE";
             if (exhibitorText != null) exhibitorText.text = booked ? $"Exhibitor: {record.exhibitorName}" : "Exhibitor: —";
-            if (bookButton != null) bookButton.gameObject.SetActive(!booked);
-            if (editButton != null) editButton.gameObject.SetActive(booked);
-            if (availableButton != null) availableButton.gameObject.SetActive(booked);
+            bool canManageBookings = IsAdmin();
+            if (bookButton != null) bookButton.gameObject.SetActive(canManageBookings && !booked);
+            if (editButton != null) editButton.gameObject.SetActive(canManageBookings && booked);
+            if (availableButton != null) availableButton.gameObject.SetActive(canManageBookings && booked);
+        }
+
+        private static bool IsAdmin()
+        {
+            return SessionManager.Instance != null && SessionManager.Instance.IsAdmin;
         }
 
         private void OnBookingChanged(string stallId)
