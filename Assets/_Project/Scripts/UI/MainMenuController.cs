@@ -24,6 +24,7 @@ namespace MeraBrand.Expo.UI
         {
             SessionManager.Instance?.ClearSession();
             ShowRoleSelection();
+            ApplyPlatformRestrictions();
         }
 
         public void ContinueAsVisitor()
@@ -34,6 +35,9 @@ namespace MeraBrand.Expo.UI
 
         public void OpenAdminLogin()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            return;
+#else
             if (rolePanel != null) rolePanel.SetActive(false);
             if (adminLoginPanel != null) adminLoginPanel.SetActive(true);
             if (loginErrorText != null) loginErrorText.text = string.Empty;
@@ -43,12 +47,16 @@ namespace MeraBrand.Expo.UI
                 usernameInput.Select();
             }
             if (passwordInput != null) passwordInput.text = string.Empty;
+#endif
         }
 
         public void CancelAdminLogin() => ShowRoleSelection();
 
         public void LoginAsAdmin()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            return;
+#else
             string username = usernameInput != null ? usernameInput.text.Trim() : string.Empty;
             string password = passwordInput != null ? passwordInput.text : string.Empty;
 
@@ -62,6 +70,27 @@ namespace MeraBrand.Expo.UI
 
             if (loginErrorText != null)
                 loginErrorText.text = "Invalid username or password.";
+#endif
+        }
+
+        private void ApplyPlatformRestrictions()
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            if (adminLoginPanel != null)
+                adminLoginPanel.SetActive(false);
+
+            if (rolePanel != null)
+            {
+                Transform adminButton = rolePanel.transform.Find("AdminButton");
+                if (adminButton != null)
+                    adminButton.gameObject.SetActive(false);
+
+                Transform visitorButton = rolePanel.transform.Find("VisitorButton");
+                RectTransform visitorRect = visitorButton != null ? visitorButton.GetComponent<RectTransform>() : null;
+                if (visitorRect != null)
+                    visitorRect.anchoredPosition = Vector2.zero;
+            }
+#endif
         }
 
         private void ShowRoleSelection()
