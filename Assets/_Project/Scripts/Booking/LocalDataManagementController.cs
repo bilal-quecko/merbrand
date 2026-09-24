@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using MeraBrand.Expo.Authentication;
 using MeraBrand.Expo.CameraSystem;
 using MeraBrand.Expo.Stalls;
 using MeraBrand.Expo.UI;
@@ -25,6 +26,9 @@ namespace MeraBrand.Expo.Booking
             cameraModeManager = FindFirstObjectByType<CameraModeManager>();
             if (adminPanel != null)
                 adminPanel.SetActive(false);
+
+            if (!IsAdmin())
+                gameObject.SetActive(false);
         }
 
         private void OnDestroy()
@@ -34,6 +38,7 @@ namespace MeraBrand.Expo.Booking
 
         public void ToggleAdminPanel()
         {
+            if (!IsAdmin()) return;
             if (adminPanel == null)
                 return;
 
@@ -45,6 +50,7 @@ namespace MeraBrand.Expo.Booking
 
         public void OpenAdminPanel()
         {
+            if (!IsAdmin()) return;
             if (adminPanel == null)
                 return;
 
@@ -66,6 +72,7 @@ namespace MeraBrand.Expo.Booking
 
         public void ImportLogoForSelectedStall()
         {
+            if (!IsAdmin()) return;
             bookingManager ??= StallBookingManager.Instance;
             StallIdentity stall = selectionController != null ? selectionController.SelectedStall : null;
             if (stall == null) { SetStatus("Select a stall first."); return; }
@@ -111,6 +118,7 @@ namespace MeraBrand.Expo.Booking
 
         public void RemoveLogoFromSelectedStall()
         {
+            if (!IsAdmin()) return;
             bookingManager ??= StallBookingManager.Instance;
             StallIdentity stall = selectionController != null ? selectionController.SelectedStall : null;
             if (stall == null) { SetStatus("Select a stall first."); return; }
@@ -146,6 +154,7 @@ namespace MeraBrand.Expo.Booking
 
         public void ExportBackup()
         {
+            if (!IsAdmin()) return;
             bookingManager ??= StallBookingManager.Instance;
             if (bookingManager == null) { SetStatus("Booking manager unavailable."); return; }
             try { SetStatus($"Backup exported:\n{bookingManager.ExportBackup()}"); }
@@ -154,6 +163,7 @@ namespace MeraBrand.Expo.Booking
 
         public void ImportBackup()
         {
+            if (!IsAdmin()) return;
             bookingManager ??= StallBookingManager.Instance;
             if (bookingManager == null) { SetStatus("Booking manager unavailable."); return; }
             bookingManager.ImportFromDefaultFile(out string message);
@@ -162,6 +172,7 @@ namespace MeraBrand.Expo.Booking
 
         public void OpenLocalDataFolder()
         {
+            if (!IsAdmin()) return;
 #if UNITY_WEBGL && !UNITY_EDITOR
             SetStatus("WebGL data is stored in this browser and has no normal filesystem folder.");
 #else
@@ -183,6 +194,7 @@ namespace MeraBrand.Expo.Booking
 
         public void ResetAllBookings()
         {
+            if (!IsAdmin()) return;
             bookingManager ??= StallBookingManager.Instance;
             if (bookingManager == null) return;
             if (!resetArmed)
@@ -196,6 +208,11 @@ namespace MeraBrand.Expo.Booking
             bookingManager.ResetAllBookings();
             selectionController?.CloseSelection();
             SetStatus("All local booking data has been cleared.");
+        }
+
+        private static bool IsAdmin()
+        {
+            return SessionManager.Instance != null && SessionManager.Instance.IsAdmin;
         }
 
         private void SetStatus(string message)
