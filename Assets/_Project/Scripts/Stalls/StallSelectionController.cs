@@ -64,6 +64,17 @@ namespace MeraBrand.Expo.Stalls
             if (session == null || session.CurrentRole == UserRole.None) return;
             if (cameraModeManager == null || cameraModeManager.CurrentMode != CameraMode.TopDown) return;
 
+            Touchscreen touchscreen = Touchscreen.current;
+            if (touchscreen != null && touchscreen.primaryTouch.press.wasPressedThisFrame)
+            {
+                int touchId = touchscreen.primaryTouch.touchId.ReadValue();
+                if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(touchId))
+                    return;
+
+                TrySelectAt(touchscreen.primaryTouch.position.ReadValue());
+                return;
+            }
+
             Mouse mouse = Mouse.current;
             if (mouse == null || !mouse.leftButton.wasPressedThisFrame) return;
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
