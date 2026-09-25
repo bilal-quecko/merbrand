@@ -2103,7 +2103,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -3376,7 +3376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -3802,7 +3802,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -5174,7 +5174,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -10094,7 +10094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -10142,7 +10142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -11445,7 +11445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -11493,7 +11493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -12339,7 +12339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -12898,7 +12898,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -18002,7 +18002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -18050,7 +18050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -29060,7 +29060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -29659,7 +29659,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -29671,7 +29671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -31088,7 +31088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -31136,7 +31136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -32683,7 +32683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -32731,7 +32731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -34339,7 +34339,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -39039,7 +39039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -39087,7 +39087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -40311,7 +40311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -41292,7 +41292,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -42201,7 +42201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -42377,7 +42377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -43408,7 +43408,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -45156,7 +45156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -45204,7 +45204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -46179,7 +46179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -46213,7 +46213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -46261,7 +46261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -46589,7 +46589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -48681,7 +48681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -49580,7 +49580,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -50183,7 +50183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -50625,7 +50625,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -50637,7 +50637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -51580,7 +51580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -53685,7 +53685,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -53901,7 +53901,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -54495,7 +54495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -54543,7 +54543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -57276,7 +57276,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -59344,7 +59344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -59498,7 +59498,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -61975,7 +61975,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -62825,7 +62825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -62873,7 +62873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -63156,10 +63156,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8673365080642465319, guid: 93bb6cc376f61ea479e4906141b17b84, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93bb6cc376f61ea479e4906141b17b84, type: 3}
 --- !u!4 &585926137 stripped
 Transform:
@@ -65392,7 +65389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -69857,96 +69854,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638948612}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &640289158
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 640289160}
-  - component: {fileID: 640289159}
-  m_Layer: 0
-  m_Name: Untitled
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!212 &640289159
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640289158}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed784b2159ac21d4ab083c1cd1ac5f03, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 11.08, y: 6.77}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &640289160
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640289158}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 125.7, y: 0, z: 77.6}
-  m_LocalScale: {x: 24.735657, y: 24.73566, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &640393548
 GameObject:
   m_ObjectHideFlags: 0
@@ -70834,7 +70741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -73497,7 +73404,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -73509,7 +73416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -74502,7 +74409,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -74563,7 +74470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -74611,7 +74518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -75352,7 +75259,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -76328,7 +76235,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -79178,7 +79085,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -85649,7 +85556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -89729,7 +89636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -92304,7 +92211,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -96762,7 +96669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -96810,7 +96717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -98175,7 +98082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -99024,7 +98931,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -99151,7 +99058,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -102831,7 +102738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -102879,7 +102786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -105904,7 +105811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -106227,7 +106134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -107323,7 +107230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -107455,7 +107362,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -107972,7 +107879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -109236,7 +109143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -110311,7 +110218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -111957,7 +111864,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -112262,7 +112169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -112310,7 +112217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -112378,7 +112285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -112426,7 +112333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -112860,7 +112767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -112908,7 +112815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -113052,7 +112959,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -113757,7 +113664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -114142,7 +114049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -114190,7 +114097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -115198,7 +115105,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -115928,7 +115835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -116573,7 +116480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -116621,7 +116528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -118789,7 +118696,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -120650,7 +120557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -120698,7 +120605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -121486,7 +121393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -121534,7 +121441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -122419,7 +122326,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -124507,7 +124414,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -124844,7 +124751,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -125434,7 +125341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -126111,7 +126018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -126521,7 +126428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -126724,7 +126631,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -130957,7 +130864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -131005,7 +130912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -131923,7 +131830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -131971,7 +131878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -137552,7 +137459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -137600,7 +137507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -138756,7 +138663,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -140668,7 +140575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -140716,7 +140623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -140859,10 +140766,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8673365080642465319, guid: 93bb6cc376f61ea479e4906141b17b84, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93bb6cc376f61ea479e4906141b17b84, type: 3}
 --- !u!4 &1290209528 stripped
 Transform:
@@ -142725,7 +142629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -145190,7 +145094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -145529,7 +145433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -145563,7 +145467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -145611,7 +145515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -146350,7 +146254,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -148289,7 +148193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -149090,10 +148994,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8152267044164358791, guid: e81388ef301591d41a66cbf835b357fc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e81388ef301591d41a66cbf835b357fc, type: 3}
 --- !u!4 &1360056722 stripped
 Transform:
@@ -150354,7 +150255,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -151284,7 +151185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -151332,7 +151233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -151530,7 +151431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -152846,7 +152747,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -153166,7 +153067,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -153855,7 +153756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -157317,7 +157218,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -157477,7 +157378,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -158398,7 +158299,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -162652,7 +162553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -163185,7 +163086,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -164225,7 +164126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -164273,7 +164174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -164573,7 +164474,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -165403,7 +165304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -168976,7 +168877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -169024,7 +168925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -169578,7 +169479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -170968,7 +170869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -171016,7 +170917,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -171337,7 +171238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -171513,7 +171414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -182462,7 +182363,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -183961,7 +183862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -187309,7 +187210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -190842,7 +190743,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -190999,7 +190900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -197553,7 +197454,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -197678,7 +197579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -198575,7 +198476,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -198587,7 +198488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -200081,7 +199982,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -200879,7 +200780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -200995,7 +200896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -201043,7 +200944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -202705,7 +202606,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -205347,7 +205248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -205946,7 +205847,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -206947,7 +206848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -207179,7 +207080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -209810,7 +209711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -211568,7 +211469,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -211580,7 +211481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -213084,7 +212985,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1911704709973307645, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -213096,7 +212997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4191414007630023579, guid: 5d2a11c1ff1cb094ca3036ad2f724531, type: 3}
       propertyPath: m_BounceIntensity
@@ -213688,7 +213589,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -214184,7 +214085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -216110,7 +216011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -216353,7 +216254,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -217216,7 +217117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -219830,6 +219731,7 @@ MonoBehaviour:
   boostMultiplier: 2.5
   verticalSpeed: 12
   mouseSensitivity: 0.12
+  touchLookSensitivity: 0.12
   minPitch: -85
   maxPitch: 85
   clampHeight: 1
@@ -220724,7 +220626,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -222238,10 +222140,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8152267044164358791, guid: e81388ef301591d41a66cbf835b357fc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e81388ef301591d41a66cbf835b357fc, type: 3}
 --- !u!4 &1953264417 stripped
 Transform:
@@ -225040,7 +224939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -225138,7 +225037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -226702,7 +226601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -232076,7 +231975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -233341,7 +233240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -235607,7 +235506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -240364,7 +240263,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -240546,7 +240445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -241333,7 +241232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -241381,7 +241280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -241606,7 +241505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6114874674270746291, guid: a3231e6999303ff499cc418d05471782, type: 3}
       propertyPath: m_BounceIntensity
@@ -241840,7 +241739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -241888,7 +241787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -243507,7 +243406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904184477430261407, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -243555,7 +243454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4233484988039765497, guid: bd020d40298f79c4aa271c75d3072db3, type: 3}
       propertyPath: m_BounceIntensity
@@ -252509,4 +252408,3 @@ SceneRoots:
   - {fileID: 142616069}
   - {fileID: 1918503653}
   - {fileID: 117903458}
-  - {fileID: 640289160}
