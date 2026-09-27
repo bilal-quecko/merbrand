@@ -125,10 +125,10 @@ namespace MeraBrand.Expo.Stalls
         private static readonly Dictionary<string, Target> SponsorTargets =
             new(StringComparer.Ordinal)
             {
-                ["H1-EXPO-SPONSOR"] = Sponsor(57),
-                ["H1-MAIN-SPONSOR"] = Sponsor(70),
-                ["H1-CO-SPONSOR"] = Sponsor(59),
-                ["H1-GOLD-SPONSOR"] = Sponsor(55)
+                ["H1-EXPO-SPONSOR"] = Sponsor(39.5f, 28.1f, 57),
+                ["H1-MAIN-SPONSOR"] = Sponsor(126f, 28.1f, 70),
+                ["H1-CO-SPONSOR"] = Sponsor(66.7f, 28.19f, 59),
+                ["H1-GOLD-SPONSOR"] = Sponsor(99.1f, 28.19f, 55)
             };
 
         public static void ApplyToLoadedScene()
@@ -153,10 +153,12 @@ namespace MeraBrand.Expo.Stalls
 
         private static bool TryResolve(StallIdentity stall, out Target target)
         {
-            if (SponsorTargets.TryGetValue(stall.name, out target))
-                return true;
-
             Vector3 p = stall.transform.localPosition;
+
+            if (SponsorTargets.TryGetValue(stall.name, out target) &&
+                Mathf.Abs(target.X - p.x) <= PositionTolerance &&
+                Mathf.Abs(target.Z - p.z) <= PositionTolerance)
+                return true;
 
             if (stall.Size == StallSize.ThreeByThree)
                 return TryFind(StandardTargets, stall.Hall, p, out target);
@@ -215,11 +217,11 @@ namespace MeraBrand.Expo.Stalls
                 return false;
 
             if (value.StartsWith("SL_", StringComparison.OrdinalIgnoreCase))
-                return int.TryParse(value.AsSpan(3), out _);
+                return int.TryParse(value.Substring(3), out _);
 
             if (value.StartsWith("S_", StringComparison.OrdinalIgnoreCase) ||
                 value.StartsWith("G_", StringComparison.OrdinalIgnoreCase))
-                return int.TryParse(value.AsSpan(2), out _);
+                return int.TryParse(value.Substring(2), out _);
 
             return false;
         }
@@ -233,7 +235,7 @@ namespace MeraBrand.Expo.Stalls
         private static Target G(float x, float z, int n) =>
             new(string.Empty, x, z, $"G-{n:00}", $"G_{n:00}");
 
-        private static Target Sponsor(int n) =>
-            new("Hall 1", 0f, 0f, $"S-{n:00}", $"S_{n:00}");
+        private static Target Sponsor(float x, float z, int n) =>
+            new("Hall 1", x, z, $"S-{n:00}", $"S_{n:00}");
     }
 }
