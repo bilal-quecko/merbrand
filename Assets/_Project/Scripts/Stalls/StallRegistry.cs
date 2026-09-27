@@ -24,6 +24,8 @@ namespace MeraBrand.Expo.Stalls
 
         public void Rebuild()
         {
+            FloorMapStallNumbering.ApplyToLoadedScene();
+
             stalls.Clear();
             byId.Clear();
             HasValidationErrors = false;
