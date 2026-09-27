@@ -689,7 +689,7 @@ MonoBehaviour:
   hall: UNASSIGNED
   size: 3
   footprintMeters: {x: 9, y: 6}
-  footprintUnityUnits: {x: 9.84252, y: 9.84252}
+  footprintUnityUnits: {x: 26.2467, y: 19.68504}
   wallHeightMeters: 2.5
   visitPoint: {fileID: 8198219466295236199}
   lookTarget: {fileID: 5203777884058645605}
@@ -913,7 +913,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.05, z: 0}
-  m_LocalScale: {x: 29.52756, y: 0.1, z: 19.68504}
+  m_LocalScale: {x: 26.2467, y: 0.1, z: 19.68504}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3993263927637662808}
@@ -2716,7 +2716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4176092579477749030, guid: 5625fa32055b93643b546d47678c4207, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1933929
+      value: 1.0501857
       objectReference: {fileID: 0}
     - target: {fileID: 4176092579477749030, guid: 5625fa32055b93643b546d47678c4207, type: 3}
       propertyPath: m_LocalScale.y
