@@ -33,6 +33,12 @@ namespace MeraBrand.Expo.Stalls
         public Transform VisitPoint => visitPoint;
         public Transform LookTarget => lookTarget;
 
+        internal void ApplyFloorMapIdentity(string id)
+        {
+            if (!string.IsNullOrWhiteSpace(id))
+                stallId = id;
+        }
+
 #if UNITY_EDITOR
         public void EditorConfigure(
             string id,
