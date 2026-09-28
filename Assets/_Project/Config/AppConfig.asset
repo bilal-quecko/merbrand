@@ -18,3 +18,8 @@ MonoBehaviour:
   standard3x3: {x: 3, y: 3}
   standard3x6: {x: 3, y: 6}
   standard6x6: {x: 6, y: 6}
+  supabaseProjectUrl: ""
+  supabasePublishableKey: ""
+  supabaseStallsTable: stalls
+  supabaseSyncIntervalSeconds: 15
+  supabaseRemoteWritesEnabled: 0
