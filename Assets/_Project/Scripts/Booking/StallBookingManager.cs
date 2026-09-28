@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using MeraBrand.Expo.Core;
@@ -188,7 +189,7 @@ namespace MeraBrand.Expo.Booking
             ApplyVisual(stallId);
             BookingChanged?.Invoke(stallId);
 
-            if (supabaseApi != null && supabaseApi.IsConfigured)
+            if (supabaseApi != null && supabaseApi.RemoteWritesEnabled)
             {
                 StallBookingRecord record = Get(stallId);
                 if (record != null)
