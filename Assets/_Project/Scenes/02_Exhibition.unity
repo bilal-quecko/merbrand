@@ -13899,7 +13899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4424937606678728483, guid: 93bb6cc376f61ea479e4906141b17b84, type: 3}
       propertyPath: stallId
-      value: STALL-111
+      value: S 69
       objectReference: {fileID: 0}
     - target: {fileID: 6564173487036172680, guid: 93bb6cc376f61ea479e4906141b17b84, type: 3}
       propertyPath: m_Name
@@ -44473,7 +44473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4424937606678728483, guid: 93bb6cc376f61ea479e4906141b17b84, type: 3}
       propertyPath: stallId
-      value: STALL-126
+      value: S 71
       objectReference: {fileID: 0}
     - target: {fileID: 4424937606678728483, guid: 93bb6cc376f61ea479e4906141b17b84, type: 3}
       propertyPath: displayName
@@ -127894,7 +127894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5822716600065092008, guid: e81388ef301591d41a66cbf835b357fc, type: 3}
       propertyPath: stallId
-      value: STALL-108
+      value: S 68
       objectReference: {fileID: 0}
     - target: {fileID: 5822716600065092008, guid: e81388ef301591d41a66cbf835b357fc, type: 3}
       propertyPath: displayName
@@ -140040,7 +140040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5822716600065092008, guid: e81388ef301591d41a66cbf835b357fc, type: 3}
       propertyPath: stallId
-      value: STALL-113
+      value: S 70
       objectReference: {fileID: 0}
     - target: {fileID: 5822716600065092008, guid: e81388ef301591d41a66cbf835b357fc, type: 3}
       propertyPath: displayName
