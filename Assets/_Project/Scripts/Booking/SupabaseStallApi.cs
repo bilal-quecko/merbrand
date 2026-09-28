@@ -45,6 +45,8 @@ namespace MeraBrand.Expo.Booking
             !string.IsNullOrWhiteSpace(config.SupabasePublishableKey) &&
             !string.IsNullOrWhiteSpace(config.SupabaseStallsTable);
 
+        public bool RemoteWritesEnabled => IsConfigured && config.SupabaseRemoteWritesEnabled;
+
         public IEnumerator FetchAll(Action<List<SupabaseStallRow>> onSuccess, Action<string> onError)
         {
             if (!IsConfigured)
