@@ -30,11 +30,14 @@ namespace MeraBrand.Expo.Booking
     public sealed class SupabaseStallApi
     {
         private readonly AppConfig config;
+        private string userAccessToken = string.Empty;
 
         public SupabaseStallApi(AppConfig appConfig)
         {
             config = appConfig;
         }
+
+        public void SetUserAccessToken(string accessToken) => userAccessToken = accessToken ?? string.Empty;
 
         public bool IsConfigured =>
             config != null &&
@@ -138,8 +141,8 @@ namespace MeraBrand.Expo.Booking
         {
             request.SetRequestHeader("apikey", config.SupabasePublishableKey);
 
-            if (!string.IsNullOrWhiteSpace(config.SupabaseUserAccessToken))
-                request.SetRequestHeader("Authorization", "Bearer " + config.SupabaseUserAccessToken);
+            if (!string.IsNullOrWhiteSpace(userAccessToken))
+                request.SetRequestHeader("Authorization", "Bearer " + userAccessToken);
         }
 
         private static string BuildError(UnityWebRequest request)
