@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using MeraBrand.Expo.Core;
 using MeraBrand.Expo.Stalls;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace MeraBrand.Expo.Booking
         private IBookingRepository repository;
         private StallBookingDatabase database;
         private readonly Dictionary<string, StallBookingRecord> byId = new();
+        private SupabaseStallApi supabaseApi;
+        private Coroutine supabaseSyncLoop;
 
         public event Action<string> BookingChanged;
         public event Action DatabaseReloaded;
@@ -31,6 +34,24 @@ namespace MeraBrand.Expo.Booking
         {
             ValidateSceneIds();
             ApplyAllVisuals();
+            TryStartSupabaseSync();
+        }
+
+        private void OnDestroy()
+        {
+            if (supabaseSyncLoop != null)
+                StopCoroutine(supabaseSyncLoop);
+        }
+
+        public void SetSupabaseUserAccessToken(string accessToken)
+        {
+            supabaseApi?.SetUserAccessToken(accessToken);
+        }
+
+        public void RefreshFromSupabase()
+        {
+            if (supabaseApi != null && supabaseApi.IsConfigured)
+                StartCoroutine(SyncFromSupabaseOnce());
         }
 
         public StallBookingRecord Get(string stallId)
@@ -163,7 +184,21 @@ namespace MeraBrand.Expo.Booking
 
         private void PersistAndApply(string stallId)
         {
-            repository.Save(database); ApplyVisual(stallId); BookingChanged?.Invoke(stallId);
+            repository.Save(database);
+            ApplyVisual(stallId);
+            BookingChanged?.Invoke(stallId);
+
+            if (supabaseApi != null && supabaseApi.IsConfigured)
+            {
+                StallBookingRecord record = Get(stallId);
+                if (record != null)
+                {
+                    StartCoroutine(supabaseApi.UpdateBooking(
+                        record,
+                        () => Debug.Log($"[Supabase] Updated {stallId}."),
+                        error => Debug.LogWarning($"[Supabase] Could not update {stallId}: {error}")));
+                }
+            }
         }
 
         private void RebuildIndex()
@@ -172,6 +207,77 @@ namespace MeraBrand.Expo.Booking
             byId.Clear();
             foreach (StallBookingRecord record in database.records)
                 if (record != null && !string.IsNullOrWhiteSpace(record.stallId)) byId[record.stallId] = record;
+        }
+
+        private void TryStartSupabaseSync()
+        {
+            AppConfig config = AppManager.Instance != null ? AppManager.Instance.Config : null;
+            supabaseApi = new SupabaseStallApi(config);
+
+            if (!supabaseApi.IsConfigured)
+            {
+                Debug.Log("[Supabase] Not configured. Using local booking cache only.");
+                return;
+            }
+
+            supabaseSyncLoop = StartCoroutine(SupabaseSyncLoop(config.SupabaseSyncIntervalSeconds));
+        }
+
+        private IEnumerator SupabaseSyncLoop(float intervalSeconds)
+        {
+            while (true)
+            {
+                yield return SyncFromSupabaseOnce();
+                yield return new WaitForSecondsRealtime(intervalSeconds);
+            }
+        }
+
+        private IEnumerator SyncFromSupabaseOnce()
+        {
+            if (supabaseApi == null || !supabaseApi.IsConfigured)
+                yield break;
+
+            bool finished = false;
+            List<SupabaseStallRow> rows = null;
+            string error = null;
+
+            yield return supabaseApi.FetchAll(
+                result => { rows = result; finished = true; },
+                message => { error = message; finished = true; });
+
+            if (!finished)
+                yield break;
+
+            if (!string.IsNullOrWhiteSpace(error))
+            {
+                Debug.LogWarning($"[Supabase] Sync failed: {error}");
+                yield break;
+            }
+
+            ApplySupabaseRows(rows);
+        }
+
+        private void ApplySupabaseRows(List<SupabaseStallRow> rows)
+        {
+            if (rows == null)
+                return;
+
+            foreach (SupabaseStallRow row in rows)
+            {
+                if (row == null || string.IsNullOrWhiteSpace(row.stall_code))
+                    continue;
+
+                StallBookingRecord record = GetOrCreate(row.stall_code.Trim());
+                record.isBooked = string.Equals(row.status, "booked", StringComparison.OrdinalIgnoreCase);
+                record.exhibitorName = row.exhibitor_name ?? string.Empty;
+                record.logoReference = row.logo_reference ?? string.Empty;
+                record.updatedUtc = row.updated_at ?? string.Empty;
+            }
+
+            RebuildIndex();
+            repository.Save(database);
+            ApplyAllVisuals();
+            DatabaseReloaded?.Invoke();
         }
 
         private void ApplyAllVisuals()
