@@ -16,10 +16,6 @@ namespace MeraBrand.Expo.UI
         [SerializeField] private TMP_InputField passwordInput;
         [SerializeField] private TMP_Text loginErrorText;
 
-        // Development-only credentials. Replace with backend authentication in Phase 7.
-        private const string DevUsername = "admin";
-        private const string DevPassword = "admin123";
-
         private void Start()
         {
             SessionManager.Instance?.ClearSession();
@@ -44,6 +40,8 @@ namespace MeraBrand.Expo.UI
             if (usernameInput != null)
             {
                 usernameInput.text = string.Empty;
+                if (usernameInput.placeholder is TMP_Text placeholder)
+                    placeholder.text = "Admin email";
                 usernameInput.Select();
             }
             if (passwordInput != null) passwordInput.text = string.Empty;
@@ -57,19 +55,21 @@ namespace MeraBrand.Expo.UI
 #if UNITY_WEBGL && !UNITY_EDITOR
             return;
 #else
-            string username = usernameInput != null ? usernameInput.text.Trim() : string.Empty;
+            string email = usernameInput != null ? usernameInput.text.Trim() : string.Empty;
             string password = passwordInput != null ? passwordInput.text : string.Empty;
-
-            if (username == DevUsername && password == DevPassword)
+            if (passwordInput != null) passwordInput.text = string.Empty;
+            if (loginErrorText != null) loginErrorText.text = "Signing in...";
+            if (SessionManager.Instance == null)
             {
-                SessionManager.Instance.StartAdminSession(username);
-                if (loginErrorText != null) loginErrorText.text = string.Empty;
-                LoadExhibition();
+                if (loginErrorText != null) loginErrorText.text = "Session unavailable.";
                 return;
             }
 
-            if (loginErrorText != null)
-                loginErrorText.text = "Invalid username or password.";
+            SessionManager.Instance.SignInAdmin(email, password, (success, message) =>
+            {
+                if (loginErrorText != null) loginErrorText.text = message;
+                if (success) LoadExhibition();
+            });
 #endif
         }
 

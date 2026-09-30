@@ -37,7 +37,8 @@ namespace MeraBrand.Expo.Stalls
             EnsureLabel();
             if (label == null || identity == null) return;
 
-            label.text = GetNumber(identity.StallId);
+            label.text = string.IsNullOrWhiteSpace(identity.StallCode)
+                ? GetNumber(identity.StallId) : identity.StallCode;
 
             float width = Mathf.Max(4f, identity.FootprintUnityUnits.x * 0.75f);
             label.rectTransform.sizeDelta = new Vector2(width, 4f);

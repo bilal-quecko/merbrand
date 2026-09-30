@@ -48,13 +48,21 @@ namespace MeraBrand.Expo.Stalls
             if (bookingPanel != null) bookingPanel.SetActive(false);
             if (availableConfirmPanel != null) availableConfirmPanel.SetActive(false);
             bookingManager ??= StallBookingManager.Instance;
-            if (bookingManager != null) bookingManager.BookingChanged += OnBookingChanged;
+            if (bookingManager != null)
+            {
+                bookingManager.BookingChanged += OnBookingChanged;
+                bookingManager.DatabaseReloaded += RefreshSelectionUI;
+            }
         }
 
         private void OnDestroy()
         {
             UIInteractionState.Release(this);
-            if (bookingManager != null) bookingManager.BookingChanged -= OnBookingChanged;
+            if (bookingManager != null)
+            {
+                bookingManager.BookingChanged -= OnBookingChanged;
+                bookingManager.DatabaseReloaded -= RefreshSelectionUI;
+            }
         }
 
         private void Update()
@@ -160,11 +168,14 @@ namespace MeraBrand.Expo.Stalls
             StallBookingRecord existing = bookingManager.Get(selectedStall.StallId);
             string logo = existing != null && existing.isBooked
                 ? existing.logoReference
-                : LocalDataManagementController.ConsumePendingLogo(selectedStall.StallId);
+                : LocalDataManagementController.GetPendingLogo(selectedStall.StallId);
 
-            bookingManager.Book(selectedStall.StallId, exhibitor, logo);
-            CloseBookingPopup();
-            RefreshSelectionUI();
+            if (bookingErrorText != null) bookingErrorText.text = "Saving...";
+            bookingManager.Book(selectedStall.StallId, exhibitor, logo, (success, message) =>
+            {
+                if (success) { CloseBookingPopup(); RefreshSelectionUI(); }
+                else if (bookingErrorText != null) bookingErrorText.text = message;
+            });
         }
 
         public void CloseBookingPopup()
@@ -186,9 +197,12 @@ namespace MeraBrand.Expo.Stalls
         {
             if (!IsAdmin()) return;
             bookingManager ??= StallBookingManager.Instance;
-            if (selectedStall != null && bookingManager != null) bookingManager.MakeAvailable(selectedStall.StallId);
-            CancelMakeAvailable();
-            RefreshSelectionUI();
+            if (selectedStall == null || bookingManager == null) return;
+            bookingManager.MakeAvailable(selectedStall.StallId, (success, message) =>
+            {
+                if (success) { CancelMakeAvailable(); RefreshSelectionUI(); }
+                else Debug.LogWarning(message);
+            });
         }
 
         public void CancelMakeAvailable()
@@ -260,9 +274,10 @@ namespace MeraBrand.Expo.Stalls
             bookingManager ??= StallBookingManager.Instance;
             StallBookingRecord record = bookingManager?.Get(selectedStall.StallId);
             bool booked = record?.isBooked == true;
-            if (statusText != null) statusText.text = booked ? "Status: BOOKED" : "Status: AVAILABLE";
+            if (statusText != null) statusText.text = bookingManager != null && !bookingManager.IsLoaded
+                ? "Status: LOADING" : booked ? "Status: BOOKED" : "Status: AVAILABLE";
             if (exhibitorText != null) exhibitorText.text = booked ? $"Exhibitor: {record.exhibitorName}" : "Exhibitor: —";
-            bool canManageBookings = IsAdmin();
+            bool canManageBookings = IsAdmin() && bookingManager != null && bookingManager.IsLoaded;
             if (bookButton != null) bookButton.gameObject.SetActive(canManageBookings && !booked);
             if (editButton != null) editButton.gameObject.SetActive(canManageBookings && booked);
             if (availableButton != null) availableButton.gameObject.SetActive(canManageBookings && booked);

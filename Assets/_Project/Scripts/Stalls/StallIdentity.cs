@@ -1,3 +1,4 @@
+using MeraBrand.Expo.Core;
 using UnityEngine;
 
 namespace MeraBrand.Expo.Stalls
@@ -6,6 +7,7 @@ namespace MeraBrand.Expo.Stalls
     {
         [Header("Identity")]
         [SerializeField] private string stallId = "UNASSIGNED";
+        private string stallCode = string.Empty;
         [SerializeField] private string displayName = "Stall";
         [SerializeField] private string hall = "Hall 1";
         [SerializeField] private StallSize size = StallSize.ThreeByThree;
@@ -24,6 +26,7 @@ namespace MeraBrand.Expo.Stalls
         [SerializeField] private Transform lookTarget;
 
         public string StallId => stallId;
+        public string StallCode => stallCode;
         public string DisplayName => displayName;
         public string Hall => hall;
         public StallSize Size => size;
@@ -32,6 +35,22 @@ namespace MeraBrand.Expo.Stalls
         public float WallHeightMeters => wallHeightMeters;
         public Transform VisitPoint => visitPoint;
         public Transform LookTarget => lookTarget;
+
+        public void ApplyCatalog(SupabaseStallsClient.Stall catalogStall)
+        {
+            if (catalogStall == null || catalogStall.unity_stall_id != stallId) return;
+            stallCode = catalogStall.stall_code ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace(catalogStall.display_name))
+                displayName = catalogStall.display_name;
+            if (!string.IsNullOrWhiteSpace(catalogStall.hall))
+                hall = catalogStall.hall;
+            if (catalogStall.width_m > 0 && catalogStall.depth_m > 0)
+            {
+                footprintMeters = new Vector2(catalogStall.width_m, catalogStall.depth_m);
+                footprintUnityUnits = footprintMeters * 3.280839895f;
+            }
+            GetComponent<StallTopDownLabel>()?.Refresh();
+        }
 
 #if UNITY_EDITOR
         public void EditorConfigure(

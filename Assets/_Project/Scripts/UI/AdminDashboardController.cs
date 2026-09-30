@@ -46,7 +46,10 @@ namespace MeraBrand.Expo.UI
 
             PopulateHallDropdown();
             if (bookingManager != null)
+            {
                 bookingManager.BookingChanged += OnBookingChanged;
+                bookingManager.DatabaseReloaded += RefreshCounters;
+            }
             RefreshCounters();
             SetResult("Search by stall ID, name, hall, or exhibitor.");
         }
@@ -55,7 +58,10 @@ namespace MeraBrand.Expo.UI
         {
             UIInteractionState.Release(this);
             if (bookingManager != null)
+            {
                 bookingManager.BookingChanged -= OnBookingChanged;
+                bookingManager.DatabaseReloaded -= RefreshCounters;
+            }
         }
 
         public void ToggleDashboard()

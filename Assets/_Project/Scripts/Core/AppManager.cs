@@ -9,6 +9,7 @@ namespace MeraBrand.Expo.Core
         [SerializeField] private AppConfig config;
 
         public AppConfig Config => config;
+        public SupabaseStallsClient StallsClient { get; private set; }
 
         private void Awake()
         {
@@ -20,6 +21,7 @@ namespace MeraBrand.Expo.Core
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            StallsClient = GetComponent<SupabaseStallsClient>() ?? gameObject.AddComponent<SupabaseStallsClient>();
         }
 
         public void SetConfig(AppConfig appConfig)

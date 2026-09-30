@@ -101,8 +101,8 @@ namespace MeraBrand.Expo.Booking
                 StallBookingRecord record = bookingManager?.Get(stall.StallId);
                 if (record != null && record.isBooked)
                 {
-                    bookingManager.SetLogo(stall.StallId, dataUri);
-                    SetStatus($"Logo updated for {stall.DisplayName}.");
+                    bookingManager.SetLogo(stall.StallId, dataUri, (success, message) =>
+                        SetStatus(success ? $"Logo updated for {stall.DisplayName}." : message));
                 }
                 else
                 {
@@ -122,9 +122,9 @@ namespace MeraBrand.Expo.Booking
             bookingManager ??= StallBookingManager.Instance;
             StallIdentity stall = selectionController != null ? selectionController.SelectedStall : null;
             if (stall == null) { SetStatus("Select a stall first."); return; }
-            bookingManager?.SetLogo(stall.StallId, string.Empty);
+            bookingManager?.SetLogo(stall.StallId, string.Empty, (success, message) =>
+                SetStatus(success ? $"Logo removed from {stall.DisplayName}." : message));
             ClearPendingLogo(stall.StallId);
-            SetStatus($"Logo removed from {stall.DisplayName}.");
         }
 
         public static string ConsumePendingLogo(string stallId)
@@ -136,6 +136,10 @@ namespace MeraBrand.Expo.Booking
             PlayerPrefs.Save();
             return value;
         }
+
+        public static string GetPendingLogo(string stallId) =>
+            string.IsNullOrWhiteSpace(stallId) ? string.Empty :
+            PlayerPrefs.GetString(PendingLogoKey(stallId), string.Empty);
 
         public static void ClearPendingLogo(string stallId)
         {
@@ -166,8 +170,12 @@ namespace MeraBrand.Expo.Booking
             if (!IsAdmin()) return;
             bookingManager ??= StallBookingManager.Instance;
             if (bookingManager == null) { SetStatus("Booking manager unavailable."); return; }
-            bookingManager.ImportFromDefaultFile(out string message);
-            SetStatus(message);
+            SetStatus("Importing into Supabase...");
+            bookingManager.ImportFromDefaultFile((success, message) =>
+            {
+                SetStatus(success ? "Imported booking records into Supabase." : message);
+                if (success) bookingManager.Refresh();
+            });
         }
 
         public void OpenLocalDataFolder()
@@ -200,14 +208,17 @@ namespace MeraBrand.Expo.Booking
             if (!resetArmed)
             {
                 resetArmed = true;
-                SetStatus("RESET is armed. Press RESET ALL again to permanently clear every local booking.");
+                SetStatus("RESET is armed. Press RESET ALL again to clear every shared booking.");
                 return;
             }
 
             resetArmed = false;
-            bookingManager.ResetAllBookings();
-            selectionController?.CloseSelection();
-            SetStatus("All local booking data has been cleared.");
+            SetStatus("Clearing shared bookings...");
+            bookingManager.ResetAllBookings((success, message) =>
+            {
+                if (success) selectionController?.CloseSelection();
+                SetStatus(message);
+            });
         }
 
         private static bool IsAdmin()
