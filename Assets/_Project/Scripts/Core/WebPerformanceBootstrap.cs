@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 namespace MeraBrand.Expo.Web
 {
@@ -17,15 +18,18 @@ namespace MeraBrand.Expo.Web
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             bool mobile = Application.isMobilePlatform;
+            string pageUrl = Application.absoluteURL;
+            bool lite = mobile || (!string.IsNullOrEmpty(pageUrl) &&
+                System.Text.RegularExpressions.Regex.IsMatch(pageUrl, @"[?&]lite=1(?:&|#|$)"));
 
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = mobile ? 30 : lite ? 45 : 60;
             QualitySettings.vSyncCount = 0;
             QualitySettings.realtimeReflectionProbes = false;
             QualitySettings.antiAliasing = 0;
             QualitySettings.softParticles = false;
             QualitySettings.softVegetation = false;
 
-            if (mobile)
+            if (lite)
             {
                 QualitySettings.shadows = ShadowQuality.Disable;
                 QualitySettings.shadowDistance = 0f;
@@ -43,10 +47,12 @@ namespace MeraBrand.Expo.Web
                 QualitySettings.globalTextureMipmapLimit = 0;
             }
 
-            ConfigureUrpAsset(mobile);
-            ConfigureCameraPostProcessing(mobile);
+            ConfigureUrpAsset(lite);
+            ConfigureCameraPostProcessing(lite);
+            if (lite)
+                SceneManager.sceneLoaded += (_, __) => ConfigureCameraPostProcessing(true);
 
-            Debug.Log($"[Web Performance] Applied {(mobile ? "mobile" : "desktop")} Web quality profile.");
+            Debug.Log($"[Web Performance] Applied {(lite ? "lite" : "desktop")} Web quality profile.");
 #endif
         }
 

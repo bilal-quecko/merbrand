@@ -1,5 +1,8 @@
 # Mera Brand Pakistan Family Expo 2026 — Unity Digital Exhibition
 
+For the smaller WebGL menu build and background exhibition download, see
+[WebGL exhibition loading](Docs/WebGLRemoteExhibition.md).
+
 Unity 6 project for the interactive 3D version of the Mera Brand Pakistan Family Expo at Tulip Hall Islamabad.
 
 ## Current Status

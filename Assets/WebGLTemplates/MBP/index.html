@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#061d19">
+  <meta name="description" content="Explore the Mera Brand Pakistan Family Expo 2026 interactive simulation.">
+  <title>Mera Brand Pakistan | Expo 2026 Simulation</title>
+  <link rel="icon" type="image/svg+xml" href="TemplateData/mbp-icon.svg">
+  <style>
+    :root { color-scheme: dark; font-family: Arial, Helvetica, sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; min-height: 100%; margin: 0; }
+    body { background: radial-gradient(circle at 50% 10%, #114a36 0, #071e1b 47%, #030e13 100%); color: #f7f5e8; }
+    .site-header { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 22px 16px 18px; }
+    .brand-mark { display: grid; place-items: center; width: 50px; height: 50px; border: 1px solid #d9b56a; border-radius: 14px; background: linear-gradient(145deg, #176c43, #07301f); box-shadow: 0 0 28px #3fac6860; color: #fff; font-size: 16px; font-weight: 800; letter-spacing: -1px; }
+    .brand-copy { display: flex; flex-direction: column; gap: 4px; }
+    .brand-copy strong { font-size: clamp(15px, 2.4vw, 20px); letter-spacing: .14em; }
+    .brand-copy span { color: #dbbf7b; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; }
+    main { display: grid; place-items: center; padding: 0 18px; }
+    #unity-container { position: relative; width: min(100%, 1100px, calc(160vh - 224px)); aspect-ratio: {{{ WIDTH }}} / {{{ HEIGHT }}}; overflow: hidden; border: 1px solid #d1ac5a7a; border-radius: 16px; background: #07171b; box-shadow: 0 24px 70px #0009, 0 0 35px #26b46b24; }
+    #unity-canvas { display: block; width: 100%; height: 100%; background: #07171b; }
+    #unity-loading-bar { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 28px; text-align: center; background: radial-gradient(circle at 50% 30%, #17503b, #071e1b 65%, #030f13); }
+    .loading-mark { display: grid; place-items: center; width: 78px; height: 78px; border: 2px solid #d9b56a; border-radius: 22px; background: #0b3d2a; box-shadow: 0 0 36px #3bc66a5c; font-size: 23px; font-weight: 800; }
+    #unity-loading-bar h1 { margin: 7px 0 0; font-size: clamp(21px, 4vw, 32px); letter-spacing: .04em; }
+    #unity-loading-bar p { margin: 0; color: #cfdbd2; font-size: 14px; }
+    #unity-progress-bar-empty { width: min(280px, 80%); height: 8px; overflow: hidden; border-radius: 999px; background: #ffffff33; }
+    #unity-progress-bar-full { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #21b76b, #e5c26f); transition: width .15s ease; }
+    .powered-by { color: #c4d5c8; font-size: 12px; letter-spacing: .03em; }
+    .powered-by strong { color: #e6c774; font-weight: 700; }
+    #unity-warning { position: absolute; top: 12px; left: 50%; z-index: 3; width: min(90%, 620px); transform: translateX(-50%); font-size: 13px; }
+    #unity-warning div { margin-bottom: 8px; padding: 12px 16px; border-radius: 8px; background: #c28a31; color: #151515; }
+    #unity-warning div.error { background: #a52232; color: white; }
+    .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: min(100% - 36px, 1100px); margin: 12px auto 20px; color: #bdcfc1; font-size: 12px; }
+    #unity-fullscreen-button { border: 1px solid #a7884e; border-radius: 7px; padding: 8px 14px; background: #102d24; color: #fff; cursor: pointer; }
+    #unity-fullscreen-button:hover { background: #1b4a34; }
+    #rotate-overlay { display: none; }
+    body.mobile-device .site-header, body.mobile-device .site-footer { display: none; }
+    body.mobile-device main { padding: 0; }
+    body.mobile-device #unity-container { position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; aspect-ratio: auto; border: 0; border-radius: 0; }
+    @media (orientation: portrait) {
+      body.mobile-device #rotate-overlay { position: fixed; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; padding: 30px; background: radial-gradient(circle at 50% 30%, #155039, #061d19 70%); text-align: center; }
+      #rotate-overlay .phone { width: 76px; height: 118px; border: 5px solid #d9b56a; border-radius: 15px; transform: rotate(-90deg); box-shadow: 0 0 32px #3bc66a5c; }
+      #rotate-overlay strong { font-size: clamp(22px, 6vw, 32px); }
+      #rotate-overlay p { max-width: 340px; margin: 0; color: #d0ded4; line-height: 1.5; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" aria-label="Mera Brand Pakistan">
+    <div class="brand-mark" aria-hidden="true">MBP</div>
+    <div class="brand-copy"><strong>MERA BRAND PAKISTAN</strong><span>Family Expo 2026</span></div>
+  </header>
+  <main>
+    <div id="unity-container">
+      <canvas id="unity-canvas" width="{{{ WIDTH }}}" height="{{{ HEIGHT }}}" tabindex="-1" aria-label="Mera Brand Pakistan simulation"></canvas>
+      <div id="unity-loading-bar" role="status" aria-live="polite">
+        <div class="loading-mark" aria-hidden="true">MBP</div>
+        <h1>Mera Brand Pakistan</h1>
+        <p>Preparing your Expo 2026 experience...</p>
+        <div id="unity-progress-bar-empty"><div id="unity-progress-bar-full"></div></div>
+        <div class="powered-by">Powered by <strong>BnM Technologies</strong></div>
+      </div>
+      <div id="unity-warning" aria-live="assertive"></div>
+    </div>
+  </main>
+  <footer class="site-footer"><span>Mera Brand Pakistan · Interactive Expo Simulation</span><span class="powered-by">Powered by <strong>BnM Technologies</strong></span><button id="unity-fullscreen-button" type="button">Fullscreen</button></footer>
+  <div id="rotate-overlay" role="alert" aria-live="polite">
+    <div class="phone" aria-hidden="true"></div>
+    <strong>Turn your phone sideways</strong>
+    <p>This simulation works best in landscape mode. Rotate your device to continue.</p>
+  </div>
+  <script>
+    const canvas = document.querySelector("#unity-canvas");
+    const loadingBar = document.querySelector("#unity-loading-bar");
+    const progressBar = document.querySelector("#unity-progress-bar-full");
+    const warningBanner = document.querySelector("#unity-warning");
+    const portrait = window.matchMedia("(orientation: portrait)");
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ||
+      (window.matchMedia("(pointer: coarse)").matches && Math.min(screen.width, screen.height) < 900);
+    if (isMobile) document.body.classList.add("mobile-device");
+    const lowMemory = typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 8;
+    if (isMobile || lowMemory) {
+      const pageUrl = new URL(window.location.href);
+      if (!pageUrl.searchParams.has("lite")) {
+        pageUrl.searchParams.set("lite", "1");
+        window.history.replaceState(null, "", pageUrl);
+      }
+    }
+
+    function showBanner(message, type) {
+      const notice = document.createElement("div");
+      notice.textContent = message;
+      if (type === "error") notice.classList.add("error");
+      warningBanner.appendChild(notice);
+      if (type !== "error") setTimeout(() => notice.remove(), 5000);
+    }
+
+    const buildUrl = "Build";
+    const config = {
+      arguments: [],
+      dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+      frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+#if USE_THREADS
+      workerUrl: buildUrl + "/{{{ WORKER_FILENAME }}}",
+#endif
+#if USE_WASM
+      codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+      symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+#endif
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
+      productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
+      productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+      showBanner: showBanner
+    };
+
+    let started = false;
+    function startSimulation() {
+      if (started || (isMobile && portrait.matches)) return;
+      started = true;
+      const script = document.createElement("script");
+      script.src = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      script.onload = () => {
+        createUnityInstance(canvas, config, progress => {
+          progressBar.style.width = Math.round(progress * 100) + "%";
+        }).then(unityInstance => {
+          loadingBar.style.display = "none";
+          document.querySelector("#unity-fullscreen-button").onclick = () => unityInstance.SetFullscreen(1);
+        }).catch(error => {
+          loadingBar.style.display = "none";
+          showBanner(String(error), "error");
+        });
+      };
+      script.onerror = () => {
+        loadingBar.style.display = "none";
+        showBanner("The simulation could not start. Please reload the page.", "error");
+      };
+      document.body.appendChild(script);
+    }
+
+    portrait.addEventListener("change", startSimulation);
+    window.addEventListener("resize", startSimulation);
+    startSimulation();
+  </script>
+</body>
+</html>
