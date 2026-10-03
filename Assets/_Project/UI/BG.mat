@@ -119,7 +119,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Haze: 0.3
-    - _LoopT: 0.7231467
+    - _LoopT: 0.10648142
     - _MapCycles: 2
     - _MapPulse: 0.4
     - _Metallic: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Hall01Profile
+  m_Name: MarqueeLightProfile
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.VolumeProfile
   components:
   - {fileID: 766633491483873992}
@@ -33,10 +33,10 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: -0.4
+    m_Value: -0.45
   contrast:
     m_OverrideState: 1
-    m_Value: 12
+    m_Value: 6
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -45,7 +45,7 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: -6
+    m_Value: -5
 --- !u!114 &3672568973043976780
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -61,10 +61,10 @@ MonoBehaviour:
   active: 1
   temperature:
     m_OverrideState: 1
-    m_Value: -12
+    m_Value: 6
   tint:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 4
 --- !u!114 &5489037476124754362
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -80,7 +80,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2
@@ -120,13 +120,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.05}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.1}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0
@@ -157,13 +157,13 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 1.2
+    m_Value: 1.4
   intensity:
     m_OverrideState: 1
-    m_Value: 0.12
+    m_Value: 0.08
   scatter:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.45
   clamp:
     m_OverrideState: 0
     m_Value: 65472

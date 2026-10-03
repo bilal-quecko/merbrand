@@ -29,8 +29,8 @@ namespace MeraBrand.Expo.CameraSystem
         {
             get
             {
-#if UNITY_WEBGL && !UNITY_EDITOR
-                return Application.isMobilePlatform || Touchscreen.current != null;
+#if UNITY_EDITOR || UNITY_STANDALONE
+                return false;
 #else
                 return Application.isMobilePlatform || Touchscreen.current != null;
 #endif

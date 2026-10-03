@@ -27,10 +27,10 @@ Material:
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
   - _ALPHATEST_ON
-  - _EMISSION
+  - _SPECULAR_SETUP
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 6
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -174,16 +174,16 @@ Material:
     - _Surface: 1
     - _TRANSPARENCY: 0
     - _UVSec: 0
-    - _WorkflowMode: 1
+    - _WorkflowMode: 0
     - _XRMotionVectorsPass: 1
     - _ZWrite: 0
     m_Colors:
     - _BASE_COLOR: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 1}
-    - _BaseColor: {r: 0.10857955, g: 0.26504523, b: 0.3773585, a: 1}
-    - _Color: {r: 0.10857955, g: 0.26504523, b: 0.3773585, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EMISSION_COLOR: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _REFLECTIONS_COLOR: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _SpecColor: {r: 0.3735848, g: 0.13745096, b: 0.13745096, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

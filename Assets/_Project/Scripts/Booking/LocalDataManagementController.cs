@@ -24,6 +24,8 @@ namespace MeraBrand.Expo.Booking
         {
             bookingManager = StallBookingManager.Instance;
             cameraModeManager = FindFirstObjectByType<CameraModeManager>();
+            if (logoPathInput != null && logoPathInput.placeholder is TMP_Text placeholder)
+                placeholder.text = "Optional image path, or click UPLOAD LOGO";
             if (adminPanel != null)
                 adminPanel.SetActive(false);
 
@@ -78,25 +80,26 @@ namespace MeraBrand.Expo.Booking
             if (stall == null) { SetStatus("Select a stall first."); return; }
 
             string path = logoPathInput != null ? logoPathInput.text.Trim().Trim('"') : string.Empty;
-#if UNITY_EDITOR
-            if (string.IsNullOrWhiteSpace(path))
-                path = UnityEditor.EditorUtility.OpenFilePanel("Select Exhibitor Logo", string.Empty, "png,jpg,jpeg");
-#endif
-            if (string.IsNullOrWhiteSpace(path)) { SetStatus("No logo selected. In a PC build, paste the image file path into the Logo Path field."); return; }
-            if (!File.Exists(path)) { SetStatus($"Logo file not found:\n{path}"); return; }
-
             try
             {
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
+                string directory = File.Exists(path) ? Path.GetDirectoryName(path) : string.Empty;
+#if UNITY_EDITOR
+                path = UnityEditor.EditorUtility.OpenFilePanel("Select Exhibitor Logo", directory, "png,jpg,jpeg");
+#else
+                path = WindowsLogoFilePicker.Open(directory);
+#endif
+                if (string.IsNullOrWhiteSpace(path)) { SetStatus("Logo selection cancelled."); return; }
+#else
+                if (string.IsNullOrWhiteSpace(path)) { SetStatus("Enter the full path of a PNG or JPG logo image."); return; }
+#endif
+                if (!File.Exists(path)) { SetStatus($"Logo file not found:\n{path}"); return; }
+                if (logoPathInput != null) logoPathInput.SetTextWithoutNotify(path);
                 byte[] bytes = File.ReadAllBytes(path);
                 if (bytes.Length > 2 * 1024 * 1024) { SetStatus("Logo is too large. Use an image below 2 MB."); return; }
-                Texture2D test = new(2, 2);
-                bool valid = test.LoadImage(bytes);
-                Destroy(test);
-                if (!valid) { SetStatus("The selected file is not a supported image."); return; }
-
-                string ext = Path.GetExtension(path).ToLowerInvariant();
-                string mime = ext == ".png" ? "image/png" : "image/jpeg";
-                string dataUri = $"data:{mime};base64,{Convert.ToBase64String(bytes)}";
+                bytes = ResizeLogo(bytes);
+                if (bytes == null) { SetStatus("The selected file is not a supported image."); return; }
+                string dataUri = $"data:image/png;base64,{Convert.ToBase64String(bytes)}";
 
                 StallBookingRecord record = bookingManager?.Get(stall.StallId);
                 if (record != null && record.isBooked)
@@ -113,6 +116,38 @@ namespace MeraBrand.Expo.Booking
             catch (Exception ex)
             {
                 SetStatus($"Logo import failed: {ex.Message}");
+            }
+        }
+
+        private static byte[] ResizeLogo(byte[] bytes)
+        {
+            const int size = 215;
+            Texture2D source = new(2, 2, TextureFormat.RGBA32, false);
+            Texture2D resized = null;
+            try
+            {
+                if (!source.LoadImage(bytes)) return null;
+                source.wrapMode = TextureWrapMode.Clamp;
+                float scale = Mathf.Min((float)size / source.width, (float)size / source.height);
+                int width = Mathf.Clamp(Mathf.RoundToInt(source.width * scale), 1, size);
+                int height = Mathf.Clamp(Mathf.RoundToInt(source.height * scale), 1, size);
+                int left = (size - width) / 2;
+                int bottom = (size - height) / 2;
+                // Fit the entire logo within a transparent square without stretching or cropping.
+                Color[] pixels = new Color[size * size];
+                for (int y = 0; y < height; y++)
+                    for (int x = 0; x < width; x++)
+                        pixels[(bottom + y) * size + left + x] =
+                            source.GetPixelBilinear((x + 0.5f) / width, (y + 0.5f) / height);
+                resized = new Texture2D(size, size, TextureFormat.RGBA32, false);
+                resized.SetPixels(pixels);
+                resized.Apply(false, false);
+                return resized.EncodeToPNG();
+            }
+            finally
+            {
+                Destroy(source);
+                if (resized != null) Destroy(resized);
             }
         }
 

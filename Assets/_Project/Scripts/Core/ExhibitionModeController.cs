@@ -136,7 +136,7 @@ namespace MeraBrand.Expo.Core
 
         public void ExitVisitorToMenu()
         {
-            SessionManager.Instance?.ClearSession();
+            SessionManager.Instance?.ClearSession(false);
             ReturnToMenu();
         }
 

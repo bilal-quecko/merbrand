@@ -25,6 +25,11 @@ namespace MeraBrand.Expo.Authentication
         private Coroutine signInRoutine;
         private Coroutine refreshRoutine;
         private DateTimeOffset nextRefreshAttempt;
+        private bool rememberAdmin;
+
+        public bool CanRememberAdmin => RememberedAdminStore.Supported;
+        public bool HasRememberedAdmin => RememberedAdminStore.TryRead(out _, out _);
+        public string RememberedEmail => RememberedAdminStore.TryRead(out string email, out _) ? email : string.Empty;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Bootstrap()
@@ -59,13 +64,16 @@ namespace MeraBrand.Expo.Authentication
 
         public void StartVisitorSession()
         {
-            ClearSession();
+            ClearSession(false);
             CurrentRole = UserRole.Visitor;
         }
 
         public void SignInAdmin(string email, string password, Action<bool, string> completed)
+            => SignInAdmin(email, password, false, completed);
+
+        public void SignInAdmin(string email, string password, bool remember, Action<bool, string> completed)
         {
-            if (signInRoutine != null)
+            if (signInRoutine != null || refreshRoutine != null)
             {
                 completed?.Invoke(false, "Sign-in is already in progress.");
                 return;
@@ -77,10 +85,32 @@ namespace MeraBrand.Expo.Authentication
                 return;
             }
 
+            rememberAdmin = remember && CanRememberAdmin;
+            if (!rememberAdmin) RememberedAdminStore.Delete();
             signInRoutine = StartCoroutine(SignInAdminRequest(email.Trim(), password, completed));
         }
 
-        public void ClearSession()
+        public void RestoreRememberedAdmin(Action<bool, string> completed)
+        {
+            ClearSession(false);
+            if (!RememberedAdminStore.TryRead(out string email, out string token))
+            {
+                completed?.Invoke(false, "Enter your admin email and password.");
+                return;
+            }
+            CurrentUsername = email;
+            refreshToken = token;
+            rememberAdmin = true;
+            refreshRoutine = StartCoroutine(RefreshSession(completed));
+        }
+
+        public void ForgetRememberedAdmin()
+        {
+            rememberAdmin = false;
+            RememberedAdminStore.Delete();
+        }
+
+        public void ClearSession(bool forgetRemembered = true)
         {
             if (signInRoutine != null) { StopCoroutine(signInRoutine); signInRoutine = null; }
             if (refreshRoutine != null) { StopCoroutine(refreshRoutine); refreshRoutine = null; }
@@ -90,6 +120,8 @@ namespace MeraBrand.Expo.Authentication
             accessToken = string.Empty;
             refreshToken = string.Empty;
             accessTokenExpiresAt = default;
+            rememberAdmin = false;
+            if (forgetRemembered) RememberedAdminStore.Delete();
         }
 
         private IEnumerator SignInAdminRequest(string email, string password, Action<bool, string> completed)
@@ -140,11 +172,12 @@ namespace MeraBrand.Expo.Authentication
                 CurrentRole = UserRole.Admin;
                 IsAdminAuthenticated = true;
                 CurrentUsername = response.user.email ?? email;
+                SaveRememberedSession();
                 completed?.Invoke(true, string.Empty);
             }
         }
 
-        private IEnumerator RefreshSession()
+        private IEnumerator RefreshSession(Action<bool, string> completed = null)
         {
             string body = JsonUtility.ToJson(new RefreshRequest { refresh_token = refreshToken });
             using (UnityWebRequest request = new UnityWebRequest(
@@ -171,12 +204,39 @@ namespace MeraBrand.Expo.Authentication
                     refreshToken = response.refresh_token;
                     accessTokenExpiresAt = DateTimeOffset.UtcNow.AddSeconds(response.expires_in);
                     nextRefreshAttempt = accessTokenExpiresAt.AddMinutes(-2);
+                    CurrentRole = UserRole.Admin;
+                    IsAdminAuthenticated = true;
+                    CurrentUsername = response.user.email ?? CurrentUsername;
+                    SaveRememberedSession();
+                    completed?.Invoke(true, string.Empty);
                 }
                 else
                 {
+                    bool rejected = request.responseCode == 400 || request.responseCode == 401 ||
+                        request.responseCode == 403 || request.result == UnityWebRequest.Result.Success;
+                    if (rejected)
+                    {
+                        ForgetRememberedAdmin();
+                        CurrentRole = UserRole.None;
+                        IsAdminAuthenticated = false;
+                        accessToken = refreshToken = string.Empty;
+                    }
                     nextRefreshAttempt = DateTimeOffset.UtcNow.AddSeconds(15);
+                    completed?.Invoke(false, rejected
+                        ? "Saved login has expired. Please sign in again."
+                        : "Could not restore login. Check your connection or sign in manually.");
                     Debug.LogWarning("Supabase admin session refresh failed. Sign in again if the session expires.");
                 }
+            }
+        }
+
+        private void SaveRememberedSession()
+        {
+            if (rememberAdmin && !RememberedAdminStore.Save(CurrentUsername, refreshToken))
+            {
+                // Never leave a stale token behind after Supabase rotates it.
+                ForgetRememberedAdmin();
+                Debug.LogWarning("Admin signed in, but Windows could not save the remembered session.");
             }
         }
 
